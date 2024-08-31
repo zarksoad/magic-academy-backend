@@ -57,9 +57,9 @@ Los tipos permitidos para el commit son los siguientes:
 ## Mensajes de Commit
 
 Aquí hay algunos ejemplos de cómo estructurar tus mensajes de commit:
-
+t
 - **Agregar una nueva característica**:
-feat(auth): add login functionality
+feat(auth): add login functionalityty
 
 markdown
 Copy code
