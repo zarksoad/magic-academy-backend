@@ -1,73 +1,185 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+Aquí tienes el archivo README.md completo para guiar a los desarrolladores sobre cómo hacer commits siguiendo las reglas de Conventional Commits:
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+markdown
+Copy code
+# Guía de Commits
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Este proyecto sigue el estándar **Conventional Commits** para mantener un historial de commits claro y estructurado. A continuación, se describen las reglas y cómo hacer commits correctamente.
 
-## Description
+## Estructura del Mensaje de Commit
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Un mensaje de commit debe seguir la siguiente estructura:
 
-## Installation
+<tipo>[alcance opcional]: <descripción>
 
-```bash
-$ npm install
-```
+[cuerpo opcional]
 
-## Running the app
+[pie opcional]
 
-```bash
-# development
-$ npm run start
+shell
+Copy code
 
-# watch mode
-$ npm run start:dev
+### Ejemplo
 
-# production mode
-$ npm run start:prod
-```
+feat(auth): add login functionality
 
-## Test
+Added login feature to the authentication module.
 
-```bash
-# unit tests
-$ npm run test
+BREAKING CHANGE: removed old login API endpoints
 
-# e2e tests
-$ npm run test:e2e
+markdown
+Copy code
 
-# test coverage
-$ npm run test:cov
-```
+## Tipos de Commit
 
-## Support
+Los tipos permitidos para el commit son los siguientes:
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+- **build**: Cambios que afectan el sistema de construcción o dependencias externas (ej. webpack, npm).
+- **chore**: Cambios en el proceso de desarrollo que no afectan el código de producción (ej. configuración de herramientas).
+- **ci**: Cambios en los archivos de configuración y scripts de CI (ej. GitHub Actions, CircleCI).
+- **docs**: Cambios en la documentación (ej. README, wiki).
+- **feat**: Nueva característica para el usuario final.
+- **fix**: Corrección de un error.
+- **perf**: Cambios que mejoran el rendimiento.
+- **refactor**: Cambios en el código que no corrigen errores ni agregan características (ej. renombrar variables).
+- **style**: Cambios que no afectan el significado del código, solo la forma en que está escrito (ej. formateo).
+- **test**: Agregar pruebas o corregir pruebas existentes.
+- **revert**: Revertir un commit anterior.
 
-## Stay in touch
+## Reglas de Commit
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- **Tipo no vacío**: El tipo del commit no debe estar vacío.
+- **Asunto no vacío**: El asunto del commit no debe estar vacío.
+- **Longitud del encabezado**: El encabezado del commit debe tener una longitud máxima de 72 caracteres.
+- **Tipo válido**: El tipo del commit debe estar en la lista de tipos permitidos.
+- **Formato del cuerpo**: El cuerpo del commit, si se incluye, debe comenzar con una línea en blanco después de la descripción y puede contener múltiples párrafos.
 
-## License
+## Mensajes de Commit
 
-Nest is [MIT licensed](LICENSE).
+Aquí hay algunos ejemplos de cómo estructurar tus mensajes de commit:
+
+- **Agregar una nueva característica**:
+feat(auth): add login functionality
+
+markdown
+Copy code
+
+- **Corregir un error**:
+fix(parser): handle empty input
+
+markdown
+Copy code
+
+- **Cambiar la API**:
+feat(api)!: remove deprecated endpoints
+
+markdown
+Copy code
+
+- **Actualizar la documentación**:
+docs: update README with installation instructions
+
+markdown
+Copy code
+
+- **Revertir un cambio**:
+revert: let us never again speak of the noodle incident
+
+Reverts commit 676104e.
+
+css
+Copy code
+
+## Configuración del Hook de Commit
+
+Para garantizar que los mensajes de commit cumplan con estas reglas, utilizamos el hook de `commit-msg` proporcionado por Husky. Asegúrate de que el archivo de configuración esté presente y correctamente configurado en `.husky/commit-msg`.
+
+### Archivo de Configuración de Commitlint
+
+El archivo de configuración para `commitlint` en el proyecto está ubicado en `.commitlintrc.js` y contiene las siguientes reglas:
+
+```js
+module.exports = {
+extends: ['@commitlint/config-conventional'],
+rules: {
+  'header-max-length': [2, 'always', 72],
+  'type-empty': [2, 'never'],
+  'type-enum': [
+    2,
+    'always',
+    [
+      'build',
+      'chore',
+      'ci',
+      'docs',
+      'feat',
+      'fix',
+      'perf',
+      'refactor',
+      'style',
+      'test',
+      'revert',
+    ],
+  ],
+  'subject-empty': [2, 'never'],
+  'subject-case': [0],
+},
+};
+Cómo Instalar y Configurar Husky
+Para instalar y configurar Husky en tu proyecto, sigue estos pasos:
+
+Instalar Husky:
+
+bash
+Copy code
+npm install husky --save-dev
+Habilitar hooks de Git:
+
+bash
+Copy code
+npx husky install
+Agregar el hook commit-msg:
+
+bash
+Copy code
+npx husky add .husky/commit-msg 'npx --no-install commitlint --edit $1'
+Por Qué Usar Conventional Commits
+Generación automática de CHANGELOGs: Facilita la creación de registros de cambios.
+Determinación automática del aumento de versión: Basado en los tipos de commits realizados.
+Comunicación clara de los cambios: Facilita la comprensión de los cambios para los miembros del equipo y otros interesados.
+Activación de procesos de construcción y publicación: Permite automatizar la integración y entrega continua.
+Facilita las contribuciones: Hace que el historial de commits sea más accesible para nuevos colaboradores.
+Preguntas Frecuentes (FAQ)
+¿Cómo debo tratar los mensajes de commit en la fase inicial de desarrollo?
+
+Procede como si ya hubieras lanzado el producto. Esto ayudará a mantener un historial claro y útil desde el principio.
+
+¿Los tipos en el título del commit deben estar en mayúsculas o minúsculas?
+
+Cualquier formato de mayúsculas o minúsculas es válido, pero es mejor ser consistente.
+
+¿Qué hacer si el commit se ajusta a más de un tipo de commit?
+
+Si es posible, realiza múltiples commits para cubrir todos los tipos. Esto ayuda a mantener un historial de commits organizado.
+
+¿Esto desalienta el desarrollo rápido y la iteración?
+
+No, ayuda a mover rápido de manera organizada y sostenida.
+
+¿Cómo se relaciona esto con SemVer?
+
+fix se traduce en una versión PATCH.
+feat se traduce en una versión MINOR.
+Los commits con un BREAKING CHANGE se traducen en una versión MAJOR.
+¿Qué hacer si uso el tipo de commit incorrecto?
+
+Antes de fusionar o lanzar, utiliza git rebase -i para editar el historial de commits. Después del lanzamiento, el proceso de limpieza puede variar según las herramientas y procesos utilizados.
+
+Para más información sobre Conventional Commits, consulta la especificación completa.
+
+¡Gracias por seguir estas pautas y contribuir a mantener un historial de commits claro y útil!
+
+css
+Copy code
+
+Este `README.md` proporciona una guía completa sobre el uso de Conventional Commits, incluyendo ejemplos.
