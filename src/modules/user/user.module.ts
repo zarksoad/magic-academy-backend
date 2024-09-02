@@ -6,6 +6,7 @@ import { Role, User } from './entities';
 import { BcryptPasswordHasher, CreateUSer, FindRole } from './services';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
+import { CheckEmailExistService } from './services/check-user-exist-register.service';
 
 @Module({
   imports: [
@@ -21,6 +22,12 @@ import { JwtModule } from '@nestjs/jwt';
     ConfigModule.forRoot(),
   ],
   controllers: [UserController],
-  providers: [UserService, CreateUSer, FindRole, BcryptPasswordHasher],
+  providers: [
+    UserService,
+    CreateUSer,
+    FindRole,
+    BcryptPasswordHasher,
+    CheckEmailExistService,
+  ],
 })
 export class UserModule {}
