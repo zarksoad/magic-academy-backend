@@ -3,13 +3,14 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { MatchPassword } from './check-password.service';
 import { CheckUserExistService } from './check-user-exist.service';
 import { GenerateToken } from './create-token.service';
+import { loginAuthDto } from '../../dto/login.dto';
 
 // Interface defining the contract for the LoginService
 interface ILoginService {
-  checkingCredential(
-    email: string,
-    password: string,
-  ): Promise<{ access_token: string }>;
+  checkingCredential({
+    email,
+    password,
+  }: loginAuthDto): Promise<{ access_token: string }>;
 }
 
 @Injectable()
@@ -20,10 +21,10 @@ export class LoginService implements ILoginService {
     private readonly generateToken: GenerateToken,
   ) {}
 
-  async checkingCredential(
-    email: string,
-    password: string,
-  ): Promise<{ access_token: string }> {
+  async checkingCredential({
+    email,
+    password,
+  }: loginAuthDto): Promise<{ access_token: string }> {
     // Check if the user exists
     const user = await this.userValidator.checkUser(email);
 
@@ -40,7 +41,7 @@ export class LoginService implements ILoginService {
 
     // If the password is incorrect, throw UnauthorizedException
     if (!checkingPassword) {
-      throw new UnauthorizedException('Invalid password or user');
+      throw new UnauthorizedException('Invalid user or password');
     }
 
     // Generate the token
