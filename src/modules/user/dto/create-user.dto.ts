@@ -1,8 +1,6 @@
 import {
   IsNotEmpty,
-  IsNumber,
   IsString,
-  IsUrl,
   Matches,
   MaxLength,
   MinLength,

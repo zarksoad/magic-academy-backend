@@ -35,7 +35,6 @@ describe('UserController', () => {
       email: 'test@example.com',
       password: 'password',
       avatarUrl: 'http://example.com/avatar.jpg', // Opcional
-      roleId: 1,
     };
 
     await controller.create(createUserDto);
