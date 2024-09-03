@@ -2,9 +2,9 @@
 import { Controller, Post, Body } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
-import { ApiParam, ApiQuery, ApiTags } from '@nestjs/swagger';
+import { ApiTags } from '@nestjs/swagger';
 import { User } from './entities';
-import { ApiPostOperation } from 'src/common/decorators/swagger/';
+import { ApiPostOperation } from 'src/common/decorators/swagger/post-swagger.decorator';
 
 @ApiTags('users')
 @Controller('register')
