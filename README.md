@@ -1,7 +1,5 @@
 Aquí tienes el archivo README.md completo para guiar a los desarrolladores sobre cómo hacer commits siguiendo las reglas de Conventional Commits:
 
-markdown
-Copy code
 # Guía de Commits
 
 Este proyecto sigue el estándar **Conventional Commits** para mantener un historial de commits claro y estructurado. A continuación, se describen las reglas y cómo hacer commits correctamente.
@@ -16,20 +14,16 @@ Un mensaje de commit debe seguir la siguiente estructura:
 
 [pie opcional]
 
-shell
-Copy code
-
 ### Ejemplo
-
+```bash
 feat(auth): add login functionality
 
 Added login feature to the authentication module.
+```
 
+```bash
 BREAKING CHANGE: removed old login API endpoints
-
-markdown
-Copy code
-
+```
 ## Tipos de Commit
 
 Los tipos permitidos para el commit son los siguientes:
@@ -61,34 +55,21 @@ t
 - **Agregar una nueva característica**:
 feat(auth): add login functionalityty
 
-markdown
-Copy code
-
 - **Corregir un error**:
 fix(parser): handle empty input
-
-markdown
-Copy code
 
 - **Cambiar la API**:
 feat(api)!: remove deprecated endpoints
 
-markdown
-Copy code
 
 - **Actualizar la documentación**:
 docs: update README with installation instructions
 
-markdown
-Copy code
 
 - **Revertir un cambio**:
 revert: let us never again speak of the noodle incident
 
 Reverts commit 676104e.
-
-css
-Copy code
 
 ## Configuración del Hook de Commit
 
@@ -125,61 +106,63 @@ rules: {
   'subject-case': [0],
 },
 };
-Cómo Instalar y Configurar Husky
+```
+## Cómo Instalar y Configurar Husky
 Para instalar y configurar Husky en tu proyecto, sigue estos pasos:
 
-Instalar Husky:
+#### Instalar Husky:
 
-bash
-Copy code
+```bash
 npm install husky --save-dev
-Habilitar hooks de Git:
+```
 
-bash
-Copy code
+#### Habilitar hooks de Git:
+
+```bash
 npx husky install
-Agregar el hook commit-msg:
+```
 
-bash
-Copy code
+#### Agregar el hook commit-msg:
+
+```bash
 npx husky add .husky/commit-msg 'npx --no-install commitlint --edit $1'
-Por Qué Usar Conventional Commits
-Generación automática de CHANGELOGs: Facilita la creación de registros de cambios.
-Determinación automática del aumento de versión: Basado en los tipos de commits realizados.
-Comunicación clara de los cambios: Facilita la comprensión de los cambios para los miembros del equipo y otros interesados.
-Activación de procesos de construcción y publicación: Permite automatizar la integración y entrega continua.
-Facilita las contribuciones: Hace que el historial de commits sea más accesible para nuevos colaboradores.
-Preguntas Frecuentes (FAQ)
-¿Cómo debo tratar los mensajes de commit en la fase inicial de desarrollo?
+```
+
+## Por Qué Usar Conventional Commits
+
+* **Generación automática de CHANGELOGs:** Facilita la creación de registros de cambios.
+* **Determinación automática del aumento de versión:** Basado en los tipos de commits realizados.
+* **Comunicación clara de los cambios:** Facilita la comprensión de los cambios para los miembros del equipo y otros interesados.
+* **Activación de procesos de construcción y publicación:** Permite automatizar la integración y entrega continua.
+* **Facilita las contribuciones:** Hace que el historial de commits sea más accesible para nuevos colaboradores.
+
+## Preguntas Frecuentes (FAQ)
+* ¿Cómo debo tratar los mensajes de commit en la fase inicial de desarrollo?
 
 Procede como si ya hubieras lanzado el producto. Esto ayudará a mantener un historial claro y útil desde el principio.
 
-¿Los tipos en el título del commit deben estar en mayúsculas o minúsculas?
+* ¿Los tipos en el título del commit deben estar en mayúsculas o minúsculas?
 
 Cualquier formato de mayúsculas o minúsculas es válido, pero es mejor ser consistente.
 
-¿Qué hacer si el commit se ajusta a más de un tipo de commit?
+* ¿Qué hacer si el commit se ajusta a más de un tipo de commit?
 
 Si es posible, realiza múltiples commits para cubrir todos los tipos. Esto ayuda a mantener un historial de commits organizado.
 
-¿Esto desalienta el desarrollo rápido y la iteración?
+* ¿Esto desalienta el desarrollo rápido y la iteración?
 
 No, ayuda a mover rápido de manera organizada y sostenida.
 
-¿Cómo se relaciona esto con SemVer?
+* ¿Cómo se relaciona esto con SemVer?
 
 fix se traduce en una versión PATCH.
 feat se traduce en una versión MINOR.
 Los commits con un BREAKING CHANGE se traducen en una versión MAJOR.
-¿Qué hacer si uso el tipo de commit incorrecto?
+
+* ¿Qué hacer si uso el tipo de commit incorrecto?
 
 Antes de fusionar o lanzar, utiliza git rebase -i para editar el historial de commits. Después del lanzamiento, el proceso de limpieza puede variar según las herramientas y procesos utilizados.
 
 Para más información sobre Conventional Commits, consulta la especificación completa.
 
 ¡Gracias por seguir estas pautas y contribuir a mantener un historial de commits claro y útil!
-
-css
-Copy code
-
-Este `README.md` proporciona una guía completa sobre el uso de Conventional Commits, incluyendo ejemplos.
