@@ -5,18 +5,25 @@ import {
   MaxLength,
   MinLength,
 } from 'class-validator';
-
+const test = { test: 'message' };
 export class CreateUserDto {
   @IsString()
-  @MinLength(5, { message: 'Name must be at least 5 characters long.' })
-  @MaxLength(100, { message: 'Name must be at most 100 characters long.' })
+  @MinLength(5, {
+    message: 'must be at least 5 characters long.',
+    context: test, // Usamos 'context' para pasar el objeto adicional
+  })
+  // @MaxLength(100, { message: 'must be at most 100 characters long.' }, test)
+  @MaxLength(100, {
+    message: 'must be at most 100 characters long.',
+    context: test, // Nuevamente, usamos 'context' para almacenar el objeto adicional
+  })
   name: string;
 
   @IsString()
-  @MinLength(6, { message: 'Email must be at least 6 characters long.' })
-  @MaxLength(254, { message: 'Email must be at most 254 characters long.' })
+  @MinLength(6, { message: 'must be at least 6 characters long.' })
+  @MaxLength(254, { message: 'must be at most 254 characters long.' })
   @Matches(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, {
-    message: 'Email must be a valid email address.',
+    message: 'must be a valid email address.',
   })
   email: string;
 

@@ -17,28 +17,40 @@ export class HttpErrorFilter implements ExceptionFilter {
 
     let exceptionResponse = exception.getResponse();
 
+    // If it's a BadRequestException with a message array
     if (
       exception instanceof BadRequestException &&
       typeof exceptionResponse === 'object' &&
-      'message' in exceptionResponse
+      'message' in exceptionResponse &&
+      Array.isArray(exceptionResponse['message'])
     ) {
-      const { statusCode, message } = exceptionResponse as any;
+      const { statusCode, message } = exceptionResponse as any; // Use 'any' temporarily to access statusCode and message
       exceptionResponse = {
-        statusCode: statusCode || status,
-        timeStamp: new Date().toISOString(),
-        path: request.url,
+        status: statusCode || status,
+        type: request.url,
         method: request.method,
-        message: message || 'Bad Request',
+        title: 'Your request parameters',
+        'invalid-params': message.map((msg: string) => {
+          // Transform messages into a structured format
+          const [name, ...reasonParts] = msg.split(' - ');
+          return { name, reason: reasonParts.join(' - ') };
+        }),
+        timeStamp: new Date().toISOString(),
       };
-    } else if (exception instanceof HttpException) {
+    } else {
+      // Default handling for other HttpExceptions
       exceptionResponse = {
-        statusCode: status,
-        timeStamp: new Date().toISOString(),
-        path: request.url,
+        status: status,
+        type: request.url,
         method: request.method,
-        message: exceptionResponse['message'] || 'an unexpected error Ocurred',
+        detail:
+          typeof exceptionResponse === 'string'
+            ? exceptionResponse
+            : exceptionResponse['message'] || 'An unexpected error occurred',
+        timeStamp: new Date().toISOString(),
       };
     }
+
     response.status(status).json(exceptionResponse);
   }
 }
