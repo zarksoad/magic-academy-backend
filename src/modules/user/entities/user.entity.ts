@@ -2,10 +2,13 @@ import {
   Column,
   Entity,
   JoinColumn,
+  JoinTable,
+  ManyToMany,
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Role } from './role.entity';
+import { Topic } from 'src/modules/topics/entities/topic.entity';
 
 @Entity('users')
 export class User {
@@ -27,9 +30,17 @@ export class User {
   @Column({ type: 'int' })
   roleId: number;
 
-  @ManyToOne(() => Role, (role: Role) => role.users)
+  @ManyToOne(() => Role, role => role.users)
   @JoinColumn({ name: 'roleId' })
   role: Role;
+
+  @ManyToMany(() => Topic, topic => topic.users)
+  @JoinTable({
+    name: 'user_topics',
+    joinColumn: { name: 'user_id', referencedColumnName: 'id' },
+    inverseJoinColumn: { name: 'topic_id', referencedColumnName: 'id' },
+  })
+  topics: Topic[];
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
