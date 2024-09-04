@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { Logger as logger, ValidationPipe } from '@nestjs/common';
+import { Logger as logger } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ResponseInterceptor } from './common/interceptor/response.interceptor';
 import { HttpErrorFilter } from './common/filters/error-filter.filter';
