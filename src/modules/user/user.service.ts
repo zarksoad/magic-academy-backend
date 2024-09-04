@@ -1,6 +1,7 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+/* eslint-disable no-unused-vars */
+import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
-import { CreateUSer, FindRole } from './services';
+import { CreateUSer } from './services';
 import { User } from './entities';
 
 @Injectable()
