@@ -1,16 +1,10 @@
 /* eslint-disable no-unused-vars */
-import {
-  Controller,
-  Post,
-  Body,
-  UsePipes,
-  ValidationPipe,
-} from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { User } from './entities';
-import { ApiPostOperation } from 'src/common/decorators/swagger/post-swagger.decorator';
+import { ApiPostOperation } from '../../common/decorators/swagger/post-swagger.decorator';
 
 @ApiTags('users')
 @Controller('register')
