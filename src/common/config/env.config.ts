@@ -1,6 +1,6 @@
-import { config } from "dotenv";
+import { config } from 'dotenv';
 
-config()
+config();
 export const EnvConfig = () => ({
   host: process.env.HOST,
   port: parseInt(process.env.PORT_DB),

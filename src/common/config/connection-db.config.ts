@@ -16,6 +16,8 @@ export class DatabaseConfigService implements TypeOrmOptionsFactory {
       database: envConfig.database,
       autoLoadEntities: true,
       synchronize: true, // Solo para desarrollo; no usar en producción
+      logging: true, // Habilita el logging
+      logger: 'advanced-console', // Configura el logger para mostrar consultas SQL
     };
   }
 }
