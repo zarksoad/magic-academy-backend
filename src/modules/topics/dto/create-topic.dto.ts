@@ -1,4 +1,5 @@
 import { IsString, MaxLength, MinLength } from 'class-validator';
+import { Transform } from 'class-transformer';
 
 export class CreateTopicDto {
   @IsString()
@@ -8,5 +9,6 @@ export class CreateTopicDto {
   @MaxLength(20, {
     message: 'must be at most 20 characters long.',
   })
+  @Transform(({ value }) => value.toLowerCase())
   name: string;
 }

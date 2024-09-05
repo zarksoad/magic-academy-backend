@@ -7,11 +7,13 @@ import { CreateUserDto } from '../dto/create-user.dto';
 import { BcryptPasswordHasher } from './hash-password.service';
 import { FindRole } from './find-role.service';
 import { CheckEmailExistService } from './check-user-exist-register.service';
+import { Topic } from 'src/modules/topics/entities/topic.entity';
 
 @Injectable()
 export class CreateUSer {
   constructor(
     @InjectRepository(User) private userRepository: Repository<User>,
+    @InjectRepository(Topic) private topicRepository: Repository<Topic>,
     private readonly cryptPassword: BcryptPasswordHasher,
     private readonly findRole: FindRole,
     private readonly verifyEmail: CheckEmailExistService,
@@ -31,9 +33,12 @@ export class CreateUSer {
       }
     }
 
+    const topics = await this.topicRepository.findByIds(userData.topicIds);
+
     const user = this.userRepository.create({
       ...userData,
       roleId: roleId,
+      topics,
     });
     return await this.userRepository.save(user);
   }

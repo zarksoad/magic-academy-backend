@@ -1,5 +1,9 @@
 /* eslint-disable no-unused-vars */
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Topic } from '../entities/topic.entity';
 import { Repository } from 'typeorm';
@@ -17,7 +21,10 @@ export class VerifyTopicExist implements ICheckTopic {
   async checkTopic(name: string): Promise<string> {
     const topic = await this.topicRepository.findOne({ where: { name } });
     if (topic) {
-      throw new NotFoundException('The topic already exists');
+      throw new ConflictException({
+        status: 417,
+        message: 'The topic already exists.',
+      });
     }
     return name;
   }

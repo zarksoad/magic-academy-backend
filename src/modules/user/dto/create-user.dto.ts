@@ -1,4 +1,6 @@
 import {
+  ArrayMinSize,
+  IsArray,
   IsNotEmpty,
   IsString,
   Matches,
@@ -43,4 +45,8 @@ export class CreateUserDto {
   @IsNotEmpty({ message: 'Avatar URL cannot be empty.' })
   // @IsUrl() // Uncomment and test this if you need URL validation
   avatarUrl: string;
+
+  @IsArray()
+  @ArrayMinSize(1)
+  topicIds: number[];
 }
