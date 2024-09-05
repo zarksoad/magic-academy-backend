@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '../entities';
 import { Repository } from 'typeorm';
@@ -34,6 +34,12 @@ export class CreateUSer {
     }
 
     const topics = await this.topicRepository.findByIds(userData.topicIds);
+    if (topics.length === 0 && userData.topicIds.length > 0) {
+      throw new ConflictException({
+        status: 406,
+        message: 'Some topic IDs are invalid or do not exist',
+      });
+    }
 
     const user = this.userRepository.create({
       ...userData,
