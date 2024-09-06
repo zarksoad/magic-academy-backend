@@ -8,7 +8,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Role } from './role.entity';
-import { Topic } from 'src/modules/topics/entities/topic.entity';
+import { Topic } from '../../topics/entities/topic.entity';
 
 @Entity('users')
 export class User {
@@ -27,11 +27,11 @@ export class User {
   @Column({ type: 'text', name: 'avatar_url' })
   avatarUrl: string;
 
-  @Column({ type: 'int' })
+  @Column({ type: 'int', name: 'role_id' })
   roleId: number;
 
   @ManyToOne(() => Role, role => role.users)
-  @JoinColumn({ name: 'roleId' })
+  @JoinColumn({ name: 'role_id' })
   role: Role;
 
   @ManyToMany(() => Topic, topic => topic.users)

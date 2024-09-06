@@ -2,8 +2,10 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DatabaseConfigService } from 'src/common/config';
 import { UserModule } from './user/user.module';
+import { CourseModule } from './course/course.module';
+import { CourseSectionModule } from './course-section/course-section.module';
+import { SectionClassModule } from './section-class/section-class.module';
 import { TopicsModule } from './topics/topics.module';
-import { CommentsModule } from './comments/comments.module';
 
 @Module({
   imports: [
@@ -11,8 +13,10 @@ import { CommentsModule } from './comments/comments.module';
       useClass: DatabaseConfigService,
     }),
     UserModule,
+    CourseModule,
+    CourseSectionModule,
+    SectionClassModule,
     TopicsModule,
-    CommentsModule,
   ],
   providers: [DatabaseConfigService],
   exports: [DatabaseConfigService],
