@@ -8,12 +8,18 @@ import { CheckCommentType } from './services/create-new-comment/check-if-comment
 import { CourseSection } from '../course-section/entities/course-section.entity';
 import { Course } from '../course/entities/course.entity';
 import { SectionClass } from '../section-class/entities/section-class.entity';
+import { CheckParentExistService } from './services/create-new-comment/check-parent-comment-exist.service';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([Comment, CourseSection, Course, SectionClass]),
   ],
   controllers: [CommentsController],
-  providers: [CommentsService, CreateCommentService, CheckCommentType],
+  providers: [
+    CommentsService,
+    CreateCommentService,
+    CheckCommentType,
+    CheckParentExistService,
+  ],
 })
 export class CommentsModule {}
