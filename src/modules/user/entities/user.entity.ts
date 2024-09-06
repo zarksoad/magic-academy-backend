@@ -8,7 +8,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Role } from './role.entity';
-import { Topic } from 'src/modules/topics/entities/topic.entity';
+import { Topic } from '../../topics/entities/topic.entity';
 
 @Entity('users')
 export class User {
