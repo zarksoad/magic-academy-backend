@@ -1,3 +1,5 @@
+import { Role } from './role.entity';
+import { Topic } from '../../topics/entities/topic.entity';
 import {
   Column,
   Entity,
@@ -5,11 +7,9 @@ import {
   JoinTable,
   ManyToMany,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Role } from './role.entity';
-import { Topic } from '../../topics/entities/topic.entity';
-
 @Entity('users')
 export class User {
   @PrimaryGeneratedColumn({ type: 'int' })
@@ -27,11 +27,11 @@ export class User {
   @Column({ type: 'text', name: 'avatar_url' })
   avatarUrl: string;
 
-  @Column({ type: 'int', name: 'role_id' })
+  @Column({ type: 'int' })
   roleId: number;
 
   @ManyToOne(() => Role, role => role.users)
-  @JoinColumn({ name: 'role_id' })
+  @JoinColumn({ name: 'roleId' })
   role: Role;
 
   @ManyToMany(() => Topic, topic => topic.users)
@@ -47,4 +47,7 @@ export class User {
 
   @Column({ type: 'timestamp', nullable: true })
   updatedAt: Date;
+
+  @OneToMany(() => Comment, comment => comment)
+  comment: Comment[];
 }
