@@ -8,6 +8,7 @@ import {
   CheckEmailExistService,
   CreateUSer,
   FindRole,
+  MailService,
 } from './services';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
@@ -33,6 +34,7 @@ import { Topic } from '../topics/entities/topic.entity';
     FindRole,
     BcryptPasswordHasher,
     CheckEmailExistService,
+    MailService,
   ],
 })
 export class UserModule {}

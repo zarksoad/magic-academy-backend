@@ -4,14 +4,15 @@ import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { User } from './entities';
-import { ApiPostOperation } from 'src/common/decorators/swagger/post-swagger.decorator';
+import { SendMailDto } from './dto';
+import { ApiPostOperation } from '../../common/decorators/swagger';
 
 @ApiTags('users')
-@Controller('register')
+@Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Post()
+  @Post('register')
   @ApiPostOperation(
     'Create User', // Summary
     User, // Response DTO
@@ -20,5 +21,10 @@ export class UserController {
   )
   create(@Body() createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto);
+  }
+
+  @Post('/invite')
+  invite(@Body() SendMailDto: SendMailDto) {
+    return this.userService.sendEmail(SendMailDto);
   }
 }
