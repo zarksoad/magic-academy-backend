@@ -5,6 +5,7 @@ import { UserModule } from './user/user.module';
 import { CourseModule } from './course/course.module';
 import { CourseSectionModule } from './course-section/course-section.module';
 import { SectionClassModule } from './section-class/section-class.module';
+import { TopicsModule } from './topics/topics.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { SectionClassModule } from './section-class/section-class.module';
     CourseModule,
     CourseSectionModule,
     SectionClassModule,
+    TopicsModule,
   ],
   providers: [DatabaseConfigService],
   exports: [DatabaseConfigService],
