@@ -2,9 +2,9 @@
 import { Controller, Post, Body, Get } from '@nestjs/common';
 import { TopicsService } from './topics.service';
 import { CreateTopicDto } from './dto/create-topic.dto';
-import { ApiPostOperation } from 'src/common/decorators/swagger';
 import { Topic } from './entities/topic.entity';
 import { ApiTags } from '@nestjs/swagger';
+import { ApiPostOperation } from '../../common/decorators/swagger';
 
 @ApiTags('Topics')
 @Controller('topics')
