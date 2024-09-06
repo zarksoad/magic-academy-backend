@@ -7,10 +7,11 @@ import { BcryptPasswordHasher, CreateUSer, FindRole } from './services';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { CheckEmailExistService } from './services/check-user-exist-register.service';
+import { UserCourse } from './entities/user-course.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([User, Role]),
+    TypeOrmModule.forFeature([User, Role, UserCourse]),
     JwtModule.registerAsync({
       imports: [ConfigModule],
       inject: [ConfigService],

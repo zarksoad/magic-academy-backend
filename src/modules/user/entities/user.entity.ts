@@ -1,11 +1,12 @@
 import {
   Column,
   Entity,
-  JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Role } from './role.entity';
+import { UserCourse } from './user-course.entity';
 
 @Entity('users')
 export class User {
@@ -35,4 +36,7 @@ export class User {
 
   @Column({ type: 'timestamp', nullable: true })
   updatedAt: Date;
+
+  @OneToMany(() => UserCourse, userCourse => userCourse.user)
+  userCourses: UserCourse[];
 }
