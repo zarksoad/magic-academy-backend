@@ -2,10 +2,10 @@
 import { Controller, Post, Body, Res, HttpCode } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { loginAuthDto } from './dto/login.dto';
-import { ApiPostOperation } from 'src/common/decorators/swagger';
 import { User } from '../user/entities';
 import { ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
+import { ApiPostOperation } from '../../common/decorators/swagger/post-swagger.decorator';
 
 @ApiTags('login')
 @Controller('auth')

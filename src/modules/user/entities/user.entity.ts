@@ -11,6 +11,9 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Comment } from '../../comments/entities/comment.entity';
+import { UserCourse } from './user-course.entity';
+import { UserSection } from './user-section.entity';
+import { UserClass } from './user-classes.entity';
 @Entity('users')
 export class User {
   @PrimaryGeneratedColumn({ type: 'int' })
@@ -51,4 +54,13 @@ export class User {
 
   @OneToMany(() => Comment, comment => comment)
   comment: Comment[];
+
+  @OneToMany(() => UserCourse, userCourse => userCourse.user)
+  userCourses: UserCourse[];
+
+  @OneToMany(() => UserSection, userSection => userSection)
+  userSections: UserSection[];
+
+  @OneToMany(() => UserClass, userClasses => userClasses.user)
+  userClasses: UserClass[];
 }

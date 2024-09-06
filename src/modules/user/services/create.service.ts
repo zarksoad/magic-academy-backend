@@ -7,7 +7,7 @@ import { CreateUserDto } from '../dto/create-user.dto';
 import { BcryptPasswordHasher } from './hash-password.service';
 import { FindRole } from './find-role.service';
 import { CheckEmailExistService } from './check-user-exist-register.service';
-import { Topic } from 'src/modules/topics/entities/topic.entity';
+import { Topic } from '../../topics/entities/topic.entity';
 
 @Injectable()
 export class CreateUSer {
