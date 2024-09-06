@@ -1,5 +1,5 @@
-import { CourseSection } from "src/modules/course-section/entities/course-section.entity";
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { CourseSection } from "../../course-section/entities/course-section.entity";
 
 @Entity('section_classes')
 export class SectionClass {

@@ -1,5 +1,6 @@
-import { CourseSection } from "src/modules/course-section/entities/course-section.entity";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { CourseSection } from "../../course-section/entities/course-section.entity";
+import { UserCourse } from "../../user/entities/user-course.entity";
 
 @Entity('courses')
 export class Course {
@@ -23,4 +24,7 @@ export class Course {
 
     @OneToMany(() => CourseSection, section => section.course)
     sections: CourseSection[];
+
+    @OneToMany(()=>UserCourse, userCourse => userCourse.course)
+    userCourses: UserCourse[];
 }

@@ -12,11 +12,12 @@ import {
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { Topic } from '../topics/entities/topic.entity';
+import { UserCourse } from './entities/user-course.entity';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    TypeOrmModule.forFeature([User, Role, Topic]),
+    TypeOrmModule.forFeature([User, Role, Topic, UserCourse]),
     JwtModule.registerAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
