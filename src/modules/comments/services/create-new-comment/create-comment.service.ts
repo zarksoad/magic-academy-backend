@@ -29,6 +29,6 @@ export class CreateCommentService implements ICreateComment {
       const save = await this.commentRepository.save(newComment);
       return save;
     }
-    throw new NotFoundException('CommentType_Id not found');
+    throw new NotFoundException('CommentType_id not found');
   }
 }
