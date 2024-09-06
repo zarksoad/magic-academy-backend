@@ -11,6 +11,8 @@ import {
 import { Role } from './role.entity';
 import { Topic } from '../../topics/entities/topic.entity';
 import { UserCourse } from './user-course.entity';
+import { UserSection } from './user-section.entity';
+import { UserClass } from './user-classes.entity';
 
 @Entity('users')
 export class User {
@@ -52,4 +54,10 @@ export class User {
 
   @OneToMany(() => UserCourse, userCourse => userCourse.user)
   userCourses: UserCourse[];
+
+  @OneToMany(() => UserSection, userSection => userSection)
+  userSections: UserSection[];
+
+  @OneToMany(() => UserClass, userClasses => userClasses.user)
+  userClasses: UserClass[]; 
 }
