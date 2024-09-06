@@ -3,15 +3,21 @@ import { UserService } from './user.service';
 import { UserController } from './user.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Role, User } from './entities';
-import { BcryptPasswordHasher, CreateUSer, FindRole } from './services';
+import {
+  BcryptPasswordHasher,
+  CheckEmailExistService,
+  CreateUSer,
+  FindRole,
+} from './services';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
-import { CheckEmailExistService } from './services/check-user-exist-register.service';
+import { Topic } from '../topics/entities/topic.entity';
 import { UserCourse } from './entities/user-course.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([User, Role, UserCourse]),
+    ConfigModule.forRoot(),
+    TypeOrmModule.forFeature([User, Role, Topic, UserCourse]),
     JwtModule.registerAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
@@ -20,7 +26,6 @@ import { UserCourse } from './entities/user-course.entity';
         signOptions: { expiresIn: '1h' },
       }),
     }),
-    ConfigModule.forRoot(),
   ],
   controllers: [UserController],
   providers: [
