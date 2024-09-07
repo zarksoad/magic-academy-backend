@@ -1,5 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import * as cookieParser from 'cookie-parser';
 import { Logger as logger } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ResponseInterceptor } from './common/interceptor/response.interceptor';
@@ -11,6 +12,7 @@ async function bootstrap() {
   app.setGlobalPrefix('api');
   app.enableCors();
   app.useGlobalPipes(globalValidationPipes);
+  app.use(cookieParser());
   const config = new DocumentBuilder()
     .setTitle('Api magic academic')
     .setDescription('API description')

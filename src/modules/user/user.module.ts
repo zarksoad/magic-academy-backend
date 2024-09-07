@@ -19,7 +19,14 @@ import { UserClass } from './entities/user-classes.entity';
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    TypeOrmModule.forFeature([User, Role, Topic, UserCourse, UserSection, UserClass]),
+    TypeOrmModule.forFeature([
+      User,
+      Role,
+      Topic,
+      UserCourse,
+      UserSection,
+      UserClass,
+    ]),
     JwtModule.registerAsync({
       imports: [ConfigModule],
       inject: [ConfigService],

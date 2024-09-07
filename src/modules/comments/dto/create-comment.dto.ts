@@ -30,7 +30,7 @@ export class CreateCommentDto {
   @IsInt()
   comment_types_id: number; // ID related to the comment type
 
-  @IsNotEmpty()
   @IsInt()
+  @IsOptional()
   users_id: number; // ID of the user who created the comment
 }

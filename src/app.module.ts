@@ -1,12 +1,18 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config'; // Import ConfigModule
 import { DatabaseModule } from './modules/database.module';
 import { UserModule } from './modules/user/user.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { TopicsModule } from './modules/topics/topics.module';
 import { CommentsModule } from './modules/comments/comments.module';
+import { JwtStrategy } from './modules/auth/strategies/jwt.strategy';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      // Initialize ConfigModule globally
+      isGlobal: true, // Makes ConfigModule available throughout the application
+    }),
     DatabaseModule,
     UserModule,
     AuthModule,
@@ -14,6 +20,6 @@ import { CommentsModule } from './modules/comments/comments.module';
     CommentsModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [JwtStrategy],
 })
 export class AppModule {}
