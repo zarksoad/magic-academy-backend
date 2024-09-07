@@ -1,15 +1,13 @@
 /* eslint-disable no-unused-vars */
-import { Controller, Post, Body, UseGuards } from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { User } from './entities';
 import { ApiPostOperation } from '../../common/decorators/swagger';
-import { JwtAuthGuard } from '../auth/guards/jwt.auth.guard';
 
 @ApiTags('users')
 @Controller('register')
-@UseGuards(JwtAuthGuard)
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
