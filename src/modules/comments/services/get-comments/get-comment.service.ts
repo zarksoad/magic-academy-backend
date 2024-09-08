@@ -4,6 +4,7 @@ import { Comment } from '../../entities/comment.entity';
 import { CommentTypeEnum } from '../../enums/comment-type/comment-type.enum';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { CommentTransformer } from './transformers/comment-transformer';
 
 interface IGetComments {
   getComments(
@@ -17,6 +18,7 @@ export class GetCommentsServices implements IGetComments {
   constructor(
     @InjectRepository(Comment)
     private readonly commentRepository: Repository<Comment>,
+    private readonly commentTransformer: CommentTransformer,
   ) {}
   async getComments(
     comment_type: CommentTypeEnum,
@@ -28,6 +30,6 @@ export class GetCommentsServices implements IGetComments {
     if (comments.length === 0) {
       throw new NotFoundException('No comments found for the given criteria');
     }
-    return comments;
+    return this.commentTransformer.transform(comments);
   }
 }
