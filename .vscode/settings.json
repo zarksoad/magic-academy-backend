@@ -4,6 +4,7 @@
         "commentables",
         "commitlint",
         "datetime",
-        "Icheck"
+        "Icheck",
+        "succesfully"
     ]
 }
