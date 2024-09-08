@@ -8,11 +8,13 @@ import {
   CheckEmailExistService,
   CreateUSer,
   FindRole,
-  MailService,
+  CreateMailService,
+  TokenService,
 } from './services';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { Topic } from '../topics/entities/topic.entity';
+import { Token } from './entities/token.entity';
 import { UserCourse } from './entities/user-course.entity';
 import { UserSection } from './entities/user-section.entity';
 import { UserClass } from './entities/user-classes.entity';
@@ -20,6 +22,7 @@ import { UserClass } from './entities/user-classes.entity';
 @Module({
   imports: [
     ConfigModule.forRoot(),
+    TypeOrmModule.forFeature([User, Role, Topic, Token]),
     TypeOrmModule.forFeature([
       User,
       Role,
@@ -44,7 +47,8 @@ import { UserClass } from './entities/user-classes.entity';
     FindRole,
     BcryptPasswordHasher,
     CheckEmailExistService,
-    MailService,
+    CreateMailService,
+    TokenService,
   ],
 })
 export class UserModule {}

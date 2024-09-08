@@ -1,5 +1,3 @@
-import { Role } from './role.entity';
-import { Topic } from '../../topics/entities/topic.entity';
 import {
   Column,
   Entity,
@@ -10,6 +8,10 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { Role } from './role.entity';
+import { Topic } from '../../topics/entities/topic.entity';
+import { Token } from './token.entity';
+
 import { Comment } from '../../comments/entities/comment.entity';
 import { UserCourse } from './user-course.entity';
 import { UserSection } from './user-section.entity';
@@ -51,6 +53,9 @@ export class User {
 
   @Column({ type: 'timestamp', nullable: true })
   updatedAt: Date;
+
+  @OneToMany(() => Token, token => token.createdBy)
+  tokens: Token[];
 
   @OneToMany(() => Comment, comment => comment)
   comment: Comment[];

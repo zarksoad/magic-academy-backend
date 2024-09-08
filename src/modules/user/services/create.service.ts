@@ -25,6 +25,7 @@ export class CreateUSer {
     await this.verifyEmail.checkUser(userData.email);
 
     if (token) {
+      token = token['token'];
       try {
         const role = await this.findRole.getRoleFromToken(token);
         roleId = role.id;
@@ -32,7 +33,6 @@ export class CreateUSer {
         throw new Error('Invalid token or role not found');
       }
     }
-
     const topics = await this.topicRepository.findByIds(userData.topicIds);
     if (topics.length === 0 && userData.topicIds.length > 0) {
       throw new ConflictException({
@@ -43,7 +43,7 @@ export class CreateUSer {
 
     const user = this.userRepository.create({
       ...userData,
-      roleId: roleId,
+      roleId,
       topics,
     });
     return await this.userRepository.save(user);

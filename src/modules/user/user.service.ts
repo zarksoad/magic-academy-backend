@@ -1,8 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { Injectable } from '@nestjs/common';
-import { CreateUSer } from './services';
+import { CreateUSer, CreateMailService } from './services';
 import { User } from './entities';
-import { MailService } from './services/send-email.service';
 import { CreateUserDto, SendMailDto } from './dto';
 import type SMTPTransport from 'nodemailer/lib/smtp-transport';
 
@@ -10,7 +9,7 @@ import type SMTPTransport from 'nodemailer/lib/smtp-transport';
 export class UserService {
   constructor(
     private readonly createUser: CreateUSer,
-    private readonly mailService: MailService,
+    private readonly mailService: CreateMailService,
   ) {}
 
   async create(createUserDto: CreateUserDto, token?: string): Promise<User> {
@@ -19,7 +18,8 @@ export class UserService {
 
   async sendEmail(
     sendEmailDto: SendMailDto,
+    user: number,
   ): Promise<SMTPTransport.SentMessageInfo> {
-    return await this.mailService.sendMail(sendEmailDto);
+    return await this.mailService.sendMail(sendEmailDto, user);
   }
 }
