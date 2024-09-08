@@ -9,6 +9,7 @@ import { CourseSection } from '../course-section/entities/course-section.entity'
 import { Course } from '../course/entities/course.entity';
 import { SectionClass } from '../section-class/entities/section-class.entity';
 import { CheckParentExistService } from './services/create-new-comment/check-parent-comment-exist.service';
+import { GetCommentsServices } from './services/get-comments/get-comment.service';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { CheckParentExistService } from './services/create-new-comment/check-par
     CreateCommentService,
     CheckCommentType,
     CheckParentExistService,
+    GetCommentsServices,
   ],
 })
 export class CommentsModule {}

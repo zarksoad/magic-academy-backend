@@ -23,4 +23,5 @@ module.exports = {
     'subject-empty': [2, 'never'],
     'subject-case': [0],
   },
+  x,
 };
