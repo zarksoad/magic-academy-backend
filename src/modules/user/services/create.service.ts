@@ -25,7 +25,6 @@ export class CreateUSer {
     await this.verifyEmail.checkUser(userData.email);
 
     if (token) {
-      token = token['token'];
       try {
         const role = await this.findRole.getRoleFromToken(token);
         roleId = role.id;

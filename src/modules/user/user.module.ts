@@ -18,6 +18,9 @@ import { Token } from './entities/token.entity';
 import { UserCourse } from './entities/user-course.entity';
 import { UserSection } from './entities/user-section.entity';
 import { UserClass } from './entities/user-classes.entity';
+import { CheckTokenStatus } from './services/email/check-token-status.service';
+import { UpdateTokenStatus } from './services/email/update-token-status.service';
+import { RoleService } from './services/role-insert.service';
 
 @Module({
   imports: [
@@ -43,12 +46,16 @@ import { UserClass } from './entities/user-classes.entity';
   controllers: [UserController],
   providers: [
     UserService,
+    RoleService,
     CreateUSer,
     FindRole,
     BcryptPasswordHasher,
     CheckEmailExistService,
     CreateMailService,
     TokenService,
+    CheckTokenStatus,
+    UpdateTokenStatus,
   ],
+  exports: [RoleService],
 })
 export class UserModule {}

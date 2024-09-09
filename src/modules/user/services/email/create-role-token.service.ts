@@ -18,6 +18,7 @@ export class TokenService {
     const token = await this.jwtService.signAsync(payload);
 
     await this.tokenRepository.save({
+      token,
       createdBy: user,
       isUsed: false,
     });

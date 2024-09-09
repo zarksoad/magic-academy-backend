@@ -17,12 +17,19 @@ export class Token {
   @Column({ type: 'int', name: 'created_by' })
   createdBy: number;
 
+  @Column({ type: 'text' })
+  token: string;
+
   @Column({ type: 'boolean', name: 'is_used' })
   isUsed: boolean;
 
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  @Column({
+    type: 'timestamp',
+    name: 'created_at',
+    default: () => 'CURRENT_TIMESTAMP',
+  })
   createdAt: Date;
 
-  @Column({ type: 'timestamp', nullable: true })
+  @Column({ type: 'timestamp', name: '4 updated_at', nullable: true })
   updatedAt: Date;
 }

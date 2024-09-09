@@ -6,6 +6,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { TopicsModule } from './modules/topics/topics.module';
 import { CommentsModule } from './modules/comments/comments.module';
 import { JwtStrategy } from './modules/auth/strategies/jwt.strategy';
+import { AppInitializer } from './app.initializer';
 
 @Module({
   imports: [
@@ -20,6 +21,6 @@ import { JwtStrategy } from './modules/auth/strategies/jwt.strategy';
     CommentsModule,
   ],
   controllers: [],
-  providers: [JwtStrategy],
+  providers: [JwtStrategy, AppInitializer],
 })
 export class AppModule {}

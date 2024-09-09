@@ -17,13 +17,14 @@ import { UserId } from '../../common/decorators/user/user-Id.decorator';
 import { JwtAuthGuard } from '../auth/guards/jwt.auth.guard';
 import { FindRole } from './services';
 import { Token } from './entities/token.entity';
+import { CheckTokenStatus } from './services/email/check-token-status.service';
 
 @ApiTags('users')
 @Controller('users')
 export class UserController {
   constructor(
     private readonly userService: UserService,
-    private readonly findRole: FindRole,
+    private readonly checkTokenStatus: CheckTokenStatus,
   ) {}
 
   @Post('register')
@@ -34,7 +35,10 @@ export class UserController {
     false, // Bearer Token (si se requiere autenticación)
   )
   async create(@Body() createUserDto: CreateUserDto, @Query() token: string) {
-    return await this.userService.create(createUserDto, token);
+    const tokenDesectructur = token['token'];
+    console.log(tokenDesectructur);
+    await this.checkTokenStatus.checkToken(tokenDesectructur);
+    return await this.userService.create(createUserDto, tokenDesectructur);
   }
 
   @Post('/invite')
