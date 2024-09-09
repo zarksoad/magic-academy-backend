@@ -6,6 +6,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ResponseInterceptor } from './common/interceptor/response.interceptor';
 import { HttpErrorFilter } from './common/filters/error-filter.filter';
 import { globalValidationPipes } from './common/pipes/globlaPipes.pipes';
+import 'reflect-metadata';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
