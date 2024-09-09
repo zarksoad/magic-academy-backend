@@ -1,5 +1,13 @@
 /* eslint-disable no-unused-vars */
-import { Controller, Post, Body, UseGuards, Query, Get } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  UseGuards,
+  Query,
+  Get,
+  Inject,
+} from '@nestjs/common';
 import { CommentsService } from './comments.service';
 import { CreateCommentDto } from './dto/create-comment.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt.auth.guard';
@@ -8,10 +16,14 @@ import { CommentTypeEnum } from './enums/comment-type/comment-type.enum';
 import { ApiPostOperation } from '../../common/decorators/swagger';
 import { ApiGetOperation } from '../../common/decorators/swagger/get-swagger.decorator';
 import { GetCommentsResponseDto } from './dto/get-comments.dto';
+import { CACHE_MANAGER, Cache } from '@nestjs/cache-manager';
 @Controller('comments')
 @UseGuards(JwtAuthGuard)
 export class CommentsController {
-  constructor(private readonly commentsService: CommentsService) {}
+  constructor(
+    private readonly commentsService: CommentsService,
+    @Inject(CACHE_MANAGER) private cacheManager: Cache,
+  ) {}
   @Post()
   @ApiPostOperation(
     'Comment succesfully created ',

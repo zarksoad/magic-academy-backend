@@ -6,12 +6,18 @@ import { AuthModule } from './modules/auth/auth.module';
 import { TopicsModule } from './modules/topics/topics.module';
 import { CommentsModule } from './modules/comments/comments.module';
 import { JwtStrategy } from './modules/auth/strategies/jwt.strategy';
+import { CacheInterceptor, CacheModule } from '@nestjs/cache-manager';
+import { APP_INTERCEPTOR } from '@nestjs/core';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       // Initialize ConfigModule globally
       isGlobal: true, // Makes ConfigModule available throughout the application
+    }),
+    CacheModule.register({
+      ttl: 5, // live time
+      max: 10, //max element saved in cache
     }),
     DatabaseModule,
     UserModule,
@@ -20,6 +26,9 @@ import { JwtStrategy } from './modules/auth/strategies/jwt.strategy';
     CommentsModule,
   ],
   controllers: [],
-  providers: [JwtStrategy],
+  providers: [
+    JwtStrategy,
+    { provide: APP_INTERCEPTOR, useClass: CacheInterceptor },
+  ],
 })
 export class AppModule {}

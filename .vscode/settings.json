@@ -5,6 +5,7 @@
         "commitlint",
         "datetime",
         "Icheck",
+        "nestjs",
         "succesfully"
     ]
 }
