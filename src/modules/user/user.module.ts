@@ -21,6 +21,7 @@ import { UserClass } from './entities/user-classes.entity';
 import { CheckTokenStatus } from './services/email/check-token-status.service';
 import { UpdateTokenStatus } from './services/email/update-token-status.service';
 import { RoleService } from './services/role-insert.service';
+import { InserUserService } from './services/user-insert.service';
 
 @Module({
   imports: [
@@ -55,7 +56,8 @@ import { RoleService } from './services/role-insert.service';
     TokenService,
     CheckTokenStatus,
     UpdateTokenStatus,
+    InserUserService,
   ],
-  exports: [RoleService],
+  exports: [RoleService, InserUserService],
 })
 export class UserModule {}

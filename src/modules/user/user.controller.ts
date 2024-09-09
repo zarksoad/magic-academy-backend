@@ -15,8 +15,6 @@ import { SendMailDto } from './dto';
 import { ApiPostOperation } from '../../common/decorators/swagger';
 import { UserId } from '../../common/decorators/user/user-Id.decorator';
 import { JwtAuthGuard } from '../auth/guards/jwt.auth.guard';
-import { FindRole } from './services';
-import { Token } from './entities/token.entity';
 import { CheckTokenStatus } from './services/email/check-token-status.service';
 
 @ApiTags('users')
@@ -43,6 +41,7 @@ export class UserController {
 
   @Post('/invite')
   @UseGuards(JwtAuthGuard)
+  @ApiPostOperation('Invite User', User, SendMailDto, true)
   invite(@Body() sendMailDto: SendMailDto, @UserId() user: number) {
     console.log(user);
     return this.userService.sendEmail(sendMailDto, user);

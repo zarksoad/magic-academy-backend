@@ -48,10 +48,14 @@ export class User {
   })
   topics: Topic[];
 
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  @Column({
+    name: 'created_at',
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP',
+  })
   createdAt: Date;
 
-  @Column({ type: 'timestamp', nullable: true })
+  @Column({ name: 'updated_at', type: 'timestamp', nullable: true })
   updatedAt: Date;
 
   @OneToMany(() => Token, token => token.createdBy)
