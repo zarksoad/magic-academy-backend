@@ -16,6 +16,8 @@ import { ApiPostOperation } from '../../common/decorators/swagger';
 import { UserId } from '../../common/decorators/user/user-Id.decorator';
 import { JwtAuthGuard } from '../auth/guards/jwt.auth.guard';
 import { CheckTokenStatus } from './services/email/check-token-status.service';
+import { RolesGuard } from '../auth/guards/roles.guard';
+import { Roles } from '../../common/decorators/roles.decorator';
 
 @ApiTags('users')
 @Controller('users')
@@ -32,15 +34,20 @@ export class UserController {
     CreateUserDto, // Request DTO
     false, // Bearer Token (si se requiere autenticación)
   )
-  async create(@Body() createUserDto: CreateUserDto, @Query() token: string) {
+  async create(@Body() createUserDto: CreateUserDto, @Query() token?: string) {
     const tokenDesectructur = token['token'];
     console.log(tokenDesectructur);
-    await this.checkTokenStatus.checkToken(tokenDesectructur);
-    return await this.userService.create(createUserDto, tokenDesectructur);
+    if (tokenDesectructur) {
+      await this.checkTokenStatus.checkToken(tokenDesectructur);
+      return await this.userService.create(createUserDto, tokenDesectructur);
+    }
+
+    return await this.userService.create(createUserDto);
   }
 
   @Post('/invite')
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(3)
   @ApiPostOperation('Invite User', User, SendMailDto, true)
   invite(@Body() sendMailDto: SendMailDto, @UserId() user: number) {
     console.log(user);

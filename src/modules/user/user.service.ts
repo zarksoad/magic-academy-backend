@@ -17,8 +17,9 @@ export class UserService {
   async create(createUserDto: CreateUserDto, token?: string): Promise<User> {
     if (token) {
       await this.updateTokenStatus.update(token);
+      return await this.createUser.saveUser(createUserDto, token);
     }
-    return await this.createUser.saveUser(createUserDto, token);
+    return await this.createUser.saveUser(createUserDto);
   }
 
   async sendEmail(
