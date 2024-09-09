@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import {
   ArrayMinSize,
   IsArray,
@@ -9,6 +10,9 @@ import {
 } from 'class-validator';
 const test = { test: 'message' };
 export class CreateUserDto {
+  @ApiProperty({
+    example: 'name',
+  })
   @IsString()
   @MinLength(5, {
     message: 'must be at least 5 characters long.',

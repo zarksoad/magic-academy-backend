@@ -12,22 +12,21 @@ export class FindRole {
   ) {}
 
   async getRoleFromToken(token: string): Promise<Role> {
-    try {
-      const decodedToken = this.jwtService.verify(token);
+    const decodedToken = this.jwtService.verify(token);
 
-      const roleId = decodedToken.roleId;
-      if (!roleId) {
-        throw new UnauthorizedException('No role ID found in token');
-      }
-
-      const role = await this.roleRepository.findOne({ where: { id: roleId } });
-      if (!role) {
-        throw new Error('Role not found');
-      }
-
-      return role;
-    } catch (error) {
-      throw new UnauthorizedException('Invalid token');
+    const roleId = decodedToken.roleId;
+    if (!roleId) {
+      throw new UnauthorizedException('No role ID found in token');
     }
+
+    const role = await this.roleRepository.findOne({ where: { id: roleId } });
+    if (!role) {
+      throw new Error('Role not found');
+    }
+
+    return role;
+  }
+  catch(error) {
+    throw new UnauthorizedException('Invalid token');
   }
 }
