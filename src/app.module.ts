@@ -6,8 +6,6 @@ import { AuthModule } from './modules/auth/auth.module';
 import { TopicsModule } from './modules/topics/topics.module';
 import { CommentsModule } from './modules/comments/comments.module';
 import { JwtStrategy } from './modules/auth/strategies/jwt.strategy';
-import { CacheInterceptor, CacheModule } from '@nestjs/cache-manager';
-import { APP_INTERCEPTOR } from '@nestjs/core';
 
 @Module({
   imports: [
@@ -29,6 +27,8 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
   providers: [
     JwtStrategy,
     { provide: APP_INTERCEPTOR, useClass: CacheInterceptor },
+    ,
+    AppInitializer,
   ],
 })
 export class AppModule {}
