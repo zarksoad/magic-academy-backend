@@ -16,7 +16,7 @@ export class CreateMailService extends MailConfig {
   async sendMail(sendMailDto: SendMailDto, user: number) {
     const { to } = sendMailDto;
 
-    const token = await this.tokenService.getToken(user);
+    const token = await this.tokenService.getToken(user, sendMailDto);
     const mailOptions: Mail.Options = {
       from: EnvMailConfig().user,
       to,

@@ -3,6 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Token } from '../../entities/token.entity';
 import { Repository } from 'typeorm';
+import { SendMailDto } from '../../dto';
 
 @Injectable()
 export class TokenService {
@@ -11,9 +12,10 @@ export class TokenService {
     @InjectRepository(Token) private tokenRepository: Repository<Token>,
   ) {}
 
-  async getToken(user: number): Promise<string> {
+  async getToken(user: number, role: SendMailDto): Promise<string> {
+    console.log('este es el role:' + role);
     const payload = {
-      roleId: 2,
+      roleId: role.role,
     };
     const token = await this.jwtService.signAsync(payload);
 

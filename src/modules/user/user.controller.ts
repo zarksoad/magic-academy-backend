@@ -50,7 +50,6 @@ export class UserController {
   @Roles(3)
   @ApiPostOperation('Invite User', User, SendMailDto, true)
   invite(@Body() sendMailDto: SendMailDto, @UserId() user: number) {
-    console.log(user);
     return this.userService.sendEmail(sendMailDto, user);
   }
 }
