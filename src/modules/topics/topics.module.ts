@@ -6,7 +6,9 @@ import { Topic } from './entities/topic.entity';
 import { CreateTopics, GetAllTopic, VerifyTopicExist } from './services';
 import { InserTopicService } from './services/topic-insert.service';
 @Module({
-  imports: [TypeOrmModule.forFeature([Topic])],
+  imports: [
+    TypeOrmModule.forFeature([Topic])
+  ],
   controllers: [TopicsController],
   providers: [
     TopicsService,

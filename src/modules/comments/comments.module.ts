@@ -11,10 +11,15 @@ import { SectionClass } from '../section-class/entities/section-class.entity';
 import { CheckParentExistService } from './services/create-new-comment/check-parent-comment-exist.service';
 import { GetCommentsServices } from './services/get-comments/get-comment.service';
 import { CommentTransformer } from './services/get-comments/transformers/comment-transformer';
+import { CacheModule } from '@nestjs/cache-manager';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([Comment, CourseSection, Course, SectionClass]),
+    CacheModule.register({
+      ttl: 5,
+      max: 10,
+    }),
   ],
   controllers: [CommentsController],
   providers: [
