@@ -8,20 +8,27 @@ import {
   CheckEmailExistService,
   CreateUSer,
   FindRole,
+  CreateMailService,
+  TokenService,
 } from './services';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { Topic } from '../topics/entities/topic.entity';
+import { Token } from './entities/token.entity';
 import { UserCourse } from './entities/user-course.entity';
 import { UserSection } from './entities/user-section.entity';
 import { UserClass } from './entities/user-classes.entity';
+import { CheckTokenStatus } from './services/email/check-token-status.service';
+import { UpdateTokenStatus } from './services/email/update-token-status.service';
+import { RoleService } from './services/role-insert.service';
+import { InserUserService } from './services/user-insert.service';
 import { FindUserByIdService } from './services/find-user-by-id.service';
 import { FindUserTopicsService } from './services/find-user-topics.service';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    TypeOrmModule.forFeature([User, Role, Topic, UserCourse, UserSection, UserClass]),
+    TypeOrmModule.forFeature([User, Role, Topic, Token, UserCourse, UserSection, UserClass]),
     JwtModule.registerAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
@@ -34,10 +41,16 @@ import { FindUserTopicsService } from './services/find-user-topics.service';
   controllers: [UserController],
   providers: [
     UserService,
+    RoleService,
     CreateUSer,
     FindRole,
     BcryptPasswordHasher,
     CheckEmailExistService,
+    CreateMailService,
+    TokenService,
+    CheckTokenStatus,
+    UpdateTokenStatus,
+    InserUserService,
     FindUserByIdService,
     FindUserTopicsService
   ],
@@ -48,7 +61,9 @@ import { FindUserTopicsService } from './services/find-user-topics.service';
     BcryptPasswordHasher,
     CheckEmailExistService,
     FindUserByIdService,
-    FindUserTopicsService
+    FindUserTopicsService,
+    RoleService,
+    InserUserService
   ]
 })
 export class UserModule {}

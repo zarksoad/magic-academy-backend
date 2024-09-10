@@ -1,14 +1,20 @@
+import { ApiProperty } from '@nestjs/swagger';
 import {
   ArrayMinSize,
   IsArray,
   IsNotEmpty,
+  IsOptional,
   IsString,
+  IsUrl,
   Matches,
   MaxLength,
   MinLength,
 } from 'class-validator';
 const test = { test: 'message' };
 export class CreateUserDto {
+  @ApiProperty({
+    example: 'name',
+  })
   @IsString()
   @MinLength(5, {
     message: 'must be at least 5 characters long.',
@@ -41,8 +47,9 @@ export class CreateUserDto {
   password: string;
 
   @IsString()
-  @IsNotEmpty({ message: 'Avatar URL cannot be empty.' })
-  // @IsUrl() // Uncomment and test this if you need URL validation
+  @IsOptional()
+  // @IsNotEmpty({ message: 'Avatar URL cannot be empty.' })
+  @IsUrl() // Uncomment and test this if you need URL validation
   avatarUrl: string;
 
   @IsArray()
