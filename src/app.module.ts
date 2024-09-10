@@ -6,6 +6,9 @@ import { AuthModule } from './modules/auth/auth.module';
 import { TopicsModule } from './modules/topics/topics.module';
 import { CommentsModule } from './modules/comments/comments.module';
 import { JwtStrategy } from './modules/auth/strategies/jwt.strategy';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import { CacheInterceptor, CacheModule } from '@nestjs/cache-manager';
+import { AppInitializer } from './app.initializer';
 
 @Module({
   imports: [
@@ -27,7 +30,6 @@ import { JwtStrategy } from './modules/auth/strategies/jwt.strategy';
   providers: [
     JwtStrategy,
     { provide: APP_INTERCEPTOR, useClass: CacheInterceptor },
-    ,
     AppInitializer,
   ],
 })

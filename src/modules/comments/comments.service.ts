@@ -9,8 +9,30 @@ import { Cache, CACHE_MANAGER } from '@nestjs/cache-manager';
 
 @Injectable()
 export class CommentsService {
-  constructor(private readonly createCommentService: CreateCommentService) {}
+  constructor(
+    private readonly createCommentService: CreateCommentService,
+    private readonly getCommentsService: GetCommentsServices,
+    @Inject(CACHE_MANAGER) private cacheManager: Cache,
+  ) {}
   async create(createCommentDto: CreateCommentDto) {
     return await this.createCommentService.createComment(createCommentDto);
+  }
+
+  async getComments(
+    comment_type: CommentTypeEnum,
+    comment_types_id: number,
+  ): Promise<Comment[]> {
+    const key = 'comments-find';
+    const fetchedComments = await this.cacheManager.get(key);
+    console.log(fetchedComments, 'this is cache');
+    if (!fetchedComments) {
+      const fetchedComments = await this.getCommentsService.getComments(
+        comment_type,
+        comment_types_id,
+      );
+      await this.cacheManager.set(key, fetchedComments, 1000 * 10);
+      return fetchedComments;
+    }
+    return fetchedComments as [];
   }
 }

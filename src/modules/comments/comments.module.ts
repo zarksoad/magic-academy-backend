@@ -12,8 +12,6 @@ import { CheckParentExistService } from './services/create-new-comment/check-par
 import { GetCommentsServices } from './services/get-comments/get-comment.service';
 import { CommentTransformer } from './services/get-comments/transformers/comment-transformer';
 import { CacheModule } from '@nestjs/cache-manager';
-import { GetCommentsServices } from './services/get-comments/get-comment.service';
-import { CommentTransformer } from './services/get-comments/transformers/comment-transformer';
 
 @Module({
   imports: [
