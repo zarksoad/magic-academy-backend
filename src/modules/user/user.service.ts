@@ -1,7 +1,11 @@
 /* eslint-disable no-unused-vars */
 import { Injectable } from '@nestjs/common';
 import { CreateUSer, CreateMailService } from './services';
+import { CreateUSer, CreateMailService } from './services';
 import { User } from './entities';
+import { CreateUserDto, SendMailDto } from './dto';
+import type SMTPTransport from 'nodemailer/lib/smtp-transport';
+import { UpdateTokenStatus } from './services/email/update-token-status.service';
 import { CreateUserDto, SendMailDto } from './dto';
 import type SMTPTransport from 'nodemailer/lib/smtp-transport';
 import { UpdateTokenStatus } from './services/email/update-token-status.service';
