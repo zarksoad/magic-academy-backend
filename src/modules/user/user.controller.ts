@@ -30,7 +30,7 @@ export class UserController {
   @Post('register')
   @ApiPostOperation(
     'Create User', // Summary
-    User, // Response DTO
+    CreateUserDto, // Response DTO
     CreateUserDto, // Request DTO
     false, // Bearer Token (si se requiere autenticación)
   )
