@@ -15,6 +15,8 @@ import { Topic } from '../topics/entities/topic.entity';
 import { UserCourse } from './entities/user-course.entity';
 import { UserSection } from './entities/user-section.entity';
 import { UserClass } from './entities/user-classes.entity';
+import { FindUserByIdService } from './services/find-user-by-id.service';
+import { FindUserTopicsService } from './services/find-user-topics.service';
 
 @Module({
   imports: [
@@ -36,6 +38,17 @@ import { UserClass } from './entities/user-classes.entity';
     FindRole,
     BcryptPasswordHasher,
     CheckEmailExistService,
+    FindUserByIdService,
+    FindUserTopicsService
   ],
+  exports:[
+    UserService,
+    CreateUSer,
+    FindRole,
+    BcryptPasswordHasher,
+    CheckEmailExistService,
+    FindUserByIdService,
+    FindUserTopicsService
+  ]
 })
 export class UserModule {}
