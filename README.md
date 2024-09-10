@@ -1,3 +1,7 @@
+# Team conventions
+- Transformers are what the industry is known as _mappers_.
+
+
 Aquí tienes el archivo README.md completo para guiar a los desarrolladores sobre cómo hacer commits siguiendo las reglas de Conventional Commits:
 
 # Guía de Commits
