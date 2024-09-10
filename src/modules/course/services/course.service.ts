@@ -1,19 +1,26 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-unused-vars */
 import { Injectable } from '@nestjs/common';
 import { CreateCourseDto } from '../dto/create-course.dto';
 import { UpdateCourseDto } from '../dto/update-course.dto';
 import { FindUserRecommendedCoursesService } from './find-user-recommended-courses.service';
+import { CreateCourseService } from './create-courses/create-course.service';
 
 @Injectable()
 export class CourseService {
+  constructor(
+    private findUserRecommendedCoursesService: FindUserRecommendedCoursesService,
+    private readonly createCourseService: CreateCourseService,
+  ) {}
 
-  constructor(private findUserRecommendedCoursesService:FindUserRecommendedCoursesService){}
-
-  create(createCourseDto: CreateCourseDto) {
-    return 'This action adds a new course';
+  async create(createCourseDto: CreateCourseDto) {
+    return await this.createCourseService.createCourse(createCourseDto);
   }
 
-  findUserRecommededCourses(id:string):Promise<any>{
-    return this.findUserRecommendedCoursesService.FindUserRecommendedCourses(id)
+  findUserRecommendedCourses(id: string): Promise<any> {
+    return this.findUserRecommendedCoursesService.FindUserRecommendedCourses(
+      id,
+    );
   }
 
   findOne(id: number) {

@@ -6,6 +6,7 @@ import {
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { ApiResponse } from '../dtos/api-response.dto';
 
 @Injectable()
 export class ResponseInterceptor implements NestInterceptor {
@@ -14,7 +15,7 @@ export class ResponseInterceptor implements NestInterceptor {
     const response = ctx.getResponse();
 
     return next.handle().pipe(
-      map(data => ({
+      map<unknown, ApiResponse<any>>(data => ({
         code: response.statusCode,
         message: this.getMessageForStatusCode(response.statusCode),
         data,

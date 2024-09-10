@@ -37,6 +37,7 @@ export class CommentsController {
   }
 
   @Get()
+  // @ApiGetOperation('comments', ApiResponse<GetCommentsResponseDto>, true)
   @ApiGetOperation('comments', GetCommentsResponseDto, true)
   async getComments(
     @Query('comment_type') comment_type: CommentTypeEnum,
