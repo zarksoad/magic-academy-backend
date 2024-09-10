@@ -9,7 +9,8 @@ import { FindRole } from './find-role.service';
 import { CheckEmailExistService } from './check-user-exist-register.service';
 import { Topic } from '../../topics/entities/topic.entity';
 import { UpdateTokenStatus } from './email/update-token-status.service';
-
+import { TopicExist } from '../../topics/services/verify-exist-topic.service';
+import { In } from 'typeorm';
 @Injectable()
 export class CreateUSer {
   constructor(
@@ -19,6 +20,7 @@ export class CreateUSer {
     private readonly findRole: FindRole,
     private readonly verifyEmail: CheckEmailExistService,
     private readonly updateTokenStatus: UpdateTokenStatus,
+    private readonly topicExists: TopicExist,
   ) {}
   async saveUser(userData: CreateUserDto, token?: string): Promise<User> {
     const password = userData.password;
@@ -26,13 +28,17 @@ export class CreateUSer {
     let roleId = 1; // Default roleId for student
     await this.verifyEmail.checkUser(userData.email);
 
-    const topics = await this.topicRepository.findByIds(userData.topicIds);
+    const topics = await this.topicRepository.findBy({
+      id: In(userData.topicIds),
+    });
     if (topics.length === 0 && userData.topicIds.length > 0) {
       throw new ConflictException({
         status: 406,
         message: 'Some topic IDs are invalid or do not exist',
       });
     }
+
+    await this.topicExists.checkTopicExist(userData.topicIds);
 
     if (token) {
       try {
