@@ -40,9 +40,14 @@ export class CreateUSer {
       });
     }
 
+    const defaultAvatarUrl =
+      'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541';
+    const avatarUrl = userData.avatarUrl || defaultAvatarUrl;
+
     const user = this.userRepository.create({
       ...userData,
       roleId,
+      avatarUrl,
       topics,
     });
     return await this.userRepository.save(user);
