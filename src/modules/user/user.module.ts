@@ -22,19 +22,13 @@ import { CheckTokenStatus } from './services/email/check-token-status.service';
 import { UpdateTokenStatus } from './services/email/update-token-status.service';
 import { RoleService } from './services/role-insert.service';
 import { InserUserService } from './services/user-insert.service';
+import { FindUserByIdService } from './services/find-user-by-id.service';
+import { FindUserTopicsService } from './services/find-user-topics.service';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    TypeOrmModule.forFeature([User, Role, Topic, Token]),
-    TypeOrmModule.forFeature([
-      User,
-      Role,
-      Topic,
-      UserCourse,
-      UserSection,
-      UserClass,
-    ]),
+    TypeOrmModule.forFeature([User, Role, Topic, Token, UserCourse, UserSection, UserClass]),
     JwtModule.registerAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
@@ -57,7 +51,19 @@ import { InserUserService } from './services/user-insert.service';
     CheckTokenStatus,
     UpdateTokenStatus,
     InserUserService,
+    FindUserByIdService,
+    FindUserTopicsService
   ],
-  exports: [RoleService, InserUserService],
+  exports:[
+    UserService,
+    CreateUSer,
+    FindRole,
+    BcryptPasswordHasher,
+    CheckEmailExistService,
+    FindUserByIdService,
+    FindUserTopicsService,
+    RoleService,
+    InserUserService
+  ]
 })
 export class UserModule {}
