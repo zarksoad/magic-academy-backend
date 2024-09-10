@@ -11,12 +11,12 @@ export class UserService {
   constructor(
     private readonly createUser: CreateUSer,
     private readonly mailService: CreateMailService,
-    private readonly updateTokenStatus: UpdateTokenStatus,
+    // private readonly updateTokenStatus: UpdateTokenStatus,
   ) {}
 
   async create(createUserDto: CreateUserDto, token?: string): Promise<User> {
     if (token) {
-      await this.updateTokenStatus.update(token);
+      // await this.updateTokenStatus.update(token);
       return await this.createUser.saveUser(createUserDto, token);
     }
     return await this.createUser.saveUser(createUserDto);

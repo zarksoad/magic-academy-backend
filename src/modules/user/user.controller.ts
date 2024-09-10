@@ -50,8 +50,6 @@ export class UserController {
   @Roles(3)
   @ApiPostOperation('Invite User', User, SendMailDto, true)
   invite(@Body() sendMailDto: SendMailDto, @UserId() user: number) {
-    console.log(user);
-    console.log('Hernancho este es tu role:' + JSON.stringify(sendMailDto));
     return this.userService.sendEmail(sendMailDto, user);
   }
 }
