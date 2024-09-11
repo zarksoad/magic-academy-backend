@@ -12,13 +12,17 @@ import {
 import { CourseService } from './course.service';
 import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
-import { JwtAuthGuard } from '../auth/guards/jwt.auth.guard';
-import { RolesGuard } from '../auth/guards/roles.guard';
-import { Roles } from '../../common/decorators/roles.decorator';
 import { UserId } from '../../common/decorators/user/user-Id.decorator';
 import { ApiPostOperation } from '../../common/decorators/swagger';
 import { TopicExist } from '../topics/services/verify-exist-topic.service';
+import { JwtAuthGuard } from '../auth/guards/jwt.auth.guard';
+import { RolesGuard } from '../auth/guards/roles.guard';
+import { Roles } from '../../common/decorators/roles.decorator';
+import { ApiGetOperation } from '../../common/decorators/swagger/get-swagger.decorator';
+import { FindUserRecommendedCoursesOutputDto } from './dto/dto-output/findUserRecommededCoursesOutputDto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Courses')
 @Controller('courses')
 @UseGuards(JwtAuthGuard, RolesGuard)
 export class CourseController {
@@ -40,7 +44,9 @@ export class CourseController {
   }
 
   @Get('/users/:id/recommended-courses')
-  findUserRecommendedCourses(@Param('id') id: string) {
+  @Roles(1)
+  @ApiGetOperation('courses', FindUserRecommendedCoursesOutputDto, true)
+  findUserRecommededCourses(@Param('id') id:string) {
     return this.courseService.findUserRecommendedCourses(id);
   }
 

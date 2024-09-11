@@ -6,6 +6,7 @@ import { Course } from './entities/course.entity';
 import { Topic } from '../topics/entities/topic.entity';
 import { FindUserRecommendedCoursesService } from './services/find-user-recommended-courses.service';
 import { UserModule } from '../user/user.module';
+import { FindCoursesRelatedToTopicsService } from './services/find-courses-related-to-topics.service';
 import { CreateCourseService } from './services/create-courses/create-course.service';
 import { TransactionalService } from '../../common/helpers/execute-transaction.helper';
 import { User } from '../user/entities';
@@ -18,6 +19,7 @@ import { VerifyTopicCourseService } from './services/create-courses/check-topics
   providers: [
     CourseService,
     FindUserRecommendedCoursesService,
+    FindCoursesRelatedToTopicsService,
     CreateCourseService,
     TransactionalService,
     CheckUserExistServiceCourse,

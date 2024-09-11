@@ -7,7 +7,9 @@ import { CreateTopics, GetAllTopic, VerifyTopicExist } from './services';
 import { InserTopicService } from './services/topic-insert.service';
 import { TopicExist } from './services/verify-exist-topic.service';
 @Module({
-  imports: [TypeOrmModule.forFeature([Topic])],
+  imports: [
+    TypeOrmModule.forFeature([Topic])
+  ],
   controllers: [TopicsController],
   providers: [
     TopicsService,

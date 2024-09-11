@@ -22,6 +22,7 @@ import { CheckTokenStatus } from './services/email/check-token-status.service';
 import { UpdateTokenStatus } from './services/email/update-token-status.service';
 import { RoleService } from './services/role-insert.service';
 import { InserUserService } from './services/user-insert.service';
+import { FindCoursesByUserIdService } from './services/find-courses-by-user.service';
 import { FindUserByIdService } from './services/find-user-by-id.service';
 import { FindUserTopicsService } from './services/find-user-topics.service';
 import { TopicExist } from '../topics/services/verify-exist-topic.service';
@@ -65,6 +66,7 @@ import { GetByIdUser } from './services/get-user.service';
     FindUserTopicsService,
     TopicExist,
     GetByIdUser,
+    FindCoursesByUserIdService
   ],
   exports: [
     UserService,
@@ -76,6 +78,7 @@ import { GetByIdUser } from './services/get-user.service';
     FindUserTopicsService,
     RoleService,
     InserUserService,
+    FindCoursesByUserIdService
   ],
 })
 export class UserModule {}
