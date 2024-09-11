@@ -6,6 +6,7 @@ import {
   MaxLength,
   IsDate,
   IsNumber,
+  ArrayMinSize,
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
@@ -68,4 +69,8 @@ export class CreateCourseDto {
   @IsNumber()
   @IsOptional()
   user: number;
+
+  @IsNumber()
+  @ArrayMinSize(1)
+  topic: number[];
 }
