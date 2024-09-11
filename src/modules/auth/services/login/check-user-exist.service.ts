@@ -15,7 +15,7 @@ export class CheckUserExistService implements IcheckUserExist {
   ) {}
   async checkUser(email: string): Promise<User> {
     const user = await this.userRepository.findOne({ where: { email } });
-    if (user === undefined) {
+    if (!user) {
       throw new NotFoundException("The user hasn't been registered");
     }
     return user;

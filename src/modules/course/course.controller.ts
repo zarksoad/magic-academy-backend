@@ -6,7 +6,6 @@ import {
   Body,
   Patch,
   Param,
-  Delete,
   UseGuards,
 } from '@nestjs/common';
 import { CourseService } from './course.service';
@@ -63,8 +62,9 @@ export class CourseController {
     return this.courseService.update(+id, updateCourseDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.courseService.remove(+id);
+  @Get()
+  @Roles(1)
+  getAllCourses() {
+    return this.courseService.findAll();
   }
 }
