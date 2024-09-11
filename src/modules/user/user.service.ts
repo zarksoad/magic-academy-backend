@@ -4,12 +4,14 @@ import { CreateUSer, CreateMailService } from './services';
 import { User } from './entities';
 import { CreateUserDto, SendMailDto } from './dto';
 import type SMTPTransport from 'nodemailer/lib/smtp-transport';
+import { GetByIdUser } from './services/get-user.service';
 
 @Injectable()
 export class UserService {
   constructor(
     private readonly createUser: CreateUSer,
     private readonly mailService: CreateMailService,
+    private readonly getByIdUser: GetByIdUser,
   ) {}
 
   async create(createUserDto: CreateUserDto, token?: string): Promise<User> {
@@ -24,5 +26,9 @@ export class UserService {
     user: number,
   ): Promise<SMTPTransport.SentMessageInfo> {
     return await this.mailService.sendMail(sendEmailDto, user);
+  }
+
+  async getUserById(id: number): Promise<Omit<User, 'password'>> {
+    return await this.getByIdUser.findByIdUser(id);
   }
 }

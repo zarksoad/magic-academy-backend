@@ -11,7 +11,7 @@ export const templateTestEmailWithToken = (token: string): string => {
           <h1 style="color: #181e4b;">Test Email with Token</h1>
           <p>Este es un correo de prueba para verificar el funcionamiento del sistema.</p>
           <p>Haz clic en el siguiente enlace para completar tu registro:</p>
-          <a href="http://localhost:3002/api/register?token=${token}" style="display: inline-block; padding: 10px 20px; background-color: #181e4b; color: #fff; text-decoration: none; border-radius: 5px;">Completar Registro</a>
+          <a href="http://localhost:3002/api/users/register?${token}" style="display: inline-block; padding: 10px 20px; background-color: #181e4b; color: #fff; text-decoration: none; border-radius: 5px;">Completar Registro</a>
           <p>Gracias por usar nuestra plataforma.</p>
       </body>
       </html>

@@ -25,6 +25,7 @@ import { InserUserService } from './services/user-insert.service';
 import { FindUserByIdService } from './services/find-user-by-id.service';
 import { FindUserTopicsService } from './services/find-user-topics.service';
 import { TopicExist } from '../topics/services/verify-exist-topic.service';
+import { GetByIdUser } from './services/get-user.service';
 
 @Module({
   imports: [
@@ -63,6 +64,7 @@ import { TopicExist } from '../topics/services/verify-exist-topic.service';
     FindUserByIdService,
     FindUserTopicsService,
     TopicExist,
+    GetByIdUser,
   ],
   exports: [
     UserService,
