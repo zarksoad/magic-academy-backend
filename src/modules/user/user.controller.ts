@@ -6,6 +6,7 @@ import {
   UseGuards,
   Query,
   Headers,
+  Get,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -30,7 +31,7 @@ export class UserController {
   @Post('register')
   @ApiPostOperation(
     'Create User', // Summary
-    User, // Response DTO
+    CreateUserDto, // Response DTO
     CreateUserDto, // Request DTO
     false, // Bearer Token (si se requiere autenticación)
   )
@@ -51,5 +52,11 @@ export class UserController {
   @ApiPostOperation('Invite User', User, SendMailDto, true)
   invite(@Body() sendMailDto: SendMailDto, @UserId() user: number) {
     return this.userService.sendEmail(sendMailDto, user);
+  }
+
+  @Get('/profile')
+  @UseGuards(JwtAuthGuard)
+  getByIdUSer(@UserId() user: number) {
+    return this.userService.getUserById(user);
   }
 }

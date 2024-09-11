@@ -22,14 +22,24 @@ import { CheckTokenStatus } from './services/email/check-token-status.service';
 import { UpdateTokenStatus } from './services/email/update-token-status.service';
 import { RoleService } from './services/role-insert.service';
 import { InserUserService } from './services/user-insert.service';
+import { FindCoursesByUserIdService } from './services/find-courses-by-user.service';
 import { FindUserByIdService } from './services/find-user-by-id.service';
 import { FindUserTopicsService } from './services/find-user-topics.service';
-import { FindCoursesByUserIdService } from './services/find-courses-by-user.service';
+import { TopicExist } from '../topics/services/verify-exist-topic.service';
+import { GetByIdUser } from './services/get-user.service';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    TypeOrmModule.forFeature([User, Role, Topic, Token, UserCourse, UserSection, UserClass]),
+    TypeOrmModule.forFeature([
+      User,
+      Role,
+      Topic,
+      Token,
+      UserCourse,
+      UserSection,
+      UserClass,
+    ]),
     JwtModule.registerAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
@@ -54,9 +64,11 @@ import { FindCoursesByUserIdService } from './services/find-courses-by-user.serv
     InserUserService,
     FindUserByIdService,
     FindUserTopicsService,
+    TopicExist,
+    GetByIdUser,
     FindCoursesByUserIdService
   ],
-  exports:[
+  exports: [
     UserService,
     CreateUSer,
     FindRole,
@@ -67,6 +79,6 @@ import { FindCoursesByUserIdService } from './services/find-courses-by-user.serv
     RoleService,
     InserUserService,
     FindCoursesByUserIdService
-  ]
+  ],
 })
 export class UserModule {}
