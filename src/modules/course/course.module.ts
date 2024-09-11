@@ -9,6 +9,7 @@ import { UserModule } from '../user/user.module';
 import { CreateCourseService } from './services/create-courses/create-course.service';
 import { TransactionalService } from '../../common/helpers/execute-transaction.helper';
 import { User } from '../user/entities';
+import { CheckUserExistServiceCourse } from './services/create-courses/check-users-to-create-courses.service';
 @Module({
   imports: [TypeOrmModule.forFeature([Course, Topic, User]), UserModule],
   controllers: [CourseController],
@@ -17,6 +18,7 @@ import { User } from '../user/entities';
     FindUserRecommendedCoursesService,
     CreateCourseService,
     TransactionalService,
+    CheckUserExistServiceCourse,
   ],
 })
 export class CourseModule {}
