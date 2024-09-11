@@ -1,5 +1,5 @@
-import { User } from "../../user/entities";
+import { User } from '../../user/entities';
 
-export const getCoursesByUserIdIdsTransformer = (coursesByUserId:User) =>{
-    return coursesByUserId.userCourses.map(userCourse => userCourse.course.id)
-}
+export const getCoursesByUserIdIdsTransformer = (coursesByUserId: User) => {
+  return coursesByUserId.userCourses.map(userCourse => userCourse.course.id);
+};

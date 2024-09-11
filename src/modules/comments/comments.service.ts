@@ -24,7 +24,6 @@ export class CommentsService {
   ): Promise<Comment[]> {
     const key = 'comments-find';
     const fetchedComments = await this.cacheManager.get(key);
-    console.log(fetchedComments, 'this is cache');
     if (!fetchedComments) {
       const fetchedComments = await this.getCommentsService.getComments(
         comment_type,
