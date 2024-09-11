@@ -9,7 +9,7 @@ export class FindUserByIdService{
         @InjectRepository(User) private userRepository:Repository<User>
     ){}
 
-    async findUserById(id:string){
+    async findUserById(id:number){
         const userData = await this.userRepository.findOne({
             where:{id:+id}
         })

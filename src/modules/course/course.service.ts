@@ -5,6 +5,7 @@ import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
 import { FindUserRecommendedCoursesService } from './services/find-user-recommended-courses.service';
 import { CreateCourseService } from './services/create-courses/create-course.service';
+import { Course } from './entities/course.entity';
 
 @Injectable()
 export class CourseService {
@@ -17,7 +18,7 @@ export class CourseService {
     return await this.createCourseService.createCourse(createCourseDto);
   }
 
-  findUserRecommendedCourses(id: string): Promise<any> {
+  findUserRecommendedCourses(id: number): Promise<Course[]> {
     return this.findUserRecommendedCoursesService.FindUserRecommendedCourses(
       id,
     );

@@ -17,7 +17,7 @@ export class FindUserRecommendedCoursesService{
         private findCoursesByUserIdService:FindCoursesByUserIdService
     ){}
     
-    async FindUserRecommendedCourses(id:string):Promise<Course[]>{
+    async FindUserRecommendedCourses(id:number):Promise<Course[]>{
         const {id:UserId} = await this.findUserByIdService.findUserById(id);
 
         //Getting topics by user
@@ -27,14 +27,21 @@ export class FindUserRecommendedCoursesService{
         
         //Getting courses related to topics
         const coursesRelatedToTopics = await this.findCoursesRelatedToTopicsService.FindCoursesRelatedToTopics(userTopicIds)
-        
+        console.log("coursesRelatedToTopics: ", coursesRelatedToTopics)
         // Getting courses id of courses in which the user is already enrolled in
         const coursesByUserId = await this.findCoursesByUserIdService.findCoursesByUserId(UserId)
         const coursesByUserIdIds = getCoursesByUserIdIdsTransformer(coursesByUserId)
-
+        console.log("coursesByUserIdIds: ", coursesByUserIdIds)
+        
         //Courses in which the student is already enrolled in are filtered out
-        return coursesRelatedToTopics.filter(courseRelatedToTopic => {
+        const recommendedCoursesFiltered = coursesRelatedToTopics.filter(courseRelatedToTopic => {
             return !coursesByUserIdIds.includes(courseRelatedToTopic.id)
         })
+
+        if(!recommendedCoursesFiltered.length){
+            // TODO: what to do in cases in which this array length is zero?
+        }
+
+        return recommendedCoursesFiltered
     }
 }

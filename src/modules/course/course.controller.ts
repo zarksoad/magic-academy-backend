@@ -21,6 +21,7 @@ import { Roles } from '../../common/decorators/roles.decorator';
 import { ApiGetOperation } from '../../common/decorators/swagger/get-swagger.decorator';
 import { FindUserRecommendedCoursesOutputDto } from './dto/dto-output/findUserRecommededCoursesOutputDto';
 import { ApiTags } from '@nestjs/swagger';
+import { Course } from './entities/course.entity';
 
 @ApiTags('Courses')
 @Controller('courses')
@@ -43,11 +44,13 @@ export class CourseController {
     return await this.courseService.create(createCourseDto);
   }
 
-  @Get('/users/:id/recommended-courses')
+  @Get('/user/recommended-courses')
   @Roles(1)
   @ApiGetOperation('courses', FindUserRecommendedCoursesOutputDto, true)
-  findUserRecommededCourses(@Param('id') id:string) {
-    return this.courseService.findUserRecommendedCourses(id);
+  async findUserRecommededCourses(
+    @UserId() id:number
+  ):Promise<Course[]>{
+    return await this.courseService.findUserRecommendedCourses(id);
   }
 
   @Get(':id')
