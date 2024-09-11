@@ -15,7 +15,7 @@ export class SectionClass {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ type: 'varchar', length: 50 })
   title: string;
 
   @Column('text', { nullable: true })
@@ -24,10 +24,10 @@ export class SectionClass {
   @Column({ type: 'enum', enum: ClassTypeEnum })
   class_type_name: ClassTypeEnum;
 
-  @Column({ nullable: true })
+  @Column({ type: 'int', nullable: true })
   duration: number;
 
-  @Column({ nullable: true })
+  @Column({ type: 'varchar', length: 255, nullable: true })
   url: string;
 
   @ManyToOne(() => CourseSection, section => section.classes)

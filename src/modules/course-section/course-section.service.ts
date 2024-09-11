@@ -1,26 +1,25 @@
 import { Injectable } from '@nestjs/common';
 import { CreateCourseSectionDto } from './dto/create-course-section.dto';
-import { UpdateCourseSectionDto } from './dto/update-course-section.dto';
+import type { CourseSection } from './entities/course-section.entity';
+import { CreateSectionService } from './services/create-section.service';
+import { FindAllSectionService } from './services/find-all-section.service';
 
 @Injectable()
 export class CourseSectionService {
-  create(createCourseSectionDto: CreateCourseSectionDto) {
-    return 'This action adds a new courseSection';
+  constructor(
+    private readonly createSectionService: CreateSectionService,
+    private readonly findAllSectionService: FindAllSectionService,
+  ) {}
+
+  async create(
+    createCourseSectionDto: CreateCourseSectionDto,
+  ): Promise<CourseSection> {
+    return await this.createSectionService.createSection(
+      createCourseSectionDto,
+    );
   }
 
-  findAll() {
-    return `This action returns all courseSection`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} courseSection`;
-  }
-
-  update(id: number, updateCourseSectionDto: UpdateCourseSectionDto) {
-    return `This action updates a #${id} courseSection`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} courseSection`;
+  async findAllSectionCourse(course: number) {
+    return await this.findAllSectionService.getAll(course);
   }
 }
