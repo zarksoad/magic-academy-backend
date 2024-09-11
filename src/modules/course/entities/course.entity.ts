@@ -1,8 +1,16 @@
-import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { CourseSection } from "../../course-section/entities/course-section.entity";
-import { UserCourse } from "../../user/entities/user-course.entity";
-import { Topic } from "../../topics/entities/topic.entity";
-
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { CourseSection } from '../../course-section/entities/course-section.entity';
+import { UserCourse } from '../../user/entities/user-course.entity';
+import { Topic } from '../../topics/entities/topic.entity';
+import { User } from '../../user/entities';
+import { Exclude } from 'class-transformer';
 @Entity('courses')
 export class Course {
   @PrimaryGeneratedColumn({ type: 'int' })
@@ -26,20 +34,29 @@ export class Course {
   @OneToMany(() => CourseSection, section => section.course)
   sections: CourseSection[];
 
-    @OneToMany(()=>UserCourse, userCourse => userCourse.course)
-    userCourses: UserCourse[];
+  @OneToMany(() => UserCourse, userCourse => userCourse.course)
+  userCourses: UserCourse[];
 
-    @ManyToMany(() => Topic, topic => topic.courses)
-    @JoinTable({
-        name: 'course_topics',
-        joinColumn: {
-            name: 'course_id',
-            referencedColumnName: 'id'
-        },
-        inverseJoinColumn: {
-            name: 'topic_id',
-            referencedColumnName: 'id'
-        }
-    })
-    topics: Topic[];
+  @ManyToMany(() => Topic, topic => topic.courses)
+  @JoinTable({
+    name: 'course_topics',
+    joinColumn: {
+      name: 'course_id',
+      referencedColumnName: 'id',
+    },
+    inverseJoinColumn: {
+      name: 'topic_id',
+      referencedColumnName: 'id',
+    },
+  })
+  topics: Topic[];
+
+  @ManyToMany(() => User, user => user.course)
+  @JoinTable({
+    name: 'course_users',
+    joinColumn: { name: 'course_id', referencedColumnName: 'id' },
+    inverseJoinColumn: { name: 'users_id', referencedColumnName: 'id' },
+  })
+  @Exclude()
+  users: User[];
 }
