@@ -1,30 +1,43 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateCourseDto } from '../../dto/create-course.dto';
 import { Course } from '../../entities/course.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { IcreateCourse } from '../../interfaces/create-course.interface';
 import { User } from '../../../user/entities';
 import { TransactionalService } from '../../../../common/helpers/execute-transaction.helper';
 import { CheckUserExistServiceCourse } from './check-users-to-create-courses.service';
 import { VerifyTopicCourseService } from './check-topics-courses.service';
+import { UploadThumbnailUrlService } from './upload-tumb-url.service';
 
 @Injectable()
-export class CreateCourseService implements IcreateCourse {
+export class CreateCourseService {
   constructor(
     @InjectRepository(Course)
     private readonly courseRepository: Repository<Course>,
     private readonly checkUserExistCourse: CheckUserExistServiceCourse,
     private readonly transactionalService: TransactionalService,
     private readonly topicsService: VerifyTopicCourseService,
+    private readonly uploadThumbnailUrlService: UploadThumbnailUrlService,
   ) {}
 
-  async createCourse(createCourseDto: CreateCourseDto): Promise<any> {
+  async createCourse(
+    createCourseDto: CreateCourseDto,
+    file?: Express.Multer.File,
+  ): Promise<any> {
     // Adjust the return type as needed
     // Execute the operation within a transaction
     return await this.transactionalService.executeInTransaction(
       async queryRunner => {
+        if (file) {
+          try {
+            createCourseDto.thumbnail_url =
+              await this.uploadThumbnailUrlService.uploadThumbnail(file);
+          } catch (error) {
+            throw new BadRequestException(`Failed to upload thumbnail`);
+          }
+        }
         // Create a new course instance
         const course = this.courseRepository.create(createCourseDto);
 
