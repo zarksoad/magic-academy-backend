@@ -27,18 +27,11 @@ export class LoginService implements ILoginService {
   }: loginAuthDto): Promise<{ access_token: string }> {
     // Check if the user exists
     const user = await this.userValidator.checkUser(email);
-
-    // If user does not exist, throw UnauthorizedException
-    if (!user) {
-      throw new UnauthorizedException('User not found');
-    }
-
     // Check if the provided password is correct
     const checkingPassword = await this.matchPassword.checkingPassword(
       password,
       user.password,
     );
-
     // If the password is incorrect, throw UnauthorizedException
     if (!checkingPassword) {
       throw new UnauthorizedException('Invalid user or password');

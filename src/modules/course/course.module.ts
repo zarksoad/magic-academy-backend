@@ -13,6 +13,7 @@ import { User } from '../user/entities';
 import { CheckUserExistServiceCourse } from './services/create-courses/check-users-to-create-courses.service';
 import { TopicExist } from '../topics/services/verify-exist-topic.service';
 import { VerifyTopicCourseService } from './services/create-courses/check-topics-courses.service';
+import { FindAllCourses } from './services/get-all-courses/get-all-courses.service';
 @Module({
   imports: [TypeOrmModule.forFeature([Course, Topic, User]), UserModule],
   controllers: [CourseController],
@@ -25,6 +26,7 @@ import { VerifyTopicCourseService } from './services/create-courses/check-topics
     CheckUserExistServiceCourse,
     TopicExist,
     VerifyTopicCourseService,
+    FindAllCourses,
   ],
 })
 export class CourseModule {}
