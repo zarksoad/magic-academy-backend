@@ -7,6 +7,7 @@ import {
   IsDate,
   IsNumber,
   ArrayMinSize,
+  IsArray,
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
@@ -70,7 +71,7 @@ export class CreateCourseDto {
   @IsOptional()
   user: number;
 
-  @IsNumber()
+  @IsArray()
   @ArrayMinSize(1)
   topic: number[];
 }

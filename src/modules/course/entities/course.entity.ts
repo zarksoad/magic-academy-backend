@@ -10,6 +10,7 @@ import { CourseSection } from '../../course-section/entities/course-section.enti
 import { UserCourse } from '../../user/entities/user-course.entity';
 import { Topic } from '../../topics/entities/topic.entity';
 import { User } from '../../user/entities';
+import { Exclude } from 'class-transformer';
 @Entity('courses')
 export class Course {
   @PrimaryGeneratedColumn({ type: 'int' })
@@ -56,5 +57,6 @@ export class Course {
     joinColumn: { name: 'course_id', referencedColumnName: 'id' },
     inverseJoinColumn: { name: 'users_id', referencedColumnName: 'id' },
   })
+  @Exclude()
   users: User[];
 }

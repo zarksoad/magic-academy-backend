@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-unused-vars */
 import { Injectable } from '@nestjs/common';
-import { CreateCourseDto } from '../dto/create-course.dto';
-import { UpdateCourseDto } from '../dto/update-course.dto';
-import { FindUserRecommendedCoursesService } from './find-user-recommended-courses.service';
-import { CreateCourseService } from './create-courses/create-course.service';
+import { CreateCourseDto } from './dto/create-course.dto';
+import { UpdateCourseDto } from './dto/update-course.dto';
+import { FindUserRecommendedCoursesService } from './services/find-user-recommended-courses.service';
+import { CreateCourseService } from './services/create-courses/create-course.service';
 
 @Injectable()
 export class CourseService {

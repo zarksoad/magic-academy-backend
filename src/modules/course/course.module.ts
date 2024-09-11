@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { CourseService } from './services/course.service';
+import { CourseService } from './course.service';
 import { CourseController } from './course.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Course } from './entities/course.entity';
@@ -10,6 +10,8 @@ import { CreateCourseService } from './services/create-courses/create-course.ser
 import { TransactionalService } from '../../common/helpers/execute-transaction.helper';
 import { User } from '../user/entities';
 import { CheckUserExistServiceCourse } from './services/create-courses/check-users-to-create-courses.service';
+import { TopicExist } from '../topics/services/verify-exist-topic.service';
+import { VerifyTopicCourseService } from './services/create-courses/check-topics-courses.service';
 @Module({
   imports: [TypeOrmModule.forFeature([Course, Topic, User]), UserModule],
   controllers: [CourseController],
@@ -19,6 +21,8 @@ import { CheckUserExistServiceCourse } from './services/create-courses/check-use
     CreateCourseService,
     TransactionalService,
     CheckUserExistServiceCourse,
+    TopicExist,
+    VerifyTopicCourseService,
   ],
 })
 export class CourseModule {}
