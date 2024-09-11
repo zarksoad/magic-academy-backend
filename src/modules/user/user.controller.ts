@@ -1,5 +1,13 @@
 /* eslint-disable no-unused-vars */
-import { Controller, Post, Body, UseGuards, Query } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  UseGuards,
+  Query,
+  Headers,
+  Get,
+} from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { ApiTags } from '@nestjs/swagger';
@@ -44,5 +52,11 @@ export class UserController {
   @ApiPostOperation('Invite User', User, SendMailDto, true)
   invite(@Body() sendMailDto: SendMailDto, @UserId() user: number) {
     return this.userService.sendEmail(sendMailDto, user);
+  }
+
+  @Get('/profile')
+  @UseGuards(JwtAuthGuard)
+  getByIdUSer(@UserId() user: number) {
+    return this.userService.getUserById(user);
   }
 }
