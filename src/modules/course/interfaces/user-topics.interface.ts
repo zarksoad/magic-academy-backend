@@ -1,7 +1,7 @@
-import { ITopics } from "./topics.interface";
+import { ITopics } from './topics.interface';
 
-export interface IUserTopics{
-    id: number,
-    name: string,
-    topics: ITopics[]
+export interface IUserTopics {
+  id: number;
+  name: string;
+  topics: ITopics[];
 }

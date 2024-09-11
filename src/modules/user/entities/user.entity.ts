@@ -16,6 +16,8 @@ import { Comment } from '../../comments/entities/comment.entity';
 import { UserCourse } from './user-course.entity';
 import { UserSection } from './user-section.entity';
 import { UserClass } from './user-classes.entity';
+import { Course } from '../../course/entities/course.entity';
+
 @Entity('users')
 export class User {
   @PrimaryGeneratedColumn({ type: 'int' })
@@ -72,4 +74,7 @@ export class User {
 
   @OneToMany(() => UserClass, userClasses => userClasses.user)
   userClasses: UserClass[];
+
+  @ManyToMany(() => Course, course => course.users)
+  course: Course[];
 }

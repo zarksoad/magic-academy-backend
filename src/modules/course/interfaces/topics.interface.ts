@@ -1,4 +1,4 @@
-export interface ITopics{
-    id: number,
-    name: string
+export interface ITopics {
+  id: number;
+  name: string;
 }
