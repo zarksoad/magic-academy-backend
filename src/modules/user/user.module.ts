@@ -24,6 +24,7 @@ import { RoleService } from './services/role-insert.service';
 import { InserUserService } from './services/user-insert.service';
 import { FindUserByIdService } from './services/find-user-by-id.service';
 import { FindUserTopicsService } from './services/find-user-topics.service';
+import { FindCoursesByUserIdService } from './services/find-courses-by-user.service';
 
 @Module({
   imports: [
@@ -52,7 +53,8 @@ import { FindUserTopicsService } from './services/find-user-topics.service';
     UpdateTokenStatus,
     InserUserService,
     FindUserByIdService,
-    FindUserTopicsService
+    FindUserTopicsService,
+    FindCoursesByUserIdService
   ],
   exports:[
     UserService,
@@ -63,7 +65,8 @@ import { FindUserTopicsService } from './services/find-user-topics.service';
     FindUserByIdService,
     FindUserTopicsService,
     RoleService,
-    InserUserService
+    InserUserService,
+    FindCoursesByUserIdService
   ]
 })
 export class UserModule {}

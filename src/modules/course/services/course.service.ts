@@ -12,7 +12,7 @@ export class CourseService {
     return 'This action adds a new course';
   }
 
-  findUserRecommededCourses(id:string):Promise<any>{
+  findUserRecommendedCourses(id:string):Promise<any>{
     return this.findUserRecommendedCoursesService.FindUserRecommendedCourses(id)
   }
 

@@ -6,6 +6,7 @@ import { Course } from './entities/course.entity';
 import { Topic } from '../topics/entities/topic.entity';
 import { FindUserRecommendedCoursesService } from './services/find-user-recommended-courses.service';
 import { UserModule } from '../user/user.module';
+import { FindCoursesRelatedToTopicsService } from './services/find-courses-related-to-topics.service';
 
 @Module({
   imports:[
@@ -13,6 +14,6 @@ import { UserModule } from '../user/user.module';
     UserModule
   ],
   controllers: [CourseController],
-  providers: [CourseService, FindUserRecommendedCoursesService],
+  providers: [CourseService, FindUserRecommendedCoursesService, FindCoursesRelatedToTopicsService],
 })
 export class CourseModule {}
