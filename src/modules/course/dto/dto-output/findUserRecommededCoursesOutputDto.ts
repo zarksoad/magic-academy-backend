@@ -1,6 +1,5 @@
 import { Injectable } from "@nestjs/common";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsNumber } from "class-validator";
 import { Course } from "../../entities/course.entity";
 
 @Injectable()

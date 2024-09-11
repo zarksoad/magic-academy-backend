@@ -6,7 +6,7 @@ import { JwtAuthGuard } from '../auth/guards/jwt.auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { Roles } from '../../common/decorators/roles.decorator';
 import { ApiGetOperation } from '../../common/decorators/swagger/get-swagger.decorator';
-import { FindUserRecommendedCoursesOutputDto } from './dto/dto-output/findUserRecommededCoursesDto';
+import { FindUserRecommendedCoursesOutputDto } from './dto/dto-output/findUserRecommededCoursesOutputDto';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Courses')

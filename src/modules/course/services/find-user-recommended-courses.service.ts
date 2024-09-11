@@ -2,11 +2,11 @@ import { Injectable } from "@nestjs/common";
 import { FindUserByIdService } from "../../user/services/find-user-by-id.service";
 import { FindUserTopicsService } from "../../user/services/find-user-topics.service";
 import { getUserTopicsIdsTransformer } from "../transformers/get-user-topics-ids.transformer";
-import { FindCoursesRelatedToTopicsService } from "./find-courses-related-to-topics.service";
-import { FindCoursesByUserIdService } from "../../user/services/find-courses-by-user.service";
 import { getCoursesByUserIdIdsTransformer } from "../transformers/get-courses-by-userId-ids.transformer";
 import { User } from "../../user/entities";
 import { Course } from "../entities/course.entity";
+import { FindCoursesRelatedToTopicsService } from "./find-courses-related-to-topics.service";
+import { FindCoursesByUserIdService } from "../../user/services/find-courses-by-user.service";
 
 @Injectable()
 export class FindUserRecommendedCoursesService{
