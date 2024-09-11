@@ -14,6 +14,8 @@ import { CheckUserExistServiceCourse } from './services/create-courses/check-use
 import { TopicExist } from '../topics/services/verify-exist-topic.service';
 import { VerifyTopicCourseService } from './services/create-courses/check-topics-courses.service';
 import { FindAllCourses } from './services/get-all-courses/get-all-courses.service';
+import { UploadThumbnailUrlService } from './services/create-courses/upload-tumb-url.service';
+import { CloudinaryService } from '../../common/services/cloudinary.service';
 @Module({
   imports: [TypeOrmModule.forFeature([Course, Topic, User]), UserModule],
   controllers: [CourseController],
@@ -27,6 +29,8 @@ import { FindAllCourses } from './services/get-all-courses/get-all-courses.servi
     TopicExist,
     VerifyTopicCourseService,
     FindAllCourses,
+    UploadThumbnailUrlService,
+    CloudinaryService,
   ],
 })
 export class CourseModule {}
