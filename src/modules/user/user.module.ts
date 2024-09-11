@@ -24,11 +24,21 @@ import { RoleService } from './services/role-insert.service';
 import { InserUserService } from './services/user-insert.service';
 import { FindUserByIdService } from './services/find-user-by-id.service';
 import { FindUserTopicsService } from './services/find-user-topics.service';
+import { TopicExist } from '../topics/services/verify-exist-topic.service';
+import { GetByIdUser } from './services/get-user.service';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    TypeOrmModule.forFeature([User, Role, Topic, Token, UserCourse, UserSection, UserClass]),
+    TypeOrmModule.forFeature([
+      User,
+      Role,
+      Topic,
+      Token,
+      UserCourse,
+      UserSection,
+      UserClass,
+    ]),
     JwtModule.registerAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
@@ -52,9 +62,11 @@ import { FindUserTopicsService } from './services/find-user-topics.service';
     UpdateTokenStatus,
     InserUserService,
     FindUserByIdService,
-    FindUserTopicsService
+    FindUserTopicsService,
+    TopicExist,
+    GetByIdUser,
   ],
-  exports:[
+  exports: [
     UserService,
     CreateUSer,
     FindRole,
@@ -63,7 +75,7 @@ import { FindUserTopicsService } from './services/find-user-topics.service';
     FindUserByIdService,
     FindUserTopicsService,
     RoleService,
-    InserUserService
-  ]
+    InserUserService,
+  ],
 })
 export class UserModule {}

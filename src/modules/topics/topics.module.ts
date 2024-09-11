@@ -5,10 +5,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Topic } from './entities/topic.entity';
 import { CreateTopics, GetAllTopic, VerifyTopicExist } from './services';
 import { InserTopicService } from './services/topic-insert.service';
+import { TopicExist } from './services/verify-exist-topic.service';
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([Topic])
-  ],
+  imports: [TypeOrmModule.forFeature([Topic])],
   controllers: [TopicsController],
   providers: [
     TopicsService,
@@ -16,7 +15,8 @@ import { InserTopicService } from './services/topic-insert.service';
     VerifyTopicExist,
     GetAllTopic,
     InserTopicService,
+    TopicExist,
   ],
-  exports: [InserTopicService],
+  exports: [InserTopicService, TopicExist],
 })
 export class TopicsModule {}
