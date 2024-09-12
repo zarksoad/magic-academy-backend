@@ -5,10 +5,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { SectionClass } from './entities/section-class.entity';
 import { CourseSection } from '../course-section/entities/course-section.entity';
 import { CreateClassService } from './services/create-class.service';
+import { FindAllClassService } from './services/find-all-class.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([SectionClass, CourseSection])],
   controllers: [SectionClassController],
-  providers: [SectionClassService, CreateClassService],
+  providers: [SectionClassService, CreateClassService, FindAllClassService],
 })
 export class SectionClassModule {}

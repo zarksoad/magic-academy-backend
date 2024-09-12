@@ -10,12 +10,11 @@ export class FindAllSectionService {
     private readonly courseSectionRepository: Repository<CourseSection>,
   ) {}
 
-  async getAll(course: number): Promise<CourseSection[]> {
+  async getAll(section: number): Promise<CourseSection[]> {
     const sections = await this.courseSectionRepository.find({
-      where: { course: { id: course } },
+      where: { course: { id: section } },
       relations: ['course'],
     });
-
     if (sections.length === 0) {
       throw new NotFoundException('No sections found for the given course');
     }

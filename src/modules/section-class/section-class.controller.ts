@@ -1,4 +1,4 @@
-import { Controller, Post, Body, UseGuards } from '@nestjs/common';
+import { Controller, Post, Body, UseGuards, Get } from '@nestjs/common';
 import { SectionClassService } from './section-class.service';
 import { CreateSectionClassDto } from './dto/create-section-class.dto';
 import { ApiPostOperation } from '../../common/decorators/swagger';
@@ -21,7 +21,12 @@ export class SectionClassController {
     CreateSectionClassDto,
     true,
   )
-  create(@Body() createSectionClassDto: CreateSectionClassDto) {
-    return this.sectionClassService.create(createSectionClassDto);
+  async create(@Body() createSectionClassDto: CreateSectionClassDto) {
+    return await this.sectionClassService.create(createSectionClassDto);
+  }
+
+  @Get()
+  async findAllClassSection(@Body('section') section: number) {
+    return await this.sectionClassService.findClassSection(section);
   }
 }
