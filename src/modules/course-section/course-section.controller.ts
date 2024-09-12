@@ -1,10 +1,11 @@
+/* eslint-disable no-unused-vars */
 import { Controller, Post, Body, Get, UseGuards } from '@nestjs/common';
 import { CourseSectionService } from './course-section.service';
 import { CreateCourseSectionDto } from './dto/create-course-section.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/guards/jwt.auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
-import { Roles } from '../../common/decorators/roles.decorator';
+// import { Roles } from '../../common/decorators/roles.decorator';
 
 @ApiTags('Sections')
 @Controller('course-section')
@@ -12,7 +13,7 @@ import { Roles } from '../../common/decorators/roles.decorator';
 export class CourseSectionController {
   constructor(private readonly courseSectionService: CourseSectionService) {}
 
-  @Roles(2)
+  // @Roles(2)
   @Post()
   async create(@Body() createCourseSectionDto: CreateCourseSectionDto) {
     return await this.courseSectionService.create(createCourseSectionDto);

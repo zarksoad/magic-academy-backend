@@ -1,9 +1,10 @@
+/* eslint-disable no-undef */
 import { Injectable } from '@nestjs/common';
+import { Type } from 'class-transformer';
 import {
   IsNumber,
   IsOptional,
   IsString,
-  IsUrl,
   MaxLength,
   MinLength,
 } from 'class-validator';
@@ -22,12 +23,16 @@ export class CreateSectionClassDto {
 
   @IsNumber()
   @IsOptional()
+  @Type(() => Number)
   duration: number;
 
   // @IsUrl()
   @IsOptional()
-  videoUrl: string;
+  url: string;
 
   @IsNumber({}, { message: 'Type is number' })
+  @Type(() => Number)
   courseSectionId: number;
+
+  video: Express.Multer.File;
 }

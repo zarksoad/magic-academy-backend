@@ -47,9 +47,7 @@ export class CourseController {
   @Get('/user/recommended-courses')
   @Roles(1)
   @ApiGetOperation('courses', FindUserRecommendedCoursesOutputDto, true)
-  async findUserRecommededCourses(
-    @UserId() id:number
-  ):Promise<Course[]>{
+  async findUserRecommededCourses(@UserId() id: number): Promise<Course[]> {
     return await this.courseService.findUserRecommendedCourses(id);
   }
 
