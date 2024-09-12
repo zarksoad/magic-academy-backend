@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 import {
   Controller,
@@ -7,46 +8,49 @@ import {
   Patch,
   Param,
   UseGuards,
+  UseInterceptors,
+  UploadedFile,
 } from '@nestjs/common';
 import { CourseService } from './course.service';
 import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
 import { UserId } from '../../common/decorators/user/user-Id.decorator';
 import { ApiPostOperation } from '../../common/decorators/swagger';
-import { TopicExist } from '../topics/services/verify-exist-topic.service';
 import { JwtAuthGuard } from '../auth/guards/jwt.auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { Roles } from '../../common/decorators/roles.decorator';
 import { ApiGetOperation } from '../../common/decorators/swagger/get-swagger.decorator';
 import { FindUserRecommendedCoursesOutputDto } from './dto/dto-output/findUserRecommededCoursesOutputDto';
 import { ApiTags } from '@nestjs/swagger';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { Course } from './entities/course.entity';
 
 @ApiTags('Courses')
 @Controller('courses')
 @UseGuards(JwtAuthGuard, RolesGuard)
 export class CourseController {
-  constructor(
-    private readonly courseService: CourseService,
-    private readonly topicsExist: TopicExist,
-  ) {}
+  constructor(private readonly courseService: CourseService) {}
 
   @Post()
-  @Roles(2, 3)
+  // @Roles(2, 3)
   @ApiPostOperation('Create Course', CreateCourseDto, CreateCourseDto)
+  @UseInterceptors(FileInterceptor('thumbnail'))
   async create(
     @Body() createCourseDto: CreateCourseDto,
     @UserId() userId: number,
+    @UploadedFile() file: Express.Multer.File,
   ) {
-    createCourseDto.user = userId;
-    await this.topicsExist.checkTopicExist(createCourseDto.topic);
-    return await this.courseService.create(createCourseDto);
+    console.log(file);
+    return await this.courseService.create(createCourseDto, userId, file);
   }
 
-  @Get('/users/:id/recommended-courses')
+  @Get('/user/recommended-courses')
   @Roles(1)
   @ApiGetOperation('courses', FindUserRecommendedCoursesOutputDto, true)
-  findUserRecommededCourses(@Param('id') id: string) {
-    return this.courseService.findUserRecommendedCourses(id);
+  async findUserRecommededCourses(
+    @UserId() id:number
+  ):Promise<Course[]>{
+    return await this.courseService.findUserRecommendedCourses(id);
   }
 
   @Get(':id')

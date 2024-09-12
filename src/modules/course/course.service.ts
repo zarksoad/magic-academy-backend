@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-unused-vars */
 import { Injectable } from '@nestjs/common';
@@ -16,11 +17,16 @@ export class CourseService {
     private readonly findAllCourses: FindAllCourses,
   ) {}
 
-  async create(createCourseDto: CreateCourseDto) {
-    return await this.createCourseService.createCourse(createCourseDto);
+  async create(
+    createCourseDto: CreateCourseDto,
+    userId: number,
+    file?: Express.Multer.File,
+  ) {
+    createCourseDto.user = userId;
+    return await this.createCourseService.createCourse(createCourseDto, file);
   }
 
-  findUserRecommendedCourses(id: string): Promise<any> {
+  findUserRecommendedCourses(id: number): Promise<Course[]> {
     return this.findUserRecommendedCoursesService.FindUserRecommendedCourses(
       id,
     );

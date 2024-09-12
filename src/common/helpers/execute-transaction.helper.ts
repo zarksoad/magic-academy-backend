@@ -26,7 +26,7 @@ export class TransactionalService {
       await queryRunner.rollbackTransaction();
       // Throw a more descriptive error message
       throw new InternalServerErrorException(
-        'An error occurred while processing the transaction. The transaction has been rolled back.',
+        ` Transaction failed: ${error.message}.An error occurred while processing the transaction. The transaction has been rolled back.`,
       );
     } finally {
       await queryRunner.release(); // Release the query runner, regardless of the outcome
