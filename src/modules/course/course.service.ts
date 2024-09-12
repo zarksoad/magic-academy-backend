@@ -26,7 +26,7 @@ export class CourseService {
     return await this.createCourseService.createCourse(createCourseDto, file);
   }
 
-  findUserRecommendedCourses(id: string): Promise<any> {
+  findUserRecommendedCourses(id: number): Promise<Course[]> {
     return this.findUserRecommendedCoursesService.FindUserRecommendedCourses(
       id,
     );
