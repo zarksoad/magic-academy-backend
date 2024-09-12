@@ -1,14 +1,21 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Course } from "../../course/entities/course.entity";
-import { SectionClass } from "../../section-class/entities/section-class.entity";
-import { UserSection } from "../../user/entities/user-section.entity";
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Course } from '../../course/entities/course.entity';
+import { SectionClass } from '../../section-class/entities/section-class.entity';
+import { UserSection } from '../../user/entities/user-section.entity';
 
 @Entity('course_sections')
 export class CourseSection {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ type: 'varchar', length: 30 })
   name: string;
 
   @ManyToOne(() => Course, course => course.sections)
@@ -20,5 +27,4 @@ export class CourseSection {
 
   @OneToMany(() => UserSection, userSection => userSection.courseSection)
   userSections: UserSection[];
-
 }

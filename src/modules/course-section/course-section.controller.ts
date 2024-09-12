@@ -1,34 +1,26 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Post, Body, Get, UseGuards } from '@nestjs/common';
 import { CourseSectionService } from './course-section.service';
 import { CreateCourseSectionDto } from './dto/create-course-section.dto';
-import { UpdateCourseSectionDto } from './dto/update-course-section.dto';
+import { ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from '../auth/guards/jwt.auth.guard';
+import { RolesGuard } from '../auth/guards/roles.guard';
+import { Roles } from '../../common/decorators/roles.decorator';
 
+@ApiTags('Sections')
 @Controller('course-section')
+@UseGuards(JwtAuthGuard, RolesGuard)
 export class CourseSectionController {
   constructor(private readonly courseSectionService: CourseSectionService) {}
 
+  @Roles(2)
   @Post()
-  create(@Body() createCourseSectionDto: CreateCourseSectionDto) {
-    return this.courseSectionService.create(createCourseSectionDto);
+  async create(@Body() createCourseSectionDto: CreateCourseSectionDto) {
+    return await this.courseSectionService.create(createCourseSectionDto);
   }
 
   @Get()
-  findAll() {
-    return this.courseSectionService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.courseSectionService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCourseSectionDto: UpdateCourseSectionDto) {
-    return this.courseSectionService.update(+id, updateCourseSectionDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.courseSectionService.remove(+id);
+  //querys example: { "courses_id": 1}
+  async FindAllCourseSection(@Body() course: number) {
+    return await this.courseSectionService.findAllSectionCourse(course);
   }
 }

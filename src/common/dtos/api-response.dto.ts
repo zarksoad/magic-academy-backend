@@ -1,5 +1,5 @@
-export class ApiResponse<TControllerResponseDto> {
+export class ApiResponse<T> {
   code: number;
   message: string;
-  data: TControllerResponseDto;
+  data: T;
 }
