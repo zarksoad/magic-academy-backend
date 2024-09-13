@@ -52,18 +52,10 @@ export class CourseController {
   }
 
   @Get()
-  async findUserId(@UserId() userId: number): Promise<any> {
+  @Roles(2)
+  @ApiGetOperation('course-by-id-instructor', CreateCourseDto, true)
+  async findUserId(@UserId() userId: number): Promise<Course[]> {
     return await this.courseService.findByUserId(userId);
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.courseService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCourseDto: UpdateCourseDto) {
-    return this.courseService.update(+id, updateCourseDto);
   }
 
   @Get()

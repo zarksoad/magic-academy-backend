@@ -35,16 +35,8 @@ export class CourseService {
     );
   }
 
-  async findByUserId(userId: number): Promise<any> {
+  async findByUserId(userId: number): Promise<Course[]> {
     return this.findCoursesByUser.findCoursesByUserId(userId);
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} course`;
-  }
-
-  update(id: number, updateCourseDto: UpdateCourseDto) {
-    return `This action updates a #${id} course`;
   }
 
   async findAll(): Promise<Course[]> {
