@@ -24,21 +24,11 @@ export class AuthController {
   @Post('login')
   @ApiPostOperation('login successfully', User, loginAuthDto, false)
   @HttpCode(200)
-  async LoginUser(@Body() body: loginAuthDto, @Res() response: Response) {
+  async LoginUser(@Body() body: loginAuthDto) {
     // Extract email and password from the request body
     const { email, password } = body;
     // Call the authentication service to obtain the JWT token
-    const { access_token } = await this.authService.login({ email, password });
-    // Set the JWT cookie in the response
-    response.cookie('jwt', access_token, {
-      httpOnly: true, // Helps protect against XSS attacks
-      secure: process.env.NODE_ENV === 'production', // Ensures cookie is sent over HTTPS in production
-      sameSite: 'strict', // Mitigates CSRF attacks
-    });
-    return response.send({
-      status: 200,
-      message: 'Logged in successfully',
-    });
+    return await this.authService.login({ email, password });
   }
 
   @Post('logout')
