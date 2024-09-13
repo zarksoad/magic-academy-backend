@@ -7,6 +7,8 @@ import {
   UseGuards,
   UseInterceptors,
   UploadedFile,
+  Patch,
+  Param,
 } from '@nestjs/common';
 import { SectionClassService } from './section-class.service';
 import { CreateSectionClassDto } from './dto/create-section-class.dto';
@@ -16,6 +18,7 @@ import { RolesGuard } from '../auth/guards/roles.guard';
 import { Roles } from '../../common/decorators/roles.decorator';
 import { ApiTags } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { UpdateSectionClassDto } from './dto/update-section-class.dto';
 @ApiTags('Class')
 @Controller('section-class')
 @UseGuards(JwtAuthGuard, RolesGuard)
@@ -36,5 +39,16 @@ export class SectionClassController {
     @UploadedFile() file: Express.Multer.File,
   ) {
     return this.sectionClassService.create(createSectionClassDto, file);
+  }
+
+  @Patch(':id')
+  @Roles(2)
+  @UseInterceptors(FileInterceptor('video'))
+  update(
+    @Param('id') id: number,
+    @Body() updateSectionClassDto: UpdateSectionClassDto,
+    @UploadedFile() file: Express.Multer.File,
+  ) {
+    return this.sectionClassService.update(id, updateSectionClassDto, file);
   }
 }

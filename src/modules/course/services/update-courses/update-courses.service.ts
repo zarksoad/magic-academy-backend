@@ -24,13 +24,11 @@ export class UpdateCoursesService {
   ): Promise<Course> {
     const findCourse = await this.findCourseExist.findCourseExist(id);
     if (file) {
-      console.log(file, 'dentro de file');
       updateCourseDto.thumbnail_url = await this.uploadCloudinaryService.upload(
         file,
         findCourse.thumbnail_url,
       );
     }
-    console.log(updateCourseDto, 'Despues de la validacion de cloudinary');
     const updatedCourse = await this.courseRepository.merge(
       findCourse,
       updateCourseDto,

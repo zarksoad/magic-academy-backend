@@ -8,6 +8,8 @@ import { CreateClassService } from './services/create-classes/create-class.servi
 import { CheckCourseSectionExistService } from './services/create-classes/check-course-section-exist.service';
 import { UploadCloudinaryService } from '../../common/services/upload-cloudinary.service';
 import { CloudinaryService } from '../../common/services/cloudinary.service';
+import { FindClassExist } from './services/update-classes/find-class-exist.service';
+import { UpdateSectionClassService } from './services/update-classes/update-class.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([SectionClass, CourseSection])],
@@ -18,6 +20,8 @@ import { CloudinaryService } from '../../common/services/cloudinary.service';
     CheckCourseSectionExistService,
     UploadCloudinaryService,
     CloudinaryService,
+    FindClassExist,
+    UpdateSectionClassService,
   ],
 })
 export class SectionClassModule {}
