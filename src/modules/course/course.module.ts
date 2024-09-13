@@ -16,6 +16,7 @@ import { VerifyTopicCourseService } from './services/create-courses/check-topics
 import { FindAllCourses } from './services/get-all-courses/get-all-courses.service';
 import { UploadThumbnailUrlService } from './services/create-courses/upload-tumb-url.service';
 import { CloudinaryService } from '../../common/services/cloudinary.service';
+import { FindCoursesByUserService } from './services/find-course-by-user.service';
 @Module({
   imports: [TypeOrmModule.forFeature([Course, Topic, User]), UserModule],
   controllers: [CourseController],
@@ -31,6 +32,7 @@ import { CloudinaryService } from '../../common/services/cloudinary.service';
     FindAllCourses,
     UploadThumbnailUrlService,
     CloudinaryService,
+    FindCoursesByUserService,
   ],
 })
 export class CourseModule {}
