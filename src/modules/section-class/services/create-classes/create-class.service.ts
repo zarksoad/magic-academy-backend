@@ -6,14 +6,14 @@ import { SectionClass } from '../../entities/section-class.entity';
 import { Repository } from 'typeorm';
 import { CreateSectionClassDto } from '../../dto/create-section-class.dto';
 import { CheckCourseSectionExistService } from './check-course-section-exist.service';
-import { UploadThumbnailUrlService } from '../../../course/services/create-courses/upload-tumb-url.service';
+import { UploadCloudinaryService } from '../../../../common/services/upload-cloudinary.service';
 @Injectable()
 export class CreateClassService {
   constructor(
     @InjectRepository(SectionClass)
     private readonly createSectionClassRepository: Repository<SectionClass>,
     private readonly checkCourseSectionExistService: CheckCourseSectionExistService,
-    private readonly uploadThumbnailUrlService: UploadThumbnailUrlService,
+    private readonly uploadService: UploadCloudinaryService,
   ) {}
 
   async createClass(
@@ -21,11 +21,11 @@ export class CreateClassService {
     file?: Express.Multer.File,
   ): Promise<SectionClass> {
     if (file) {
+      console.log(file, 'entro en file');
       try {
-        classDto.url =
-          await this.uploadThumbnailUrlService.uploadThumbnail(file);
+        classDto.url = await this.uploadService.upload(file);
       } catch (error) {
-        throw new BadRequestException(`Failed to upload thumbnail`);
+        throw new BadRequestException(`Failed to upload video`);
       }
     }
     const courseSection =

@@ -32,7 +32,7 @@ export class CourseController {
   constructor(private readonly courseService: CourseService) {}
 
   @Post()
-  // @Roles(2, 3)
+  @Roles(2, 3)
   @ApiPostOperation('Create Course', CreateCourseDto, CreateCourseDto)
   @UseInterceptors(FileInterceptor('thumbnail'))
   async create(
@@ -57,8 +57,14 @@ export class CourseController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCourseDto: UpdateCourseDto) {
-    return this.courseService.update(+id, updateCourseDto);
+  @Roles(2)
+  @UseInterceptors(FileInterceptor('thumbnail'))
+  update(
+    @Param('id') id: number,
+    @Body() updateCourseDto: UpdateCourseDto,
+    @UploadedFile() file: Express.Multer.File,
+  ) {
+    return this.courseService.update(id, updateCourseDto, file);
   }
 
   @Get()

@@ -14,8 +14,10 @@ import { CheckUserExistServiceCourse } from './services/create-courses/check-use
 import { TopicExist } from '../topics/services/verify-exist-topic.service';
 import { VerifyTopicCourseService } from './services/create-courses/check-topics-courses.service';
 import { FindAllCourses } from './services/get-all-courses/get-all-courses.service';
-import { UploadThumbnailUrlService } from './services/create-courses/upload-tumb-url.service';
 import { CloudinaryService } from '../../common/services/cloudinary.service';
+import { UpdateCoursesService } from './services/update-courses/update-courses.service';
+import { FindCourseExist } from './services/update-courses/find-course-exist.service';
+import { UploadCloudinaryService } from '../../common/services/upload-cloudinary.service';
 @Module({
   imports: [TypeOrmModule.forFeature([Course, Topic, User]), UserModule],
   controllers: [CourseController],
@@ -29,8 +31,10 @@ import { CloudinaryService } from '../../common/services/cloudinary.service';
     TopicExist,
     VerifyTopicCourseService,
     FindAllCourses,
-    UploadThumbnailUrlService,
+    UploadCloudinaryService,
     CloudinaryService,
+    UpdateCoursesService,
+    FindCourseExist,
   ],
 })
 export class CourseModule {}
