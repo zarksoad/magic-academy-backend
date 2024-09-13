@@ -6,7 +6,7 @@ import { SectionClass } from './entities/section-class.entity';
 import { CourseSection } from '../course-section/entities/course-section.entity';
 import { CreateClassService } from './services/create-classes/create-class.service';
 import { CheckCourseSectionExistService } from './services/create-classes/check-course-section-exist.service';
-import { UploadThumbnailUrlService } from '../course/services/create-courses/upload-tumb-url.service';
+import { UploadCloudinaryService } from '../../common/services/upload-cloudinary.service';
 import { CloudinaryService } from '../../common/services/cloudinary.service';
 
 @Module({
@@ -16,7 +16,7 @@ import { CloudinaryService } from '../../common/services/cloudinary.service';
     SectionClassService,
     CreateClassService,
     CheckCourseSectionExistService,
-    UploadThumbnailUrlService,
+    UploadCloudinaryService,
     CloudinaryService,
   ],
 })

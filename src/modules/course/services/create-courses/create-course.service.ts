@@ -9,7 +9,7 @@ import { User } from '../../../user/entities';
 import { TransactionalService } from '../../../../common/helpers/execute-transaction.helper';
 import { CheckUserExistServiceCourse } from './check-users-to-create-courses.service';
 import { VerifyTopicCourseService } from './check-topics-courses.service';
-import { UploadThumbnailUrlService } from './upload-tumb-url.service';
+import { UploadCloudinaryService } from '../../../../common/services/upload-cloudinary.service';
 
 @Injectable()
 export class CreateCourseService {
@@ -19,7 +19,7 @@ export class CreateCourseService {
     private readonly checkUserExistCourse: CheckUserExistServiceCourse,
     private readonly transactionalService: TransactionalService,
     private readonly topicsService: VerifyTopicCourseService,
-    private readonly uploadThumbnailUrlService: UploadThumbnailUrlService,
+    private readonly uploadService: UploadCloudinaryService,
   ) {}
 
   async createCourse(
@@ -33,7 +33,7 @@ export class CreateCourseService {
         if (file) {
           try {
             createCourseDto.thumbnail_url =
-              await this.uploadThumbnailUrlService.uploadThumbnail(file);
+              await this.uploadService.upload(file);
           } catch (error) {
             throw new BadRequestException(`Failed to upload thumbnail`);
           }

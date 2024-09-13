@@ -13,7 +13,7 @@ import { CreateSectionClassDto } from './dto/create-section-class.dto';
 import { ApiPostOperation } from '../../common/decorators/swagger';
 import { JwtAuthGuard } from '../auth/guards/jwt.auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
-// import { Roles } from '../../common/decorators/roles.decorator';
+import { Roles } from '../../common/decorators/roles.decorator';
 import { ApiTags } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
 @ApiTags('Class')
@@ -23,7 +23,7 @@ export class SectionClassController {
   constructor(private readonly sectionClassService: SectionClassService) {}
 
   @Post()
-  // @Roles(2)
+  @Roles(2)
   @ApiPostOperation(
     'Create Class',
     CreateSectionClassDto,
