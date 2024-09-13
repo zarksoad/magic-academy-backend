@@ -21,10 +21,11 @@ export class CreateClassService {
     file?: Express.Multer.File,
   ): Promise<SectionClass> {
     if (file) {
+      console.log(file, 'entro en file');
       try {
         classDto.url = await this.uploadService.upload(file);
       } catch (error) {
-        throw new BadRequestException(`Failed to upload thumbnail`);
+        throw new BadRequestException(`Failed to upload video`);
       }
     }
     const courseSection =

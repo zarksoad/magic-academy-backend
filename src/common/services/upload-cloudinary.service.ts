@@ -1,6 +1,10 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  InternalServerErrorException,
+} from '@nestjs/common';
 import { CloudinaryService } from './cloudinary.service';
 
 @Injectable()
@@ -12,7 +16,6 @@ export class UploadCloudinaryService {
       const mimeType = file.mimetype;
 
       if (publicId) {
-        console.log(publicId, 'Dentro de public id para eliminar');
         try {
           const resourceType = mimeType.startsWith('image/')
             ? 'image'
@@ -21,7 +24,7 @@ export class UploadCloudinaryService {
           publicId = '';
         } catch (error) {
           // Handle the error from deletion if it occurs, but continue with updating
-          console.error(`Error deleting resource: ${error.message}`);
+          throw new InternalServerErrorException('Error deleting the file');
         }
 
         // Then update the resource

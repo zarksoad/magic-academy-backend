@@ -20,12 +20,6 @@ export class CreateSectionClassDto {
   @IsOptional()
   @MinLength(15, { message: 'Must be at least 15 characters long' })
   content: string;
-
-  @IsNumber()
-  @IsOptional()
-  @Type(() => Number)
-  duration: number;
-
   // @IsUrl()
   @IsOptional()
   url: string;
