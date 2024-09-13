@@ -35,11 +35,6 @@ export class AuthController {
   @HttpCode(200)
   @UseGuards(JwtAuthGuard)
   logoutUser(@Req() _req: Request, @Res() res: Response) {
-    res.clearCookie('jwt', {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
-    });
-    res.status(200).send({ message: 'succesfully logout' });
+    res.status(200).send({ message: 'Successfully logged out' });
   }
 }
