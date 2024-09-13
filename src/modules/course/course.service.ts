@@ -10,6 +10,7 @@ import { Course } from './entities/course.entity';
 import { FindAllCourses } from './services/get-all-courses/get-all-courses.service';
 import { FindCoursesByUserIdService } from '../user/services/find-courses-by-user.service';
 import { FindCoursesByUserService } from './services/find-course-by-user.service';
+import { UpdateCoursesService } from './services/update-courses/update-courses.service';
 
 @Injectable()
 export class CourseService {
@@ -18,6 +19,7 @@ export class CourseService {
     private readonly createCourseService: CreateCourseService,
     private readonly findAllCourses: FindAllCourses,
     private readonly findCoursesByUser: FindCoursesByUserService,
+    private readonly updateCoursesService: UpdateCoursesService,
   ) {}
 
   async create(
@@ -33,6 +35,18 @@ export class CourseService {
     return this.findUserRecommendedCoursesService.FindUserRecommendedCourses(
       id,
     );
+  }
+
+  findOne(id: number) {
+    return `This action returns a #${id} course`;
+  }
+
+  update(
+    id: number,
+    updateCourseDto: UpdateCourseDto,
+    file?: Express.Multer.File,
+  ) {
+    return this.updateCoursesService.updateCourse(id, updateCourseDto, file);
   }
 
   async findByUserId(userId: number): Promise<Course[]> {

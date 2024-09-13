@@ -1,9 +1,10 @@
+/* eslint-disable no-undef */
 import { Injectable } from '@nestjs/common';
+import { Type } from 'class-transformer';
 import {
   IsNumber,
   IsOptional,
   IsString,
-  IsUrl,
   MaxLength,
   MinLength,
 } from 'class-validator';
@@ -19,15 +20,13 @@ export class CreateSectionClassDto {
   @IsOptional()
   @MinLength(15, { message: 'Must be at least 15 characters long' })
   content: string;
-
-  @IsNumber()
-  @IsOptional()
-  duration: number;
-
   // @IsUrl()
   @IsOptional()
-  videoUrl: string;
+  url: string;
 
   @IsNumber({}, { message: 'Type is number' })
+  @Type(() => Number)
   courseSectionId: number;
+
+  video: Express.Multer.File;
 }

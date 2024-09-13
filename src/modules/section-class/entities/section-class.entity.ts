@@ -24,9 +24,6 @@ export class SectionClass {
   @Column({ type: 'enum', enum: ClassTypeEnum })
   class_type_name: ClassTypeEnum;
 
-  @Column({ type: 'int', nullable: true })
-  duration: number;
-
   @Column({ type: 'varchar', length: 255, nullable: true })
   url: string;
 

@@ -1,11 +1,26 @@
-import { Controller, Post, Body, UseGuards, Get } from '@nestjs/common';
+/* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
+import {
+  Controller,
+  Post,
+  Body,
+  UseGuards,
+  UseInterceptors,
+  UploadedFile,
+  Patch,
+  Param,
+  Get,
+} from '@nestjs/common';
 import { SectionClassService } from './section-class.service';
 import { CreateSectionClassDto } from './dto/create-section-class.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiPostOperation } from '../../common/decorators/swagger';
 import { JwtAuthGuard } from '../auth/guards/jwt.auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { Roles } from '../../common/decorators/roles.decorator';
 import { ApiTags } from '@nestjs/swagger';
+import { UpdateSectionClassDto } from './dto/update-section-class.dto';
+@ApiTags('Class')
 @ApiTags('Class')
 @Controller('section-class')
 @UseGuards(JwtAuthGuard, RolesGuard)
@@ -13,7 +28,6 @@ export class SectionClassController {
   constructor(private readonly sectionClassService: SectionClassService) {}
 
   @Post()
-  @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(2)
   @ApiPostOperation(
     'Create Class',
@@ -21,8 +35,23 @@ export class SectionClassController {
     CreateSectionClassDto,
     true,
   )
-  async create(@Body() createSectionClassDto: CreateSectionClassDto) {
-    return await this.sectionClassService.create(createSectionClassDto);
+  @UseInterceptors(FileInterceptor('video'))
+  create(
+    @Body() createSectionClassDto: CreateSectionClassDto,
+    @UploadedFile() file: Express.Multer.File,
+  ) {
+    return this.sectionClassService.create(createSectionClassDto, file);
+  }
+
+  @Patch(':id')
+  @Roles(2)
+  @UseInterceptors(FileInterceptor('video'))
+  update(
+    @Param('id') id: number,
+    @Body() updateSectionClassDto: UpdateSectionClassDto,
+    @UploadedFile() file: Express.Multer.File,
+  ) {
+    return this.sectionClassService.update(id, updateSectionClassDto, file);
   }
 
   @Get()
