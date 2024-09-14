@@ -67,7 +67,7 @@ import { GetLatestClassesInProgressByCourseByUserService } from './services/get-
     FindUserTopicsService,
     TopicExist,
     GetByIdUser,
-    FindCoursesByUserIdService,,
+    FindCoursesByUserIdService,
     GetLatestClassesInProgressByCourseByUserService
   ],
   exports: [
@@ -80,7 +80,7 @@ import { GetLatestClassesInProgressByCourseByUserService } from './services/get-
     FindUserTopicsService,
     RoleService,
     InserUserService,
-    FindCoursesByUserIdService,,
+    FindCoursesByUserIdService,
     GetLatestClassesInProgressByCourseByUserService
   ],
 })
