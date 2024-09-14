@@ -14,6 +14,7 @@ import { Roles } from '../../common/decorators/roles.decorator';
 import { EmailResponseDto } from './dto/dto-output/email-response.dto';
 import { ApiGetOperation } from '../../common/decorators/swagger/get-swagger.decorator';
 import { UserResponseDto } from './dto/dto-output/user-Response.dto';
+import { GetLatestClassesInProgressByCourseByUserService } from './services/get-latest-classes-inprogress-byCourse-byUser.service';
 
 @ApiTags('users')
 @Controller('users')
@@ -21,6 +22,7 @@ export class UserController {
   constructor(
     private readonly userService: UserService,
     private readonly checkTokenStatus: CheckTokenStatus,
+    private readonly getLatestClassesInProgressByCourseByUserService:GetLatestClassesInProgressByCourseByUserService
   ) {}
 
   @Post('register')
@@ -54,5 +56,14 @@ export class UserController {
   @UseGuards(JwtAuthGuard)
   getByIdUSer(@UserId() user: number) {
     return this.userService.getUserById(user);
+  }
+
+  @Get('/user/classes/in-progress/latest')
+  @UseGuards(JwtAuthGuard)
+  @Roles(1)
+  getLatestClassesInProgressByCourseByUser(
+    @UserId() id:number
+  ){
+    return this.userService.getLatestClassesInProgressByCourseByUser(id)
   }
 }

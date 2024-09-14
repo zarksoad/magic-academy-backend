@@ -27,6 +27,7 @@ import { FindUserByIdService } from './services/find-user-by-id.service';
 import { FindUserTopicsService } from './services/find-user-topics.service';
 import { TopicExist } from '../topics/services/verify-exist-topic.service';
 import { GetByIdUser } from './services/get-user.service';
+import { GetLatestClassesInProgressByCourseByUserService } from './services/get-latest-classes-inprogress-byCourse-byUser.service';
 
 @Module({
   imports: [
@@ -66,7 +67,8 @@ import { GetByIdUser } from './services/get-user.service';
     FindUserTopicsService,
     TopicExist,
     GetByIdUser,
-    FindCoursesByUserIdService,
+    FindCoursesByUserIdService,,
+    GetLatestClassesInProgressByCourseByUserService
   ],
   exports: [
     UserService,
@@ -78,7 +80,8 @@ import { GetByIdUser } from './services/get-user.service';
     FindUserTopicsService,
     RoleService,
     InserUserService,
-    FindCoursesByUserIdService,
+    FindCoursesByUserIdService,,
+    GetLatestClassesInProgressByCourseByUserService
   ],
 })
 export class UserModule {}
