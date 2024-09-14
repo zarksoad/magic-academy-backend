@@ -15,7 +15,7 @@ export class CourseSection {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'varchar', length: 30 })
+  @Column({ type: 'varchar', length: 100 })
   name: string;
 
   @ManyToOne(() => Course, course => course.sections)
