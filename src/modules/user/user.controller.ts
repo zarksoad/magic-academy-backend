@@ -11,6 +11,9 @@ import { JwtAuthGuard } from '../auth/guards/jwt.auth.guard';
 import { CheckTokenStatus } from './services/email/check-token-status.service';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { Roles } from '../../common/decorators/roles.decorator';
+import { EmailResponseDto } from './dto/dto-output/email-response.dto';
+import { ApiGetOperation } from '../../common/decorators/swagger/get-swagger.decorator';
+import { UserResponseDto } from './dto/dto-output/user-Response.dto';
 
 @ApiTags('users')
 @Controller('users')
@@ -41,12 +44,13 @@ export class UserController {
   @Post('/invite')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(3)
-  @ApiPostOperation('Invite User', User, SendMailDto, true)
+  @ApiPostOperation('Invite User', EmailResponseDto, SendMailDto, true)
   invite(@Body() sendMailDto: SendMailDto, @UserId() user: number) {
     return this.userService.sendEmail(sendMailDto, user);
   }
 
   @Get('/profile')
+  @ApiGetOperation('Profile', UserResponseDto, true)
   @UseGuards(JwtAuthGuard)
   getByIdUSer(@UserId() user: number) {
     return this.userService.getUserById(user);

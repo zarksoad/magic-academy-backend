@@ -51,11 +51,6 @@ export class CourseController {
     return await this.courseService.findUserRecommendedCourses(id);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.courseService.findOne(+id);
-  }
-
   @Patch(':id')
   @Roles(2)
   @UseInterceptors(FileInterceptor('thumbnail'))
@@ -65,6 +60,12 @@ export class CourseController {
     @UploadedFile() file: Express.Multer.File,
   ) {
     return this.courseService.update(id, updateCourseDto, file);
+  }
+  @Get()
+  @Roles(2)
+  @ApiGetOperation('course-by-id-instructor', CreateCourseDto, true)
+  async findUserId(@UserId() userId: number): Promise<Course[]> {
+    return await this.courseService.findByUserId(userId);
   }
 
   @Get()

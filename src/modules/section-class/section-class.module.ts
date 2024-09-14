@@ -3,13 +3,14 @@ import { SectionClassService } from './section-class.service';
 import { SectionClassController } from './section-class.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { SectionClass } from './entities/section-class.entity';
-import { CourseSection } from '../course-section/entities/course-section.entity';
-import { CreateClassService } from './services/create-classes/create-class.service';
 import { CheckCourseSectionExistService } from './services/create-classes/check-course-section-exist.service';
 import { UploadCloudinaryService } from '../../common/services/upload-cloudinary.service';
 import { CloudinaryService } from '../../common/services/cloudinary.service';
 import { FindClassExist } from './services/update-classes/find-class-exist.service';
 import { UpdateSectionClassService } from './services/update-classes/update-class.service';
+import { CourseSection } from '../course-section/entities/course-section.entity';
+import { FindAllClassService } from './services/find-all-class.service';
+import { CreateClassService } from './services/create-classes/create-class.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([SectionClass, CourseSection])],
@@ -22,6 +23,7 @@ import { UpdateSectionClassService } from './services/update-classes/update-clas
     CloudinaryService,
     FindClassExist,
     UpdateSectionClassService,
+    FindAllClassService,
   ],
 })
 export class SectionClassModule {}

@@ -8,6 +8,8 @@ import { FindUserRecommendedCoursesService } from './services/find-user-recommen
 import { CreateCourseService } from './services/create-courses/create-course.service';
 import { Course } from './entities/course.entity';
 import { FindAllCourses } from './services/get-all-courses/get-all-courses.service';
+import { FindCoursesByUserIdService } from '../user/services/find-courses-by-user.service';
+import { FindCoursesByUserService } from './services/find-course-by-user.service';
 import { UpdateCoursesService } from './services/update-courses/update-courses.service';
 
 @Injectable()
@@ -16,6 +18,7 @@ export class CourseService {
     private findUserRecommendedCoursesService: FindUserRecommendedCoursesService,
     private readonly createCourseService: CreateCourseService,
     private readonly findAllCourses: FindAllCourses,
+    private readonly findCoursesByUser: FindCoursesByUserService,
     private readonly updateCoursesService: UpdateCoursesService,
   ) {}
 
@@ -44,6 +47,10 @@ export class CourseService {
     file?: Express.Multer.File,
   ) {
     return this.updateCoursesService.updateCourse(id, updateCourseDto, file);
+  }
+
+  async findByUserId(userId: number): Promise<Course[]> {
+    return this.findCoursesByUser.findCoursesByUserId(userId);
   }
 
   async findAll(): Promise<Course[]> {

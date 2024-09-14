@@ -20,7 +20,8 @@ export class CourseSectionController {
   }
 
   @Get()
-  async FindAllCourseSection(@Body() course: number) {
+  //querys example: { "courses_id": 1}
+  async findAllCourseSection(@Body() course: number) {
     return await this.courseSectionService.findAllSectionCourse(course);
   }
 }

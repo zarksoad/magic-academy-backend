@@ -1,5 +1,6 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { User } from './user.entity';
+import { Exclude } from 'class-transformer';
 
 @Entity('roles')
 export class Role {
@@ -10,5 +11,6 @@ export class Role {
   name: string;
 
   @OneToMany(() => User, (user: User) => user.role)
+  @Exclude()
   users: User[];
 }

@@ -66,7 +66,7 @@ import { GetByIdUser } from './services/get-user.service';
     FindUserTopicsService,
     TopicExist,
     GetByIdUser,
-    FindCoursesByUserIdService
+    FindCoursesByUserIdService,
   ],
   exports: [
     UserService,
@@ -78,7 +78,7 @@ import { GetByIdUser } from './services/get-user.service';
     FindUserTopicsService,
     RoleService,
     InserUserService,
-    FindCoursesByUserIdService
+    FindCoursesByUserIdService,
   ],
 })
 export class UserModule {}

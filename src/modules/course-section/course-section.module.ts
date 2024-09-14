@@ -6,9 +6,13 @@ import { CourseSection } from './entities/course-section.entity';
 import { Course } from '../course/entities/course.entity';
 import { CreateSectionService } from './services/create-section.service';
 import { FindAllSectionService } from './services/find-all-section.service';
+import { SectionClassModule } from '../section-class/section-class.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([CourseSection, Course])],
+  imports: [
+    TypeOrmModule.forFeature([CourseSection, Course]),
+    SectionClassModule,
+  ],
   controllers: [CourseSectionController],
   providers: [
     CreateSectionService,

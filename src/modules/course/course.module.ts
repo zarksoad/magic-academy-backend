@@ -18,6 +18,7 @@ import { CloudinaryService } from '../../common/services/cloudinary.service';
 import { UpdateCoursesService } from './services/update-courses/update-courses.service';
 import { FindCourseExist } from './services/update-courses/find-course-exist.service';
 import { UploadCloudinaryService } from '../../common/services/upload-cloudinary.service';
+import { FindCoursesByUserService } from './services/find-course-by-user.service';
 @Module({
   imports: [TypeOrmModule.forFeature([Course, Topic, User]), UserModule],
   controllers: [CourseController],
@@ -35,6 +36,7 @@ import { UploadCloudinaryService } from '../../common/services/upload-cloudinary
     CloudinaryService,
     UpdateCoursesService,
     FindCourseExist,
+    FindCoursesByUserService,
   ],
 })
 export class CourseModule {}
