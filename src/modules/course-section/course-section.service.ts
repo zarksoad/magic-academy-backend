@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Injectable } from '@nestjs/common';
 import { CreateCourseSectionDto } from './dto/create-course-section.dto';
 import type { CourseSection } from './entities/course-section.entity';

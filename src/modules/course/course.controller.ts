@@ -32,7 +32,7 @@ export class CourseController {
   constructor(private readonly courseService: CourseService) {}
 
   @Post()
-  // @Roles(2, 3)
+  @Roles(2, 3)
   @ApiPostOperation('Create Course', CreateCourseDto, CreateCourseDto)
   @UseInterceptors(FileInterceptor('thumbnail'))
   async create(
@@ -47,20 +47,25 @@ export class CourseController {
   @Get('/user/recommended-courses')
   @Roles(1)
   @ApiGetOperation('courses', FindUserRecommendedCoursesOutputDto, true)
-  async findUserRecommededCourses(
-    @UserId() id:number
-  ):Promise<Course[]>{
+  async findUserRecommededCourses(@UserId() id: number): Promise<Course[]> {
     return await this.courseService.findUserRecommendedCourses(id);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.courseService.findOne(+id);
-  }
-
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCourseDto: UpdateCourseDto) {
-    return this.courseService.update(+id, updateCourseDto);
+  @Roles(2)
+  @UseInterceptors(FileInterceptor('thumbnail'))
+  update(
+    @Param('id') id: number,
+    @Body() updateCourseDto: UpdateCourseDto,
+    @UploadedFile() file: Express.Multer.File,
+  ) {
+    return this.courseService.update(id, updateCourseDto, file);
+  }
+  @Get()
+  @Roles(2)
+  @ApiGetOperation('course-by-id-instructor', CreateCourseDto, true)
+  async findUserId(@UserId() userId: number): Promise<Course[]> {
+    return await this.courseService.findByUserId(userId);
   }
 
   @Get()

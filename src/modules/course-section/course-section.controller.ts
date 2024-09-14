@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Controller, Post, Body, Get, UseGuards } from '@nestjs/common';
 import { CourseSectionService } from './course-section.service';
 import { CreateCourseSectionDto } from './dto/create-course-section.dto';
@@ -20,7 +21,7 @@ export class CourseSectionController {
 
   @Get()
   //querys example: { "courses_id": 1}
-  async FindAllCourseSection(@Body() course: number) {
+  async findAllCourseSection(@Body() course: number) {
     return await this.courseSectionService.findAllSectionCourse(course);
   }
 }

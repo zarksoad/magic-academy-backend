@@ -3,21 +3,22 @@ import { FindUserByIdService } from "../../user/services/find-user-by-id.service
 import { FindUserTopicsService } from "../../user/services/find-user-topics.service";
 import { getUserTopicsIdsTransformer } from "../transformers/get-user-topics-ids.transformer";
 import { getCoursesByUserIdIdsTransformer } from "../transformers/get-courses-by-userId-ids.transformer";
+import { User } from "../../user/entities";
 import { Course } from "../entities/course.entity";
 import { FindCoursesRelatedToTopicsService } from "./find-courses-related-to-topics.service";
 import { FindCoursesByUserIdService } from "../../user/services/find-courses-by-user.service";
 
 @Injectable()
-export class FindUserRecommendedCoursesService{
-    constructor(
-        private findUserByIdService:FindUserByIdService,
-        private findUserTopicsService:FindUserTopicsService,
-        private findCoursesRelatedToTopicsService:FindCoursesRelatedToTopicsService,
-        private findCoursesByUserIdService:FindCoursesByUserIdService
-    ){}
-    
-    async FindUserRecommendedCourses(id:number):Promise<Course[]>{
-        const {id:UserId} = await this.findUserByIdService.findUserById(id);
+export class FindUserRecommendedCoursesService {
+  constructor(
+    private findUserByIdService: FindUserByIdService,
+    private findUserTopicsService: FindUserTopicsService,
+    private findCoursesRelatedToTopicsService: FindCoursesRelatedToTopicsService,
+    private findCoursesByUserIdService: FindCoursesByUserIdService,
+  ) {}
+
+  async FindUserRecommendedCourses(id: number): Promise<Course[]> {
+    const { id: UserId } = await this.findUserByIdService.findUserById(id);
 
         //Getting topics by user
         const topicsByUser = await this.findUserTopicsService.FindTopicsByUser(UserId);

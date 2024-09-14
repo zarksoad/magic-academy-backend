@@ -51,11 +51,11 @@ export class Course {
   })
   topics: Topic[];
 
-  @ManyToMany(() => User, user => user.course)
+  @ManyToMany(() => User, user => user.course, { eager: true })
   @JoinTable({
     name: 'course_users',
     joinColumn: { name: 'course_id', referencedColumnName: 'id' },
-    inverseJoinColumn: { name: 'users_id', referencedColumnName: 'id' },
+    inverseJoinColumn: { name: 'user_id', referencedColumnName: 'id' },
   })
   @Exclude()
   users: User[];
