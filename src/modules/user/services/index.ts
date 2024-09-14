@@ -1,5 +1,4 @@
 export * from './check-user-exist-register.service';
-export * from './create-role-token.service';
 export * from './create.service';
 export * from './email/check-token-status.service';
 export * from './email/create-role-token.service';
