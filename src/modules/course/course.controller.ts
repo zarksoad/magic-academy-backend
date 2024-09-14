@@ -62,7 +62,7 @@ export class CourseController {
     return this.courseService.update(id, updateCourseDto, file);
   }
   @Get()
-  // @Roles(2)
+  @Roles(2)
   @ApiGetOperation('course-by-id-instructor', CreateCourseDto, true)
   async findUserId(@UserId() userId: number): Promise<Course[]> {
     return await this.courseService.findByUserId(userId);
