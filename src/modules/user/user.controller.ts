@@ -60,6 +60,6 @@ export class UserController {
   getLatestClassesInProgressByCourseByUser(
     @UserId() id:number
   ){
-    return this.getLatestClassesInProgressByCourseByUserService.getLatestClassesInProgressByUserByCourse(id)
+    return this.userService.getLatestClassesInProgressByCourseByUser(id)
   }
 }
