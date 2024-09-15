@@ -10,11 +10,11 @@ import {
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { loginAuthDto } from './dto/login.dto';
-import { User } from '../user/entities';
 import { ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
 import { ApiPostOperation } from '../../common/decorators/swagger/post-swagger.decorator';
 import { JwtAuthGuard } from './guards/jwt.auth.guard';
+import { LoginResponseDto } from './dto/login-response.dto';
 
 @ApiTags('login')
 @Controller('auth')
@@ -22,7 +22,7 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('login')
-  @ApiPostOperation('login successfully', User, loginAuthDto, false)
+  @ApiPostOperation('login successfully', LoginResponseDto, loginAuthDto, false)
   @HttpCode(200)
   async LoginUser(@Body() body: loginAuthDto) {
     // Extract email and password from the request body
