@@ -17,6 +17,8 @@ import { ApiPostOperation } from '../../common/decorators/swagger';
 import { ApiGetOperation } from '../../common/decorators/swagger/get-swagger.decorator';
 import { GetCommentsResponseDto } from './dto/get-comments.dto';
 import { CACHE_MANAGER, Cache } from '@nestjs/cache-manager';
+import { ApiTags } from '@nestjs/swagger';
+@ApiTags('Comments')
 @Controller('comments')
 @UseGuards(JwtAuthGuard)
 export class CommentsController {
