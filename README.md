@@ -303,30 +303,29 @@ Este endpoint permite a un usuario iniciar sesión en el sistema. El usuario deb
   "email": "johndoe@example.com",
   "password": "password123"
 }
-Parámetros del Cuerpo
-Campo	Tipo	Descripción
-email	string	Correo electrónico del usuario.
-password	string	Contraseña del usuario.
-Response (200 OK)
-Ejemplo de Respuesta
+
+## Parámetros del Cuerpo
+
+| Campo     | Tipo    | Descripción                       |
+|-----------|---------|-----------------------------------|
+| `email`   | `string` | Correo electrónico del usuario.    |
+| `password`| `string` | Contraseña del usuario.            |
+
 json
-Copy code
 {
   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
 }
 Campos de Respuesta
-Campo	Tipo	Descripción
-token	string	Token de autenticación JWT para acceder a rutas protegidas.
-Errores Comunes
+### Campos de Respuesta
+
+| Campo  | Tipo    | Descripción                                           |
+|--------|---------|-------------------------------------------------------|
+| `token`| `string` | Token de autenticación JWT para acceder a rutas protegidas. |
+
 400 Bad Request: Datos incompletos o formato inválido.
 401 Unauthorized: Credenciales inválidas o usuario no autenticado.
 500 Internal Server Error: Error en el servidor al procesar la solicitud.
-Si necesitas más detalles o ajustes, avísame y estaré encantado de ayudarte.
 
-css
-Copy code
-
-Este formato debería ser claro y bien organizado para tu documentación en Markdown.
 
 
 
