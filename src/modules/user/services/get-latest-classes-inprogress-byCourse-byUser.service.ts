@@ -45,6 +45,7 @@ export class GetLatestClassesInProgressByCourseByUserService{
             "user_classes.status AS user_class_status",
             "user_classes.updated_at AS user_class_updated_at",
             "section_classes.title AS section_class_title",
+            "section_classes.id AS section_class_id",
             "course_sections.name AS course_section_name",
             "courses.name AS course_name",
             "courses.description AS course_description"
