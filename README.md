@@ -303,18 +303,21 @@ Este endpoint permite a un usuario iniciar sesión en el sistema. El usuario deb
   "email": "johndoe@example.com",
   "password": "password123"
 }
+```
 
-## Parámetros del Cuerpo
+### Parámetros del Cuerpo
 
 | Campo     | Tipo    | Descripción                       |
 |-----------|---------|-----------------------------------|
 | `email`   | `string` | Correo electrónico del usuario.    |
 | `password`| `string` | Contraseña del usuario.            |
 
-json
+
+```json
 {
   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
 }
+```
 Campos de Respuesta
 ### Campos de Respuesta
 
