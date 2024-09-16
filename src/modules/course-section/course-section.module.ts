@@ -19,5 +19,6 @@ import { SectionClassModule } from '../section-class/section-class.module';
     CourseSectionService,
     FindAllSectionService,
   ],
+  exports: [FindAllSectionService],
 })
 export class CourseSectionModule {}

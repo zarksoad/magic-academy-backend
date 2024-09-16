@@ -6,6 +6,8 @@ import { CreateUserDto, SendMailDto } from './dto';
 import type SMTPTransport from 'nodemailer/lib/smtp-transport';
 import { GetByIdUser } from './services/get-user.service';
 import { GetLatestClassesInProgressByCourseByUserService } from './services/get-latest-classes-inprogress-byCourse-byUser.service';
+import { EnrollService } from './services/enroll-user-course/enroll.service';
+import { UserCourseDto } from './dto/enroll-user-course-dtos/user-course.dto';
 
 @Injectable()
 export class UserService {
@@ -13,7 +15,8 @@ export class UserService {
     private readonly createUser: CreateUSer,
     private readonly mailService: CreateMailService,
     private readonly getByIdUser: GetByIdUser,
-    private readonly getLatestClassesInProgressByCourseByUserService:GetLatestClassesInProgressByCourseByUserService 
+    private readonly getLatestClassesInProgressByCourseByUserService: GetLatestClassesInProgressByCourseByUserService,
+    private readonly enrollService: EnrollService,
   ) {}
 
   async create(createUserDto: CreateUserDto, token?: string): Promise<User> {
@@ -34,7 +37,13 @@ export class UserService {
     return await this.getByIdUser.findByIdUser(id);
   }
 
-  async getLatestClassesInProgressByCourseByUser(id:number):Promise<User>{
-    return this.getLatestClassesInProgressByCourseByUserService.getLatestClassesInProgressByUserByCourse(id) 
+  async getLatestClassesInProgressByCourseByUser(id: number): Promise<User> {
+    return this.getLatestClassesInProgressByCourseByUserService.getLatestClassesInProgressByUserByCourse(
+      id,
+    );
+  }
+
+  async enrollStudentInCourse(userCourseDto: UserCourseDto) {
+    return this.enrollService.enroll(userCourseDto);
   }
 }

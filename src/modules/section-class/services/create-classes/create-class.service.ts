@@ -32,6 +32,8 @@ export class CreateClassService {
       await this.checkCourseSectionExistService.verifyCourseSection(
         classDto.courseSectionId,
       );
+
+    classDto.created_at = new Date();
     const newClass = this.createSectionClassRepository.create({
       ...classDto,
       courseSection: courseSection,

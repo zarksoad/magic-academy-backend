@@ -3,7 +3,7 @@ import { Controller, Post, Body, UseGuards, Query, Get } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { User } from './entities';
+import { Role, User } from './entities';
 import { SendMailDto } from './dto';
 import { ApiPostOperation } from '../../common/decorators/swagger';
 import { UserId } from '../../common/decorators/user/user-Id.decorator';
@@ -15,6 +15,7 @@ import { EmailResponseDto } from './dto/dto-output/email-response.dto';
 import { ApiGetOperation } from '../../common/decorators/swagger/get-swagger.decorator';
 import { UserResponseDto } from './dto/dto-output/user-Response.dto';
 import { GetLatestClassesInProgressByCourseByUserService } from './services/get-latest-classes-inprogress-byCourse-byUser.service';
+import { UserCourseDto } from './dto/enroll-user-course-dtos/user-course.dto';
 
 @ApiTags('users')
 @Controller('users')
@@ -22,7 +23,7 @@ export class UserController {
   constructor(
     private readonly userService: UserService,
     private readonly checkTokenStatus: CheckTokenStatus,
-    private readonly getLatestClassesInProgressByCourseByUserService:GetLatestClassesInProgressByCourseByUserService
+    private readonly getLatestClassesInProgressByCourseByUserService: GetLatestClassesInProgressByCourseByUserService,
   ) {}
 
   @Post('register')
@@ -61,9 +62,17 @@ export class UserController {
   @Get('/user/classes/in-progress/latest')
   @UseGuards(JwtAuthGuard)
   @Roles(1)
-  getLatestClassesInProgressByCourseByUser(
-    @UserId() id:number
-  ){
-    return this.userService.getLatestClassesInProgressByCourseByUser(id)
+  getLatestClassesInProgressByCourseByUser(@UserId() id: number) {
+    return this.userService.getLatestClassesInProgressByCourseByUser(id);
+  }
+
+  @Post('enroll')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(1)
+  async enroll(@UserId() userId: number, @Body() userCourseDto: UserCourseDto) {
+    const updatedUserCourseDto: UserCourseDto = {
+      ...userCourseDto,
+    };
+    return this.userService.enrollStudentInCourse(updatedUserCourseDto);
   }
 }

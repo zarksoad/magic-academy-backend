@@ -38,5 +38,6 @@ import { FindCoursesByUserService } from './services/find-course-by-user.service
     FindCourseExist,
     FindCoursesByUserService,
   ],
+  exports: [FindCourseExist],
 })
 export class CourseModule {}
