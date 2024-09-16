@@ -326,7 +326,9 @@ Campos de Respuesta
 | `token`| `string` | Token de autenticación JWT para acceder a rutas protegidas. |
 
 400 Bad Request: Datos incompletos o formato inválido.
+
 401 Unauthorized: Credenciales inválidas o usuario no autenticado.
+
 500 Internal Server Error: Error en el servidor al procesar la solicitud.
 
 
