@@ -14,12 +14,7 @@ import { FindAllClassService } from './services/find-all-class.service';
 import { CreateClassService } from './services/create-classes/create-class.service';
 
 @Module({
-  imports:[
-    TypeOrmModule.forFeature([
-      SectionClass,
-      CourseSection
-    ])
-  ],
+  imports: [TypeOrmModule.forFeature([SectionClass, CourseSection])],
   controllers: [SectionClassController],
   providers: [
     SectionClassService,
@@ -31,5 +26,6 @@ import { CreateClassService } from './services/create-classes/create-class.servi
     UpdateSectionClassService,
     FindAllClassService,
   ],
+  exports: [FindAllClassService],
 })
 export class SectionClassModule {}

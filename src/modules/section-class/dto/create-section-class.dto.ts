@@ -24,6 +24,9 @@ export class CreateSectionClassDto {
   @IsOptional()
   url: string;
 
+  @IsOptional()
+  created_at: Date;
+
   @IsNumber({}, { message: 'Type is number' })
   @Type(() => Number)
   courseSectionId: number;

@@ -21,13 +21,10 @@ export class SectionClass {
   @Column('text', { nullable: true })
   content: string;
 
-  @Column({ type: 'int', nullable: true })
-  duration: number;
-
   @Column({ type: 'varchar', length: 255, nullable: true })
   url: string;
 
-  @Column({type: 'datetime', nullable:false})
+  @Column({ type: 'datetime', nullable: false })
   created_at: Date;
 
   @ManyToOne(() => CourseSection, section => section.classes)
