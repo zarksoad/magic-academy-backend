@@ -13,7 +13,7 @@ import { Roles } from '../../common/decorators/roles.decorator';
 export class CourseSectionController {
   constructor(private readonly courseSectionService: CourseSectionService) {}
 
-  @Roles(2)
+  // @Roles(1, 2)
   @Post()
   async create(@Body() createCourseSectionDto: CreateCourseSectionDto) {
     return await this.courseSectionService.create(createCourseSectionDto);
