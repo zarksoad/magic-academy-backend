@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { CourseService } from './course.service';
 import { CourseController } from './course.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -19,8 +19,16 @@ import { UpdateCoursesService } from './services/update-courses/update-courses.s
 import { FindCourseExist } from './services/update-courses/find-course-exist.service';
 import { UploadCloudinaryService } from '../../common/services/upload-cloudinary.service';
 import { FindCoursesByUserService } from './services/find-course-by-user.service';
+import { FindAllCourseClassesService } from './services/get-all-courses/find-course-classes.service';
 @Module({
-  imports: [TypeOrmModule.forFeature([Course, Topic, User]), UserModule],
+  imports: [
+    TypeOrmModule.forFeature(
+      [Course,
+        Topic,
+        User
+      ]
+    ),
+  forwardRef(() => UserModule) ],
   controllers: [CourseController],
   providers: [
     CourseService,
@@ -37,6 +45,24 @@ import { FindCoursesByUserService } from './services/find-course-by-user.service
     UpdateCoursesService,
     FindCourseExist,
     FindCoursesByUserService,
+    FindAllCourseClassesService
+  ],
+  exports:[
+    CourseService,
+    FindUserRecommendedCoursesService,
+    FindCoursesRelatedToTopicsService,
+    CreateCourseService,
+    TransactionalService,
+    CheckUserExistServiceCourse,
+    TopicExist,
+    VerifyTopicCourseService,
+    FindAllCourses,
+    UploadCloudinaryService,
+    CloudinaryService,
+    UpdateCoursesService,
+    FindCourseExist,
+    FindCoursesByUserService,
+    FindAllCourseClassesService
   ],
 })
 export class CourseModule {}

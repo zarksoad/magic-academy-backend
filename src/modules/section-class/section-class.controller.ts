@@ -21,7 +21,6 @@ import { Roles } from '../../common/decorators/roles.decorator';
 import { ApiTags } from '@nestjs/swagger';
 import { UpdateSectionClassDto } from './dto/update-section-class.dto';
 @ApiTags('Class')
-@ApiTags('Class')
 @Controller('section-class')
 @UseGuards(JwtAuthGuard, RolesGuard)
 export class SectionClassController {
@@ -31,7 +30,6 @@ export class SectionClassController {
   @Roles(2)
   @ApiPostOperation(
     'Create Class',
-    CreateSectionClassDto,
     CreateSectionClassDto,
     true,
   )

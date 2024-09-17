@@ -1,33 +1,34 @@
 import { Injectable } from "@nestjs/common";
-import { User } from "../../entities";
 import { ApiProperty } from "@nestjs/swagger";
+import { UserProgressEnum } from "../../enums/user-sections.enum";
 
 @Injectable()
-export class GetLatestClassesInProgressByCourseByUserOutputDto{
-    @ApiProperty({
-        example: [
-            {
-                "users_id": 2,
-                "user_class_status": "IN PROGRESS",
-                "user_class_updated_at": "2024-12-19T05:00:00.000Z",
-                "section_class_title": "Intro to Web Development",
-                "section_class_id": 21,
-                "course_section_name": "Introducción",
-                "course_name": "Aprende front",
-                "course_description": "Esto es una descripción de front"
-            },
-            {
-                "users_id": 2,
-                "user_class_status": "IN PROGRESS",
-                "user_class_updated_at": "2024-12-30T05:00:00.000Z",
-                "section_class_title": "Data Analysis Overview",
-                "section_class_id": 29,
-                "course_section_name": "Que es el análisis de datos - Sección",
-                "course_name": "Aprende analisis de datos",
-                "course_description": "Esto es una descripción de analisis"
-            }
-        ],
-        description: 'Returns a set of last seen classes per course per user. "Last seen" means the classes with the last "updated_at" property of the course.'
-    })
-    data: User;
+export class GetLatestClassesInProgressByCourseByUserResponseDto {
+    @ApiProperty({ example: "IN PROGRESS", description: "State of completion of the class" })
+    user_class_status: UserProgressEnum;
+
+    @ApiProperty({ example: "Intro to Web Development" })
+    section_class_title: string;
+
+    @ApiProperty({ example: 21 })
+    section_class_id: number;
+
+    @ApiProperty({ example: "Introducción" })
+    course_section_name: string;
+
+    @ApiProperty({ example: 21 })
+    course_id: number;
+
+    @ApiProperty({ example: "Aprende front" })
+    course_name: string;
+
+    @ApiProperty({ example: 8, description: "Number of classes in the course" })
+    numClassesInCourse?: number;
+
+    @ApiProperty({ example: 8, description: "Number of class in the corresponding course" })
+    numClassInCourse?: number;
+}
+
+export class anotherDTO{
+    data: GetLatestClassesInProgressByCourseByUserResponseDto[]
 }

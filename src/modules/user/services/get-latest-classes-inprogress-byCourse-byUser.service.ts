@@ -2,6 +2,8 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { FindUserByIdService } from "./find-user-by-id.service";
 import { UserClass } from "../entities/user-classes.entity";
+import { User } from "../entities"
+import { GetLatestClassesInProgressByCourseByUserResponseDto } from "../dto/dto-output/get-latest-classes-inprogress-byCourse-byUser-output.dto";
 
 export class GetLatestClassesInProgressByCourseByUserService{
 
@@ -10,7 +12,7 @@ export class GetLatestClassesInProgressByCourseByUserService{
         private findUserByIdService:FindUserByIdService
     ){}
 
-    async getLatestClassesInProgressByUserByCourse(id:number):Promise<any>
+    async getLatestClassesInProgressByUserByCourse(id:number):Promise<GetLatestClassesInProgressByCourseByUserResponseDto[]>
     // Promise<SectionClass>{
     {
         const {id:userId} = await this.findUserByIdService.findUserById(id);
@@ -41,16 +43,15 @@ export class GetLatestClassesInProgressByCourseByUserService{
             return `user_classes.updated_at IN (${subQuery})`;
         })
         .select([
-            "user_classes.users_id",
             "user_classes.status AS user_class_status",
-            "user_classes.updated_at AS user_class_updated_at",
             "section_classes.title AS section_class_title",
             "section_classes.id AS section_class_id",
             "course_sections.name AS course_section_name",
-            "courses.name AS course_name",
-            "courses.description AS course_description"
+            "courses.id AS course_id",
+            "courses.name AS course_name"
         ])
         .getRawMany();
 
     }
+
 }
