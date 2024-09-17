@@ -23,8 +23,8 @@ export class UserClass {
 
   @ManyToOne(() => SectionClass, sectionClass => sectionClass.userClass)
   @JoinColumn({ name: 'section_classes_id' })
-  sectionClasses: SectionClass[];
+  sectionClasses: SectionClass;
 
-  @Column({type:'datetime', nullable:false})
+  @Column({ type: 'datetime', nullable: false })
   updated_at: Date;
 }

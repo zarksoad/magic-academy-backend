@@ -28,6 +28,15 @@ import { FindUserTopicsService } from './services/find-user-topics.service';
 import { TopicExist } from '../topics/services/verify-exist-topic.service';
 import { GetByIdUser } from './services/get-user.service';
 import { GetLatestClassesInProgressByCourseByUserService } from './services/get-latest-classes-inprogress-byCourse-byUser.service';
+import { FindCourseExist } from '../course/services/update-courses/find-course-exist.service';
+import { CourseSection } from '../course-section/entities/course-section.entity';
+import { FindAllSectionService } from '../course-section/services/find-all-section.service';
+import { UserSectionService } from './services/enroll-user-course/user-section.service';
+import { EnrollService } from './services/enroll-user-course/enroll.service';
+import { UserCourseService } from './services/enroll-user-course/user-course.service';
+import { FindAllClassService } from '../section-class/services/find-all-class.service';
+import { UserClassService } from './services/enroll-user-course/user-class.service';
+import { SectionClass } from '../section-class/entities/section-class.entity';
 import { Course } from '../course/entities/course.entity';
 import { CourseModule } from '../course/course.module';
 
@@ -42,7 +51,9 @@ import { CourseModule } from '../course/course.module';
       UserCourse,
       UserSection,
       UserClass,
-      Course
+      Course,
+      CourseSection,
+      SectionClass,
     ]),
     JwtModule.registerAsync({
       imports: [ConfigModule],
@@ -72,7 +83,14 @@ import { CourseModule } from '../course/course.module';
     TopicExist,
     GetByIdUser,
     FindCoursesByUserIdService,
-    GetLatestClassesInProgressByCourseByUserService
+    GetLatestClassesInProgressByCourseByUserService,
+    FindCourseExist,
+    FindAllSectionService,
+    UserSectionService,
+    UserCourseService,
+    EnrollService,
+    FindAllClassService,
+    UserClassService,
   ],
   exports: [
     UserService,
@@ -85,7 +103,7 @@ import { CourseModule } from '../course/course.module';
     RoleService,
     InserUserService,
     FindCoursesByUserIdService,
-    GetLatestClassesInProgressByCourseByUserService
+    GetLatestClassesInProgressByCourseByUserService,
   ],
 })
 export class UserModule {}

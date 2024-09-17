@@ -1,7 +1,5 @@
-import { IUserTopics } from "../interfaces/user-topics.interface";
+import { IUserTopics } from '../interfaces/user-topics.interface';
 
-export const getUserTopicsIds = (userTopics:IUserTopics):number[] =>{
-    return userTopics.topics.map(userTopic => (
-        userTopic.id
-    ))
-}
+export const getUserTopicsIds = (userTopics: IUserTopics): number[] => {
+  return userTopics.topics.map(userTopic => userTopic.id);
+};

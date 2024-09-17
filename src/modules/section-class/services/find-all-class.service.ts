@@ -23,9 +23,12 @@ export class FindAllClassService {
       where: { courseSection: { id: sectionId } },
       relations: ['courseSection'],
     });
-
+    console.log('****************************');
+    console.log(classes);
+    console.log('****************************');
     if (classes.length === 0) {
-      throw new NotFoundException('No classes found for the given section');
+      // throw new NotFoundException('No classes found for the given section');
+      return [];
     }
 
     return classes;

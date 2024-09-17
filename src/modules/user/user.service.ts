@@ -9,6 +9,8 @@ import { GetLatestClassesInProgressByCourseByUserService } from './services/get-
 import { CourseService } from '../course/course.service';
 import { getClassesNumInCourse } from './helpers/get-course-classes-ids.helper';
 import { GetLatestClassesInProgressByCourseByUserResponseDto } from './dto/dto-output/get-latest-classes-inprogress-byCourse-byUser-output.dto';
+import { EnrollService } from './services/enroll-user-course/enroll.service';
+import { UserCourseDto } from './dto/enroll-user-course-dtos/user-course.dto';
 
 @Injectable()
 export class UserService {
@@ -17,7 +19,8 @@ export class UserService {
     private readonly mailService: CreateMailService,
     private readonly getByIdUser: GetByIdUser,
     private readonly getLatestClassesInProgressByCourseByUserService: GetLatestClassesInProgressByCourseByUserService,
-    private courseService: CourseService
+    private courseService: CourseService,
+    private readonly enrollService: EnrollService,
   ) { }
 
   async create(createUserDto: CreateUserDto, token?: string): Promise<User> {
@@ -56,5 +59,9 @@ export class UserService {
       }));
 
     return latestClasses
+  }
+
+  async enrollStudentInCourse(userCourseDto: UserCourseDto) {
+    return this.enrollService.enroll(userCourseDto);
   }
 }

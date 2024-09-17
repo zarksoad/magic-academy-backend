@@ -63,6 +63,6 @@ import { FindAllCourseClassesService } from './services/get-all-courses/find-cou
     FindCourseExist,
     FindCoursesByUserService,
     FindAllCourseClassesService
-  ],
+  ]
 })
 export class CourseModule {}

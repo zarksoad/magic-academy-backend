@@ -15,7 +15,7 @@ async function bootstrap() {
   app.useGlobalPipes(globalValidationPipes);
   app.use(cookieParser());
   const config = new DocumentBuilder()
-    .setTitle('Api magic academic')
+    .setTitle('API MAGIC ACADEMY')
     .setDescription('API description')
     .setVersion('1.0')
     .addTag('users')

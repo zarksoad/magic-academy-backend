@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsString, IsNumber, IsDateString } from 'class-validator';
+import { createApiResponseDto } from '../../../../common/helpers/create-api-response-dto.helper';
 
 export class UserResponseDataDto {
   @ApiProperty({ example: 1, description: 'User ID' })
@@ -28,16 +29,4 @@ export class UserResponseDataDto {
   @IsDateString()
   updatedAt: string;
 }
-
-export class UserResponseDto {
-  @ApiProperty({ example: 200, description: 'Response status code' })
-  @IsNumber()
-  code: number;
-
-  @ApiProperty({ example: 'Success', description: 'Response message' })
-  @IsString()
-  message: string;
-
-  @ApiProperty({ description: 'User data' })
-  data: UserResponseDataDto;
-}
+export const UserResponseDto = createApiResponseDto(UserResponseDataDto);

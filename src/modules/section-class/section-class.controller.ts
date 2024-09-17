@@ -27,7 +27,7 @@ export class SectionClassController {
   constructor(private readonly sectionClassService: SectionClassService) {}
 
   @Post()
-  @Roles(2)
+  @Roles(1,2)
   @ApiPostOperation(
     'Create Class',
     CreateSectionClassDto,
