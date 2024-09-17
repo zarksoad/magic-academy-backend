@@ -15,7 +15,6 @@ import { CourseService } from './course.service';
 import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
 import { UserId } from '../../common/decorators/user/user-Id.decorator';
-import { ApiPostOperation } from '../../common/decorators/swagger';
 import { JwtAuthGuard } from '../auth/guards/jwt.auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { Roles } from '../../common/decorators/roles.decorator';
@@ -24,6 +23,7 @@ import { FindUserRecommendedCoursesOutputDto } from './dto/dto-output/findUserRe
 import { ApiTags } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Course } from './entities/course.entity';
+import { ApiPostOperationFormData } from '../../common/decorators/swagger/post-form-data-swagger.decorator';
 
 @ApiTags('Courses')
 @Controller('courses')
@@ -32,8 +32,8 @@ export class CourseController {
   constructor(private readonly courseService: CourseService) {}
 
   @Post()
-  @Roles(2, 3)
-  @ApiPostOperation('Create Course', CreateCourseDto, CreateCourseDto)
+  @Roles(1, 2, 3)
+  @ApiPostOperationFormData('Create Course', CreateCourseDto, CreateCourseDto)
   @UseInterceptors(FileInterceptor('thumbnail'))
   async create(
     @Body() createCourseDto: CreateCourseDto,

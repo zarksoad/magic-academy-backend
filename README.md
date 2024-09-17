@@ -283,4 +283,57 @@ El servicio de correos debe estar configurado en la aplicación para disparar la
 
 ---
 
-Si necesitas más detalles o ajustes, dime y sigo ayudando con lo que requieras.
+# API de Inicio de Sesión
+
+## Endpoint
+
+**Método:** POST  
+**URL:** `/api/auth/login`  
+
+Este endpoint permite a un usuario iniciar sesión en el sistema. El usuario debe proporcionar su correo electrónico y contraseña para autenticarse.
+
+## Request
+
+**Content-Type:** `application/json`
+
+### Cuerpo de la Solicitud
+
+```json
+{
+  "email": "johndoe@example.com",
+  "password": "password123"
+}
+```
+
+### Parámetros del Cuerpo
+
+| Campo     | Tipo    | Descripción                       |
+|-----------|---------|-----------------------------------|
+| `email`   | `string` | Correo electrónico del usuario.    |
+| `password`| `string` | Contraseña del usuario.            |
+
+
+```json
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+}
+```
+Campos de Respuesta
+### Campos de Respuesta
+
+| Campo  | Tipo    | Descripción                                           |
+|--------|---------|-------------------------------------------------------|
+| `token`| `string` | Token de autenticación JWT para acceder a rutas protegidas. |
+
+400 Bad Request: Datos incompletos o formato inválido.
+
+401 Unauthorized: Credenciales inválidas o usuario no autenticado.
+
+500 Internal Server Error: Error en el servidor al procesar la solicitud.
+
+
+
+
+
+
+
