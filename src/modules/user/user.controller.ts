@@ -15,6 +15,7 @@ import { EmailResponseDto } from './dto/dto-output/email-response.dto';
 import { ApiGetOperation } from '../../common/decorators/swagger/get-swagger.decorator';
 import { UserResponseDto } from './dto/dto-output/user-Response.dto';
 import { GetLatestClassesInProgressByCourseByUserService } from './services/get-latest-classes-inprogress-byCourse-byUser.service';
+import { GetLatestClassesInProgressByCourseByUserResponseDto } from './dto/dto-output/get-latest-classes-inprogress-byCourse-byUser-output.dto';
 import { UserCourseDto } from './dto/enroll-user-course-dtos/user-course.dto';
 
 @ApiTags('users')
@@ -62,8 +63,11 @@ export class UserController {
   @Get('/user/classes/in-progress/latest')
   @UseGuards(JwtAuthGuard)
   @Roles(1)
-  getLatestClassesInProgressByCourseByUser(@UserId() id: number) {
-    return this.userService.getLatestClassesInProgressByCourseByUser(id);
+  @ApiGetOperation('users', GetLatestClassesInProgressByCourseByUserResponseDto, true, true)
+  getLatestClassesInProgressByCourseByUser(
+    @UserId() id:number
+  ):Promise<GetLatestClassesInProgressByCourseByUserResponseDto[]>{
+    return this.userService.getLatestClassesInProgressByCourseByUser(id)
   }
 
   @Post('enroll')

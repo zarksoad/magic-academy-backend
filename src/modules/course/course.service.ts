@@ -11,6 +11,7 @@ import { FindAllCourses } from './services/get-all-courses/get-all-courses.servi
 import { FindCoursesByUserIdService } from '../user/services/find-courses-by-user.service';
 import { FindCoursesByUserService } from './services/find-course-by-user.service';
 import { UpdateCoursesService } from './services/update-courses/update-courses.service';
+import { FindAllCourseClassesService } from './services/get-all-courses/find-course-classes.service';
 
 @Injectable()
 export class CourseService {
@@ -20,6 +21,7 @@ export class CourseService {
     private readonly findAllCourses: FindAllCourses,
     private readonly findCoursesByUser: FindCoursesByUserService,
     private readonly updateCoursesService: UpdateCoursesService,
+    private readonly findAllCourseClassesService: FindAllCourseClassesService
   ) {}
 
   async create(
@@ -55,5 +57,9 @@ export class CourseService {
 
   async findAll(): Promise<Course[]> {
     return await this.findAllCourses.getAll();
+  }
+
+  async FindCourseClasses(courseId:number):Promise<Course>{
+    return this.findAllCourseClassesService.FindCourseClasses(courseId)
   }
 }

@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-/* eslint-disable no-unused-vars */
 import {
   Controller,
   Post,
@@ -30,12 +28,7 @@ export class SectionClassController {
 
   @Post()
   @Roles(1, 2)
-  @ApiPostOperation(
-    'Create Class',
-    CreateSectionClassDto,
-    CreateSectionClassDto,
-    true,
-  )
+  @ApiPostOperation('Create Class', CreateSectionClassDto, true)
   @UseInterceptors(FileInterceptor('video'))
   create(
     @Body() createSectionClassDto: CreateSectionClassDto,
@@ -55,8 +48,8 @@ export class SectionClassController {
     return this.sectionClassService.update(id, updateSectionClassDto, file);
   }
 
-  @Get(':id/section')
-  async findAllClassSection(@Param() section: number) {
+  @Get(':id/sections')
+  async findAllClassSection(@Param('id') section: number) {
     return await this.sectionClassService.findClassSection(section);
   }
 
@@ -66,6 +59,6 @@ export class SectionClassController {
     @UserId() userId: number,
     @UserRole() userRole: number,
   ) {
-    return await this.sectionClassService.findClassById(id, userId,userRole);
+    return await this.sectionClassService.findClassById(id, userId, userRole);
   }
 }

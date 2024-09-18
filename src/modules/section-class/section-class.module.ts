@@ -15,6 +15,8 @@ import { GetClassByIdService } from './services/get-class-by-id/get-class-by-id.
 import { CheckCourseEnrollment } from './services/get-class-by-id/check-user-enrollment.service';
 import { UserCourse } from '../user/entities/user-course.entity';
 import { CheckInstructorProvided } from './services/get-class-by-id/check-instructor-provided.service';
+import { GetClassNumInCourseService } from './services/get-class-num-in-course.service';
+import { GetCourseIdBySection } from './services/get-class-by-id/get-section-id-by-class.service';
 
 @Module({
   imports: [
@@ -32,7 +34,9 @@ import { CheckInstructorProvided } from './services/get-class-by-id/check-instru
     FindAllClassService,
     GetClassByIdService,
     CheckCourseEnrollment,
-    CheckInstructorProvided
+    CheckInstructorProvided,
+    GetClassNumInCourseService,
+    GetCourseIdBySection
   ],
   exports: [FindAllClassService],
 })
