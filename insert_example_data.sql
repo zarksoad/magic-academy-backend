@@ -2,15 +2,17 @@ USE magic;
 
 /*
 	INSERT INTO topics(name) VALUES ("python"),("javascript"), ("html");
-*/
 
-/*
 	INSERT INTO courses(name, description, thumbnail_url, slug, published_at) VALUES
 		("Aprende css desde cero", "Esto es una descripción de CSS", "Oelo", "Oelo", NOW()),
         ("Aprende html desde cero", "Esto es una descripción de HTML", "Oelo", "Oelo", NOW()),
 		("Aprende front", "Esto es una descripción de front", "Oelo", "Oelo", NOW()),
         ("Aprende analisis de datos", "Esto es una descripción de analisis", "Oelo", "Oelo", NOW());
 
+	INSERT INTO user_courses(status, users_id, courses_id) VALUES ('UNINITIALLIZED', 2, 4), ('UNINITIALLIZED', 2, 3);
+	
+	INSERT INTO course_topics(course_id, topic_id) VALUES (1, 1), (2, 5), (3, 1), (3, 5), (3, 4), (4,3);
+    
 	INSERT INTO course_sections(name, courses_id) VALUES
 		('Css grid', 1), 
         ('Css flex', 1),
@@ -76,25 +78,24 @@ INSERT INTO section_classes (title, content, duration, url, created_at, course_s
     ('Front-end Frameworks', 'Popular front-end frameworks like React and Angular.', 24, 'http://example.com/front-3', NOW(), 7),
     ('Building Front-end Projects', 'Developing small front-end projects.', 28, 'http://example.com/front-4', NOW(), 7),
 
-    -- Classes for 'Que es el análisis de datos - Sección' (course_sections_id = 9)
+    -- Classes for 'Que es el análisis de datos - Sección' (course_sections_id = 8)
     ('Data Analysis Overview', 'Introduction to data analysis concepts.', 15, 'http://example.com/data-analysis-1', NOW(), 8),
     ('Data Collection Techniques', 'Methods for collecting data.', 18, 'http://example.com/data-analysis-2', NOW(), 8),
     ('Data Cleaning', 'Cleaning and preparing data for analysis.', 20, 'http://example.com/data-analysis-3', NOW(), 8),
     ('Analyzing Data with Python', 'Using Python for data analysis.', 25, 'http://example.com/data-analysis-4', NOW(), 8),
 
-    -- Classes for 'Machine learning' (course_sections_id = 29)
+    -- Classes for 'Machine learning' (course_sections_id = 9)
     ('Intro to Machine Learning', 'Basic concepts of machine learning.', 15, 'http://example.com/ml-1', NOW(), 9),
     ('Supervised Learning', 'Understanding supervised learning models.', 22, 'http://example.com/ml-2', NOW(), 9),
     ('Unsupervised Learning', 'Exploring unsupervised learning techniques.', 24, 'http://example.com/ml-3', NOW(), 9),
     ('Neural Networks', 'Introduction to neural networks.', 28, 'http://example.com/ml-4', NOW(), 9),
 
-    -- Classes for 'Minando datos' (course_sections_id = 30)
-    ('Data Mining Basics', 'Introduction to data mining techniques.', 18, 'http://example.com/data-mining-1', NOW(), 3),
-    ('Data Mining Algorithms', 'Overview of popular data mining algorithms.', 20, 'http://example.com/data-mining-2', NOW(), 3),
-    ('Text Mining', 'Text mining techniques and applications.', 22, 'http://example.com/data-mining-3', NOW(), 3),
-    ('Data Mining with Python', 'Using Python for data mining tasks.', 25, 'http://example.com/data-mining-4', NOW(), 3);
-
-
+    -- Classes for 'Minando datos' (course_sections_id = 10)
+    ('Data Mining Basics', 'Introduction to data mining techniques.', 18, 'http://example.com/data-mining-1', NOW(), 10),
+    ('Data Mining Algorithms', 'Overview of popular data mining algorithms.', 20, 'http://example.com/data-mining-2', NOW(), 10),
+    ('Text Mining', 'Text mining techniques and applications.', 22, 'http://example.com/data-mining-3', NOW(), 10),
+    ('Data Mining with Python', 'Using Python for data mining tasks.', 25, 'http://example.com/data-mining-4', NOW(), 10);
+|
 INSERT INTO user_classes (status, users_id, section_classes_id, updated_at) VALUES
     -- Classes for "Introducción" (course_sections_id = 6)
     ('UNINITIALIZED', 2, 21, NOW()), -- Intro to Web Development
@@ -125,10 +126,9 @@ INSERT INTO user_classes (status, users_id, section_classes_id, updated_at) VALU
     ('UNINITIALIZED', 2, 38, NOW()), -- Data Mining Algorithms
     ('UNINITIALIZED', 2, 39, NOW()), -- Text Mining
     ('UNINITIALIZED', 2, 40, NOW()); -- Data Mining with Python
-*/
 
-/*To randomly update the table "user_classes" */
-/* 
+To randomly update the table "user_classes"
+ 
 	UPDATE user_classes
 	SET 
 		status = 'IN PROGRESS',
@@ -146,18 +146,11 @@ INSERT INTO user_classes (status, users_id, section_classes_id, updated_at) VALU
 			WHERE uc.status = 'UNINITIALIZED'
 			GROUP BY cs.id, uc.id
 			ORDER BY cs.id, RAND() 
-			LIMIT 20
+			LIMIT 15
 		) as selected_classes
 	);
 */
 
-/*
-	INSERT INTO course_topics(course_id, topic_id) VALUES (1, 1), (2, 5), (3, 1), (3, 5), (3, 4), (4,3);
-*/
-
-/*
-	INSERT INTO user_courses(status, users_id, courses_id) VALUES ('UNINITIALLIZED', 2, 4), ('UNINITIALLIZED', 2, 3);
-*/
 
 /*
 SELECT * FROM course_topics;
@@ -166,20 +159,23 @@ SELECT * FROM user_topics;
 SELECT * FROM topics;
 SELECT * FROM courses;
 SELECT * FROM user_courses;
+SELECT * FROM user_sections;
+SELECT * FROM user_classes;
 SELECT * FROM users;
 SELECT * FROM course_sections;
 SELECT * FROM section_classes;
-SELECT * FROM user_sections;
-SELECT * FROM user_classes;
 
 SELECT
 	uc.users_id,
     uc.status AS user_class_status,
     uc.updated_at AS user_class_updated_at,
+    sc.id AS section_class_id,
     sc.title AS section_class_title,
     cs.name AS course_section_name,
+    cs.id AS course_section_id,
     c.name AS course_name,
-    c.description AS course_description
+    c.description AS course_description,
+    c.id AS course_id
 FROM 
     user_classes uc
 INNER JOIN 
@@ -188,7 +184,7 @@ INNER JOIN
     course_sections cs ON sc.course_sections_id = cs.id
 INNER JOIN 
     courses c ON cs.courses_id = c.id
-WHERE uc.users_id = 2;
+WHERE uc.users_id = 2 AND uc.status = 'IN PROGRESS';
 
 SELECT
 	uc.users_id,

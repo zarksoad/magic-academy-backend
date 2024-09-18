@@ -12,6 +12,7 @@ import { UpdateSectionClassService } from './services/update-classes/update-clas
 import { CourseSection } from '../course-section/entities/course-section.entity';
 import { FindAllClassService } from './services/find-all-class.service';
 import { CreateClassService } from './services/create-classes/create-class.service';
+import { GetClassNumInCourseService } from './services/get-class-num-in-course.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([SectionClass, CourseSection])],
@@ -25,6 +26,7 @@ import { CreateClassService } from './services/create-classes/create-class.servi
     FindClassExist,
     UpdateSectionClassService,
     FindAllClassService,
+    GetClassNumInCourseService
   ],
   exports: [FindAllClassService],
 })

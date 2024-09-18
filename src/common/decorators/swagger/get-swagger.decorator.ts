@@ -12,12 +12,14 @@ export function ApiGetOperation(
   summary: string,
   responseDto: any,
   bearerToken?: boolean,
+  isArray?: boolean
 ) {
   const decorators = [
     ApiOperation({ summary }),
     ApiOkResponse({
       description: 'Request was successful',
       type: responseDto,
+      isArray: isArray
     }),
     ApiBadRequestResponse({ description: 'Invalid query parameters' }),
     ApiUnauthorizedResponse({ description: 'Unauthorized access' }),

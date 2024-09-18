@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserController } from './user.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -29,7 +29,6 @@ import { TopicExist } from '../topics/services/verify-exist-topic.service';
 import { GetByIdUser } from './services/get-user.service';
 import { GetLatestClassesInProgressByCourseByUserService } from './services/get-latest-classes-inprogress-byCourse-byUser.service';
 import { FindCourseExist } from '../course/services/update-courses/find-course-exist.service';
-import { Course } from '../course/entities/course.entity';
 import { CourseSection } from '../course-section/entities/course-section.entity';
 import { FindAllSectionService } from '../course-section/services/find-all-section.service';
 import { UserSectionService } from './services/enroll-user-course/user-section.service';
@@ -38,6 +37,8 @@ import { UserCourseService } from './services/enroll-user-course/user-course.ser
 import { FindAllClassService } from '../section-class/services/find-all-class.service';
 import { UserClassService } from './services/enroll-user-course/user-class.service';
 import { SectionClass } from '../section-class/entities/section-class.entity';
+import { Course } from '../course/entities/course.entity';
+import { CourseModule } from '../course/course.module';
 
 @Module({
   imports: [
@@ -62,6 +63,7 @@ import { SectionClass } from '../section-class/entities/section-class.entity';
         signOptions: { expiresIn: '1h' },
       }),
     }),
+    forwardRef(() => CourseModule)
   ],
   controllers: [UserController],
   providers: [

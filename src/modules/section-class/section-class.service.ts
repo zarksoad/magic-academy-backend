@@ -7,6 +7,7 @@ import { FindAllClassService } from './services/find-all-class.service';
 import { SectionClass } from './entities/section-class.entity';
 import { UpdateSectionClassService } from './services/update-classes/update-class.service';
 import { UpdateSectionClassDto } from './dto/update-section-class.dto';
+import { GetClassNumInCourseService } from './services/get-class-num-in-course.service';
 
 @Injectable()
 export class SectionClassService {
@@ -14,6 +15,7 @@ export class SectionClassService {
     private readonly createClassService: CreateClassService,
     private readonly updateSectionClassService: UpdateSectionClassService,
     private readonly findSectionService: FindAllClassService,
+    private readonly getClassNumInCourseService: GetClassNumInCourseService
   ) {}
   async create(
     createSectionClassDto: CreateSectionClassDto,
@@ -38,5 +40,9 @@ export class SectionClassService {
 
   async findClassSection(section: number): Promise<SectionClass[]> {
     return await this.findSectionService.getAll(section);
+  }
+
+  async getClassNumInCourse(classId:number):Promise<any>{
+    return this.getClassNumInCourseService.getClassNumInCourse(classId)
   }
 }
