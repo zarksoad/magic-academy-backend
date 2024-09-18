@@ -16,9 +16,7 @@ export class GetLatestClassesInProgressByCourseByUserService {
         private courseService: CourseService
     ) { }
 
-    async getLatestClassesInProgressByUserByCourse(id: number): Promise<GetLatestClassesInProgressByCourseByUserResponseDto[]>
-    // Promise<SectionClass>{
-    {
+    async getLatestClassesInProgressByUserByCourse(id: number): Promise<GetLatestClassesInProgressByCourseByUserResponseDto[]> {
         const { id: userId } = await this.findUserByIdService.findUserById(id);
 
         // Subquery that filters by class with the latest updated date per course
