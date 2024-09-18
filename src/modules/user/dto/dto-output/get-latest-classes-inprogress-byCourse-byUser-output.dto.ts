@@ -1,34 +1,36 @@
-import { Injectable } from "@nestjs/common";
 import { ApiProperty } from "@nestjs/swagger";
 import { UserProgressEnum } from "../../enums/user-sections.enum";
+import { createApiResponseDto } from "../../../../common/helpers/create-api-response-dto.helper";
 
-@Injectable()
 export class GetLatestClassesInProgressByCourseByUserResponseDto {
     @ApiProperty({ example: "IN PROGRESS", description: "State of completion of the class" })
-    user_class_status: UserProgressEnum;
+    userClassStatus: UserProgressEnum;
 
     @ApiProperty({ example: "Intro to Web Development" })
-    section_class_title: string;
+    sectionClassTitle: string;
 
     @ApiProperty({ example: 21 })
-    section_class_id: number;
+    sectionClassId: number;
 
     @ApiProperty({ example: "Introducción" })
-    course_section_name: string;
+    courseSectionName: string;
 
     @ApiProperty({ example: 21 })
-    course_id: number;
+    courseId: number;
 
     @ApiProperty({ example: "Aprende front" })
-    course_name: string;
+    courseName: string;
+}
 
+export class GetLatestClassesInProgressByCourseByUserWithClassNumResponseDto extends GetLatestClassesInProgressByCourseByUserResponseDto {
     @ApiProperty({ example: 8, description: "Number of classes in the course" })
-    numClassesInCourse?: number;
+    numClassesInCourse: number;
 
     @ApiProperty({ example: 8, description: "Number of class in the corresponding course" })
-    numClassInCourse?: number;
+    numClassInCourse: number;
 }
 
-export class anotherDTO{
-    data: GetLatestClassesInProgressByCourseByUserResponseDto[]
-}
+export const GetLatestClassesResponseDto = createApiResponseDto({
+    classDataDto: GetLatestClassesInProgressByCourseByUserWithClassNumResponseDto,
+    isArray: true
+})
