@@ -1,8 +1,15 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNumber, IsString } from 'class-validator';
 
-export function createApiResponseDto<TClassDataDto>(
+interface IcreateApiResponseDto<TClassDataDto> {
   classDataDto: TClassDataDto,
+  isArray?: boolean
+}
+
+export function createApiResponseDto<TClassDataDto>({
+  classDataDto,
+  isArray = false
+}: IcreateApiResponseDto<TClassDataDto>
 ) {
   class ApiResponseDto {
     @ApiProperty({ example: 200, description: 'Response status code' })
@@ -13,8 +20,8 @@ export function createApiResponseDto<TClassDataDto>(
     @IsString()
     message: string;
 
-    @ApiProperty({ description: 'User data', type: classDataDto })
-    data: typeof classDataDto;
+    @ApiProperty({ description: 'User data', type: classDataDto, isArray })
+    data: TClassDataDto | TClassDataDto[];
   }
   return ApiResponseDto;
 }

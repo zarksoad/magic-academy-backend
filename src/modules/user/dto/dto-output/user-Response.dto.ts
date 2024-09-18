@@ -29,4 +29,6 @@ export class UserResponseDataDto {
   @IsDateString()
   updatedAt: string;
 }
-export const UserResponseDto = createApiResponseDto(UserResponseDataDto);
+export const UserResponseDto = createApiResponseDto({
+  classDataDto: UserResponseDataDto
+});
