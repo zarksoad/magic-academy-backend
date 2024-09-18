@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-/* eslint-disable no-unused-vars */
 import {
   Controller,
   Post,
@@ -20,6 +18,8 @@ import { RolesGuard } from '../auth/guards/roles.guard';
 import { Roles } from '../../common/decorators/roles.decorator';
 import { ApiTags } from '@nestjs/swagger';
 import { UpdateSectionClassDto } from './dto/update-section-class.dto';
+import { UserId } from '../../common/decorators/user/user-Id.decorator';
+import { UserRole } from '../../common/decorators/user/userRole.decorator';
 @ApiTags('Class')
 @Controller('section-class')
 @UseGuards(JwtAuthGuard, RolesGuard)
@@ -27,12 +27,8 @@ export class SectionClassController {
   constructor(private readonly sectionClassService: SectionClassService) {}
 
   @Post()
-  @Roles(1,2)
-  @ApiPostOperation(
-    'Create Class',
-    CreateSectionClassDto,
-    true,
-  )
+  @Roles(1, 2)
+  @ApiPostOperation('Create Class', CreateSectionClassDto, true)
   @UseInterceptors(FileInterceptor('video'))
   create(
     @Body() createSectionClassDto: CreateSectionClassDto,
@@ -52,8 +48,17 @@ export class SectionClassController {
     return this.sectionClassService.update(id, updateSectionClassDto, file);
   }
 
-  @Get()
-  async findAllClassSection(@Body('section') section: number) {
+  @Get(':id/sections')
+  async findAllClassSection(@Param('id') section: number) {
     return await this.sectionClassService.findClassSection(section);
+  }
+
+  @Get(':id')
+  async findClassById(
+    @Param() id: number,
+    @UserId() userId: number,
+    @UserRole() userRole: number,
+  ) {
+    return await this.sectionClassService.findClassById(id, userId, userRole);
   }
 }
