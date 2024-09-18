@@ -11,5 +11,6 @@
         "Recommeded",
         "succesfully",
         "tumb"
-    ]
+    ],
+    "editor.formatOnSave": true
 }
