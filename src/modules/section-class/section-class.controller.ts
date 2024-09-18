@@ -20,7 +20,8 @@ import { RolesGuard } from '../auth/guards/roles.guard';
 import { Roles } from '../../common/decorators/roles.decorator';
 import { ApiTags } from '@nestjs/swagger';
 import { UpdateSectionClassDto } from './dto/update-section-class.dto';
-@ApiTags('Class')
+import { UserId } from '../../common/decorators/user/user-Id.decorator';
+import { UserRole } from '../../common/decorators/user/userRole.decorator';
 @ApiTags('Class')
 @Controller('section-class')
 @UseGuards(JwtAuthGuard, RolesGuard)
@@ -28,7 +29,7 @@ export class SectionClassController {
   constructor(private readonly sectionClassService: SectionClassService) {}
 
   @Post()
-  @Roles(1,2)
+  @Roles(1, 2)
   @ApiPostOperation(
     'Create Class',
     CreateSectionClassDto,
@@ -54,8 +55,17 @@ export class SectionClassController {
     return this.sectionClassService.update(id, updateSectionClassDto, file);
   }
 
-  @Get()
-  async findAllClassSection(@Body('section') section: number) {
+  @Get(':id/section')
+  async findAllClassSection(@Param() section: number) {
     return await this.sectionClassService.findClassSection(section);
+  }
+
+  @Get(':id')
+  async findClassById(
+    @Param() id: number,
+    @UserId() userId: number,
+    @UserRole() userRole: number,
+  ) {
+    return await this.sectionClassService.findClassById(id, userId,userRole);
   }
 }

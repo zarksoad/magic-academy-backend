@@ -70,9 +70,7 @@ export class UserController {
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(1)
   async enroll(@UserId() userId: number, @Body() userCourseDto: UserCourseDto) {
-    const updatedUserCourseDto: UserCourseDto = {
-      ...userCourseDto,
-    };
-    return this.userService.enrollStudentInCourse(updatedUserCourseDto);
+    userCourseDto.userId = userId;
+    return this.userService.enrollStudentInCourse(userCourseDto);
   }
 }

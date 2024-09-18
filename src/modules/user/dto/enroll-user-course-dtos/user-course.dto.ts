@@ -1,7 +1,8 @@
-import { IsEnum, IsNumber } from 'class-validator';
+import { IsEnum, IsNumber, IsOptional } from 'class-validator';
 import { UserProgressEnum } from '../../enums/user-sections.enum';
 
 export class UserCourseDto {
+  @IsOptional()
   @IsNumber({}, { message: 'User id is a number' })
   userId: number;
 
