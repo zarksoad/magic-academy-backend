@@ -39,6 +39,9 @@ import { UserClassService } from './services/enroll-user-course/user-class.servi
 import { SectionClass } from '../section-class/entities/section-class.entity';
 import { Course } from '../course/entities/course.entity';
 import { CourseModule } from '../course/course.module';
+import { FindUserCoursesAndProgressService } from './services/find-user-courses-and-progress.services';
+import { GetCourseProgressService } from './services/get-course-progress.service';
+import { GetCompletedClassesInCourseService } from './services/get-num-completed-classes-in-course.service';
 
 @Module({
   imports: [
@@ -91,6 +94,9 @@ import { CourseModule } from '../course/course.module';
     EnrollService,
     FindAllClassService,
     UserClassService,
+    FindUserCoursesAndProgressService,
+    GetCourseProgressService,
+    GetCompletedClassesInCourseService
   ],
   exports: [
     UserService,
@@ -104,6 +110,9 @@ import { CourseModule } from '../course/course.module';
     InserUserService,
     FindCoursesByUserIdService,
     GetLatestClassesInProgressByCourseByUserService,
+    FindUserCoursesAndProgressService,
+    GetCourseProgressService,
+    GetCompletedClassesInCourseService
   ],
 })
-export class UserModule {}
+export class UserModule { }
