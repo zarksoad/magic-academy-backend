@@ -61,7 +61,7 @@ export class CourseController {
   ) {
     return this.courseService.update(id, updateCourseDto, file);
   }
-  @Get()
+  @Get('/instructor')
   @Roles(2)
   @ApiGetOperation('course-by-id-instructor', CreateCourseDto, true)
   async findUserId(@UserId() userId: number): Promise<Course[]> {
@@ -72,5 +72,10 @@ export class CourseController {
   @Roles(1)
   getAllCourses() {
     return this.courseService.findAll();
+  }
+
+  @Get(':id')
+  async getCourse(@Param() courseId: number) {
+    return await this.courseService.findOne(courseId)
   }
 }
