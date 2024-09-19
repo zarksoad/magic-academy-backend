@@ -28,8 +28,7 @@ export class FindUserCoursesAndProgressService {
             userCoursesProgress.map(async (userCourseProgress) => {
                 // Getting user progress for a course
                 // userCourseProgress.progress = 
-                const progress = this.getCourseProgressService.getCourseProgress(userCourseProgress.courseId)
-                console.log(progress)
+                userCourseProgress.progress = await this.getCourseProgressService.getCourseProgress(studentId, userCourseProgress.courseId)
             })
         );
 

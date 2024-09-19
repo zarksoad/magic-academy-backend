@@ -41,7 +41,7 @@ import { Course } from '../course/entities/course.entity';
 import { CourseModule } from '../course/course.module';
 import { FindUserCoursesAndProgressService } from './services/find-user-courses-and-progress.services';
 import { GetCourseProgressService } from './services/get-course-progress.service';
-import { GetNumCompletedClassesInCourseService } from './services/get-num-completed-classes-in-course.service';
+import { GetCompletedClassesInCourseService } from './services/get-num-completed-classes-in-course.service';
 
 @Module({
   imports: [
@@ -96,7 +96,7 @@ import { GetNumCompletedClassesInCourseService } from './services/get-num-comple
     UserClassService,
     FindUserCoursesAndProgressService,
     GetCourseProgressService,
-    GetNumCompletedClassesInCourseService
+    GetCompletedClassesInCourseService
   ],
   exports: [
     UserService,
@@ -112,7 +112,7 @@ import { GetNumCompletedClassesInCourseService } from './services/get-num-comple
     GetLatestClassesInProgressByCourseByUserService,
     FindUserCoursesAndProgressService,
     GetCourseProgressService,
-    GetNumCompletedClassesInCourseService
+    GetCompletedClassesInCourseService
   ],
 })
 export class UserModule { }

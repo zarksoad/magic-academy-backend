@@ -1,25 +1,23 @@
 import { Injectable } from "@nestjs/common";
 import { getClassesNumInCourse } from "../helpers/get-course-classes-ids.helper";
 import { CourseService } from "../../course/course.service";
-import { GetNumCompletedClassesInCourseService } from "./get-num-completed-classes-in-course.service";
+import { GetCompletedClassesInCourseService } from "./get-num-completed-classes-in-course.service";
 
 @Injectable()
 export class GetCourseProgressService {
     constructor(
         private readonly courseService: CourseService,
-        private readonly getNumCompletedClassesInCourseService: GetNumCompletedClassesInCourseService
+        private readonly getCompletedClassesInCourseService: GetCompletedClassesInCourseService
     ) { }
 
-    async getCourseProgress(courseId: number): Promise<any> {
+    async getCourseProgress(userId: number, courseId: number): Promise<number> {
 
         const classCourses = await this.courseService.FindCourseClasses(courseId);
 
         const { numClassesInCourse } = await getClassesNumInCourse(classCourses)
 
-        const numCompletedClasses = await this.getNumCompletedClassesInCourseService.get(courseId)
+        const completedClasses = await this.getCompletedClassesInCourseService.get(userId, courseId)
 
-        console.log("numCompletedClasses: ", numCompletedClasses)
-
-        // return numCompletedClasses / numClassesInCourse
+        return Math.round((completedClasses.length / numClassesInCourse) * 100) / 100
     }
 }

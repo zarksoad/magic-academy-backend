@@ -15,7 +15,7 @@ import { EmailResponseDto } from './dto/dto-output/email-response.dto';
 import { ApiGetOperation } from '../../common/decorators/swagger/get-swagger.decorator';
 import { UserResponseDto } from './dto/dto-output/user-Response.dto';
 import { GetLatestClassesInProgressByCourseByUserService } from './services/get-latest-classes-inprogress-byCourse-byUser.service';
-import { GetLatestClassesInProgressByCourseByUserResponseDto, GetLatestClassesInProgressByCourseByUserWithClassNumResponseDto, GetLatestClassesResponseDto } from './dto/dto-output/get-latest-classes-inprogress-byCourse-byUser-output.dto';
+import { GetLatestClassesInProgressByCourseByUserWithClassNumResponseDto, GetLatestClassesResponseDto } from './dto/dto-output/get-latest-classes-inprogress-byCourse-byUser-output.dto';
 import { UserCourseDto } from './dto/enroll-user-course-dtos/user-course.dto';
 import { GetStudentCoursesResponseDto } from './dto/dto-output/get-student-courses-response.dto';
 
@@ -25,7 +25,6 @@ export class UserController {
   constructor(
     private readonly userService: UserService,
     private readonly checkTokenStatus: CheckTokenStatus,
-    private readonly getLatestClassesInProgressByCourseByUserService: GetLatestClassesInProgressByCourseByUserService,
   ) { }
 
   @Post('register')
