@@ -17,6 +17,7 @@ import { UserResponseDto } from './dto/dto-output/user-Response.dto';
 import { GetLatestClassesInProgressByCourseByUserService } from './services/get-latest-classes-inprogress-byCourse-byUser.service';
 import { GetLatestClassesInProgressByCourseByUserResponseDto, GetLatestClassesInProgressByCourseByUserWithClassNumResponseDto, GetLatestClassesResponseDto } from './dto/dto-output/get-latest-classes-inprogress-byCourse-byUser-output.dto';
 import { UserCourseDto } from './dto/enroll-user-course-dtos/user-course.dto';
+import { GetStudentCoursesResponseDto } from './dto/dto-output/get-student-courses-response.dto';
 
 @ApiTags('users')
 @Controller('users')
@@ -76,5 +77,14 @@ export class UserController {
   async enroll(@UserId() userId: number, @Body() userCourseDto: UserCourseDto) {
     userCourseDto.userId = userId;
     return this.userService.enrollStudentInCourse(userCourseDto);
+  }
+
+  @Get('/user/enrolled-courses')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(1)
+  async getUserCoursesAndProgress(
+    @UserId() id: number
+  ): Promise<GetStudentCoursesResponseDto[]> {
+    return await this.userService.getStudentCourses(id)
   }
 }
