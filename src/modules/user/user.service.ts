@@ -6,13 +6,11 @@ import { CreateUserDto, SendMailDto } from './dto';
 import type SMTPTransport from 'nodemailer/lib/smtp-transport';
 import { GetByIdUser } from './services/get-user.service';
 import { GetLatestClassesInProgressByCourseByUserService } from './services/get-latest-classes-inprogress-byCourse-byUser.service';
-import { CourseService } from '../course/course.service';
-import { getClassesNumInCourse } from './helpers/get-course-classes-ids.helper';
-import { GetLatestClassesInProgressByCourseByUserResponseDto, GetLatestClassesInProgressByCourseByUserWithClassNumResponseDto } from './dto/dto-output/get-latest-classes-inprogress-byCourse-byUser-output.dto';
+import { GetLatestClassesInProgressByCourseByUserWithClassNumResponseDto } from './dto/dto-output/get-latest-classes-inprogress-byCourse-byUser-output.dto';
 import { EnrollService } from './services/enroll-user-course/enroll.service';
 import { UserCourseDto } from './dto/enroll-user-course-dtos/user-course.dto';
-import { addClassNumToLatestClassesTransformer } from './transformers/add-class-num-to-latest-classes.transformer';
-
+import { GetStudentCoursesResponseDto } from './dto/dto-output/get-student-courses-response.dto';
+import { FindUserCoursesAndProgressService } from './services/find-user-courses-and-progress.services';
 @Injectable()
 export class UserService {
   constructor(
@@ -21,6 +19,7 @@ export class UserService {
     private readonly getByIdUser: GetByIdUser,
     private readonly getLatestClassesInProgressByCourseByUserService: GetLatestClassesInProgressByCourseByUserService,
     private readonly enrollService: EnrollService,
+    private readonly findUserCoursesAndProgressService: FindUserCoursesAndProgressService
   ) { }
 
   async create(createUserDto: CreateUserDto, token?: string): Promise<User> {
@@ -47,5 +46,10 @@ export class UserService {
 
   async enrollStudentInCourse(userCourseDto: UserCourseDto) {
     return this.enrollService.enroll(userCourseDto);
+  }
+
+  async getStudentCourses(id: number)
+    : Promise<GetStudentCoursesResponseDto[]> {
+    return await this.findUserCoursesAndProgressService.findUserCoursesAndProgress(id)
   }
 }
