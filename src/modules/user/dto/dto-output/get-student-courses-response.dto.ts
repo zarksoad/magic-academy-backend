@@ -1,4 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { createApiResponseDto } from "../../../../common/helpers/create-api-response-dto.helper";
 
 export class GetStudentCoursesResponseDto {
     @ApiProperty({ example: "www.thisIsaUrl.com" })
@@ -16,3 +17,8 @@ export class GetStudentCoursesResponseDto {
     @ApiProperty({ example: 0.9, description: "The progress is given as a number between 0 and 1" })
     progress: number;
 }
+
+export const GetStudentCoursesProgressResponseDto = createApiResponseDto({
+    classDataDto: GetStudentCoursesResponseDto,
+    isArray: true
+})
