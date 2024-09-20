@@ -1,7 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsArray, IsNumber, IsString } from 'class-validator';
+import { createApiResponseDto } from '../../../../common/helpers/create-api-response-dto.helper';
 
-export class EmailResponseDto {
+export class EmailDataDto {
   @ApiProperty({ example: 201, description: 'Response status code' })
   code: number;
 
@@ -67,3 +68,8 @@ export class EmailResponseDto {
   @IsString()
   messageId: string;
 }
+
+export const EmailResponseDto = createApiResponseDto({
+  classDataDto: EmailDataDto,
+  isArray: false
+})

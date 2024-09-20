@@ -9,6 +9,7 @@ import {
   MaxLength,
   MinLength,
 } from 'class-validator';
+import { createApiResponseDto } from '../../../common/helpers/create-api-response-dto.helper';
 
 export class CreateUserDto {
   @ApiProperty({
@@ -71,3 +72,8 @@ export class CreateUserDto {
   @ArrayMinSize(1)
   topicIds: number[];
 }
+
+export const CreateUserReponseDto = createApiResponseDto({
+  classDataDto: CreateUserDto,
+  isArray: false
+})
