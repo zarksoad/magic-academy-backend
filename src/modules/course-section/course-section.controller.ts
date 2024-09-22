@@ -1,11 +1,10 @@
 /* eslint-disable no-unused-vars */
-import { Controller, Post, Body, Get, UseGuards } from '@nestjs/common';
+import { Controller, Post, Body, Get, UseGuards, Param } from '@nestjs/common';
 import { CourseSectionService } from './course-section.service';
 import { CreateCourseSectionDto } from './dto/create-course-section.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/guards/jwt.auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
-import { Roles } from '../../common/decorators/roles.decorator';
 
 @ApiTags('Sections')
 @Controller('course-section')
@@ -19,9 +18,14 @@ export class CourseSectionController {
     return await this.courseSectionService.create(createCourseSectionDto);
   }
 
-  @Get()
+  @Get(':id/classes')
+  async findSectionClasses(@Param('id') section: number) {
+    return await this.courseSectionService.findAllSectionClasses(section);
+  }
+
+  @Get(':courseId')
   //querys example: { "courses_id": 1}
-  async findAllCourseSection(@Body() course: number) {
-    return await this.courseSectionService.findAllSectionCourse(course);
+  async findAllCourseSection(@Param('courseId') courseId: number) {
+    return await this.courseSectionService.findAllSectionCourse(courseId);
   }
 }

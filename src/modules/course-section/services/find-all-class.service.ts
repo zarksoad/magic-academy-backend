@@ -1,14 +1,13 @@
 import {
   BadRequestException,
   Injectable,
-  NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { SectionClass } from '../entities/section-class.entity';
+import { SectionClass } from '../../section-class/entities/section-class.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
-export class FindAllClassService {
+export class FindAllSectionClassesService {
   constructor(
     @InjectRepository(SectionClass)
     private readonly classSectionRepository: Repository<SectionClass>,

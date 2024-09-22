@@ -5,7 +5,7 @@ import { UserClassService } from './user-class.service';
 import { UserCourseDto } from '../../dto/enroll-user-course-dtos/user-course.dto';
 import { UserSectionDto } from '../../dto/enroll-user-course-dtos/user-section.dto';
 import { FindAllSectionService } from '../../../course-section/services/find-all-section.service';
-import { FindAllClassService } from '../../../section-class/services/find-all-class.service';
+import { FindAllSectionClassesService } from '../../../course-section/services/find-all-class.service';
 import { UserClassDto } from '../../dto/enroll-user-course-dtos/user-class.dto';
 import { UserProgressEnum } from '../../enums/user-sections.enum';
 
@@ -16,7 +16,7 @@ export class EnrollService {
     private readonly userSectionService: UserSectionService,
     private readonly userClassService: UserClassService,
     private readonly findAllSectionService: FindAllSectionService,
-    private readonly findAllClassService: FindAllClassService,
+    private readonly findAllSectionClassesService: FindAllSectionClassesService,
   ) {}
 
   async enroll(userCourseDto: UserCourseDto) {
@@ -47,7 +47,9 @@ export class EnrollService {
     let personalizedMessage = [];
     // Process each section to get classes and enroll them
     for (const section of sections) {
-      const classes = await this.findAllClassService.getAll(section.id);
+      const classes = await this.findAllSectionClassesService.getAll(
+        section.id,
+      );
 
       if (classes && classes.length > 0) {
         const userClassDtos: UserClassDto[] = classes.map(sectionClass => ({
