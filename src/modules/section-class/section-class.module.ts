@@ -9,7 +9,6 @@ import { CloudinaryService } from '../../common/services/cloudinary.service';
 import { FindClassExist } from './services/update-classes/find-class-exist.service';
 import { UpdateSectionClassService } from './services/update-classes/update-class.service';
 import { CourseSection } from '../course-section/entities/course-section.entity';
-import { FindAllClassService } from './services/find-all-class.service';
 import { CreateClassService } from './services/create-classes/create-class.service';
 import { GetClassByIdService } from './services/get-class-by-id/get-class-by-id.service';
 import { CheckCourseEnrollment } from './services/get-class-by-id/check-user-enrollment.service';
@@ -31,13 +30,12 @@ import { GetCourseIdBySection } from './services/get-class-by-id/get-section-id-
     CloudinaryService,
     FindClassExist,
     UpdateSectionClassService,
-    FindAllClassService,
     GetClassByIdService,
     CheckCourseEnrollment,
     CheckInstructorProvided,
     GetClassNumInCourseService,
-    GetCourseIdBySection
+    GetCourseIdBySection,
   ],
-  exports: [FindAllClassService],
+  exports: [TypeOrmModule],
 })
 export class SectionClassModule {}

@@ -1,11 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { CreateSectionClassDto } from './dto/create-section-class.dto';
 import { CreateClassService } from './services/create-classes/create-class.service';
-import { FindAllClassService } from './services/find-all-class.service';
-import { SectionClass } from './entities/section-class.entity';
 import { UpdateSectionClassService } from './services/update-classes/update-class.service';
 import { UpdateSectionClassDto } from './dto/update-section-class.dto';
-import { ClassWithCourseId, GetClassByIdService } from './services/get-class-by-id/get-class-by-id.service';
+import {
+  ClassWithCourseId,
+  GetClassByIdService,
+} from './services/get-class-by-id/get-class-by-id.service';
 import { GetClassNumInCourseService } from './services/get-class-num-in-course.service';
 
 @Injectable()
@@ -13,7 +14,6 @@ export class SectionClassService {
   constructor(
     private readonly createClassService: CreateClassService,
     private readonly updateSectionClassService: UpdateSectionClassService,
-    private readonly findSectionService: FindAllClassService,
     private readonly getClassByIdService: GetClassByIdService,
     private readonly getClassNumInCourseService: GetClassNumInCourseService,
   ) {}
@@ -38,9 +38,10 @@ export class SectionClassService {
     );
   }
 
-  async findClassSection(section: number): Promise<SectionClass[]> {
-    return await this.findSectionService.getAll(section);
+  async getClassNumInCourse(classId: number): Promise<any> {
+    return this.getClassNumInCourseService.getClassNumInCourse(classId);
   }
+
   async findClassById(
     id: number,
     userId: number,
@@ -48,9 +49,5 @@ export class SectionClassService {
   ): Promise<ClassWithCourseId> {
     id = id['id'];
     return await this.getClassByIdService.getClass(id, userId, userRole);
-  }
-
-  async getClassNumInCourse(classId: number): Promise<any> {
-    return this.getClassNumInCourseService.getClassNumInCourse(classId);
   }
 }

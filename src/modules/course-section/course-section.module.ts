@@ -7,6 +7,8 @@ import { Course } from '../course/entities/course.entity';
 import { CreateSectionService } from './services/create-section.service';
 import { FindAllSectionService } from './services/find-all-section.service';
 import { SectionClassModule } from '../section-class/section-class.module';
+import { FindAllSectionClassesService } from './services/find-all-class.service';
+import { SectionClass } from '../section-class/entities/section-class.entity';
 
 @Module({
   imports: [
@@ -18,7 +20,8 @@ import { SectionClassModule } from '../section-class/section-class.module';
     CreateSectionService,
     CourseSectionService,
     FindAllSectionService,
+    FindAllSectionClassesService,
   ],
-  exports: [FindAllSectionService],
+  exports: [FindAllSectionService, FindAllSectionClassesService],
 })
 export class CourseSectionModule {}

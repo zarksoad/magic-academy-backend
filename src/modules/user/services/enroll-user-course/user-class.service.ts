@@ -4,10 +4,9 @@ import { UserClass } from '../../entities/user-classes.entity';
 import { Repository } from 'typeorm';
 import { UserClassDto } from '../../dto/enroll-user-course-dtos/user-class.dto';
 import { FindUserByIdService } from '../find-user-by-id.service';
-import { FindAllClassService } from '../../../section-class/services/find-all-class.service';
+import { FindAllSectionClassesService } from '../../../course-section/services/find-all-class.service';
 import { UserProgressEnum } from '../../enums/user-sections.enum';
 import { SectionClass } from '../../../section-class/entities/section-class.entity';
-import { measureMemory } from 'vm';
 
 @Injectable()
 export class UserClassService {
@@ -15,7 +14,7 @@ export class UserClassService {
     @InjectRepository(UserClass)
     private readonly userClassRepository: Repository<UserClass>,
     private readonly findUserByIdService: FindUserByIdService,
-    private readonly findAllClassService: FindAllClassService,
+    private readonly findAllSectionClassesService: FindAllSectionClassesService,
   ) {}
 
   async insertUserClass(userClassDto: UserClassDto): Promise<any> {
@@ -33,7 +32,7 @@ export class UserClassService {
 
       let sectionClasses: SectionClass[] = [];
 
-      sectionClasses = await this.findAllClassService.getAll(id);
+      sectionClasses = await this.findAllSectionClassesService.getAll(id);
 
       let message = '';
       if (!sectionClasses.length) {

@@ -48,11 +48,6 @@ export class SectionClassController {
     return this.sectionClassService.update(id, updateSectionClassDto, file);
   }
 
-  @Get(':id/sections')
-  async findAllClassSection(@Param('id') section: number) {
-    return await this.sectionClassService.findClassSection(section);
-  }
-
   @Get(':id')
   async findClassById(
     @Param() id: number,

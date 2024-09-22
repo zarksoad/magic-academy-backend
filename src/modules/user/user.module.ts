@@ -34,7 +34,7 @@ import { FindAllSectionService } from '../course-section/services/find-all-secti
 import { UserSectionService } from './services/enroll-user-course/user-section.service';
 import { EnrollService } from './services/enroll-user-course/enroll.service';
 import { UserCourseService } from './services/enroll-user-course/user-course.service';
-import { FindAllClassService } from '../section-class/services/find-all-class.service';
+import { FindAllSectionClassesService } from '../course-section/services/find-all-class.service';
 import { UserClassService } from './services/enroll-user-course/user-class.service';
 import { SectionClass } from '../section-class/entities/section-class.entity';
 import { Course } from '../course/entities/course.entity';
@@ -66,7 +66,7 @@ import { GetCompletedClassesInCourseService } from './services/get-num-completed
         signOptions: { expiresIn: '1h' },
       }),
     }),
-    forwardRef(() => CourseModule)
+    forwardRef(() => CourseModule),
   ],
   controllers: [UserController],
   providers: [
@@ -92,11 +92,11 @@ import { GetCompletedClassesInCourseService } from './services/get-num-completed
     UserSectionService,
     UserCourseService,
     EnrollService,
-    FindAllClassService,
+    FindAllSectionClassesService,
     UserClassService,
     FindUserCoursesAndProgressService,
     GetCourseProgressService,
-    GetCompletedClassesInCourseService
+    GetCompletedClassesInCourseService,
   ],
   exports: [
     UserService,
@@ -112,7 +112,7 @@ import { GetCompletedClassesInCourseService } from './services/get-num-completed
     GetLatestClassesInProgressByCourseByUserService,
     FindUserCoursesAndProgressService,
     GetCourseProgressService,
-    GetCompletedClassesInCourseService
+    GetCompletedClassesInCourseService,
   ],
 })
-export class UserModule { }
+export class UserModule {}
