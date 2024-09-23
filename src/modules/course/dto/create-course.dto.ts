@@ -11,7 +11,7 @@ import {
   IsArray,
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { Type } from 'class-transformer';
+import { Transform, Type } from 'class-transformer';
 
 @Injectable()
 export class CreateCourseDto {
@@ -85,6 +85,7 @@ export class CreateCourseDto {
   @IsArray({ message: 'Topics must be an array of numbers' })
   @ArrayMinSize(1, { message: 'At least one topic must be provided' })
   @Type(() => Number)
+  @Transform(({ value }) => (Array.isArray(value) ? value : [value]))
   topic: number[];
 
   thumbnail: Express.Multer.File;

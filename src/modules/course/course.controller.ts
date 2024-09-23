@@ -24,6 +24,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Course } from './entities/course.entity';
 import { ApiPostOperationFormData } from '../../common/decorators/swagger/post-form-data-swagger.decorator';
+import { CourseDto } from './dto/dto-output/findAllCourse.dto';
 
 @ApiTags('Courses')
 @Controller('courses')
@@ -64,7 +65,7 @@ export class CourseController {
   @Get('/instructor')
   @Roles(2)
   @ApiGetOperation('course-by-id-instructor', CreateCourseDto, true)
-  async findUserId(@UserId() userId: number): Promise<Course[]> {
+  async findUserId(@UserId() userId: number): Promise<CourseDto[]> {
     return await this.courseService.findByUserId(userId);
   }
 

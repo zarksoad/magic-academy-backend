@@ -65,7 +65,7 @@ export class CourseService {
     return this.updateCoursesService.updateCourse(id, updateCourseDto, file);
   }
 
-  async findByUserId(userId: number): Promise<Course[]> {
+  async findByUserId(userId: number): Promise<CourseDto[]> {
     return this.findCoursesByUser.findCoursesByUserId(userId);
   }
 
