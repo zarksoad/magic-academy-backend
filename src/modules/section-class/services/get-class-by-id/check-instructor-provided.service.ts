@@ -9,7 +9,6 @@ export class CheckInstructorProvided {
     userId: number,
     courseId: number,
   ): Promise<boolean> {
-    courseId = courseId['id']
     const relationExists = await this.dataSource
       .createQueryBuilder()
       .select('1')
@@ -19,6 +18,8 @@ export class CheckInstructorProvided {
       .getRawOne();
 
     if (!relationExists) {
+      console.log("*************");
+      console.log('Relation does not exist:', relationExists);
       throw new UnauthorizedException('the instructor is not the course owner');
     }
 

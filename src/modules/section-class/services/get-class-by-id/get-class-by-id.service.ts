@@ -26,7 +26,6 @@ export class GetClassByIdService {
     userId: number,
     userRole: number,
   ): Promise<ClassWithCourseId> {
-    console.log(id,"este es el did");
     const sectionClass = await this.sectionClassRepository
       .createQueryBuilder('sectionClass')
       .leftJoinAndSelect('sectionClass.courseSection', 'courseSection')
